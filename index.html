@@ -14,7 +14,7 @@
     .marquee {
       display: inline-block;
       white-space: nowrap;
-      animation: marquee 10s linear infinite;
+      animation: marquee 20s linear infinite; /* Lambatin jadi 20s */
     }
     @keyframes marquee {
       0% { transform: translateX(100%); }
@@ -95,20 +95,7 @@
     <div class="p-4">
       <h2 class="text-xl font-semibold text-purple-700 mb-4">Watu Gajah Highlights</h2>
       <div class="swiper watu-gajah-carousel">
-        <div class="swiper-wrapper">
-          <div class="swiper-slide">
-            <img src="images/watu-gajah/kolam-keceh.jpg" alt="Kolam Keceh">
-          </div>
-          <div class="swiper-slide">
-            <img src="images/watu-gajah/batu-gajah.jpg" alt="Batu Gajah">
-          </div>
-          <div class="swiper-slide">
-            <img src="images/watu-gajah/jembatan-kayu.jpg" alt="Jembatan Kayu">
-          </div>
-          <div class="swiper-slide">
-            <img src="images/watu-gajah/angel-wings.jpg" alt="Angel Wings">
-          </div>
-        </div>
+        <div class="swiper-wrapper" id="watu-gajah-slides"></div>
         <div class="swiper-pagination"></div>
       </div>
       <div class="mt-2 text-sm text-gray-600 overflow-hidden">
@@ -122,23 +109,7 @@
     <div class="p-4">
       <h2 class="text-xl font-semibold text-purple-700 mb-4">Saloka Theme Park Highlights</h2>
       <div class="swiper saloka-carousel">
-        <div class="swiper-wrapper">
-          <div class="swiper-slide">
-            <img src="images/saloka/danau-baruklinting.jpg" alt="Danau Baruklinting">
-          </div>
-          <div class="swiper-slide">
-            <img src="images/saloka/cakrawala.jpg" alt="Cakrawala">
-          </div>
-          <div class="swiper-slide">
-            <img src="images/saloka/lumbung-ilmu.jpg" alt="Lumbung Ilmu Galileo">
-          </div>
-          <div class="swiper-slide">
-            <img src="images/saloka/pakubumi.jpg" alt="Pakubumi">
-          </div>
-          <div class="swiper-slide">
-            <img src="images/saloka/roller-coaster.jpg" alt="Roller Coaster">
-          </div>
-        </div>
+        <div class="swiper-wrapper" id="saloka-slides"></div>
         <div class="swiper-pagination"></div>
       </div>
       <div class="mt-2 text-sm text-gray-600 overflow-hidden">
@@ -161,8 +132,39 @@
       </ul>
     </div>
 
-    <!-- Initialize Swiper -->
+    <!-- JavaScript untuk Carousel dan Swiper -->
     <script>
+      // Daftar nama file gambar (ganti sesuai nama file lo)
+      const watuGajahImages = [
+        'kolam-keceh.jpg',
+        'batu-gajah.jpg',
+        'jembatan-kayu.jpg',
+        'angel-wings.jpg'
+      ];
+      const salokaImages = [
+        'danau-baruklinting.jpg',
+        'cakrawala.jpg',
+        'lumbung-ilmu.jpg',
+        'pakubumi.jpg',
+        'roller-coaster.jpg'
+      ];
+
+      // Fungsi buat generate slide carousel
+      function createSlides(containerId, images, folder) {
+        const wrapper = document.getElementById(containerId);
+        images.forEach(img => {
+          const slide = document.createElement('div');
+          slide.className = 'swiper-slide';
+          slide.innerHTML = `<img src="images/${folder}/${img}" alt="${img.split('.')[0]}">`;
+          wrapper.appendChild(slide);
+        });
+      }
+
+      // Generate slide untuk kedua carousel
+      createSlides('watu-gajah-slides', watuGajahImages, 'watu-gajah');
+      createSlides('saloka-slides', salokaImages, 'saloka');
+
+      // Inisialisasi Swiper
       new Swiper('.watu-gajah-carousel', {
         slidesPerView: 1,
         spaceBetween: 10,
