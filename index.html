@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,7 +15,7 @@
     .marquee {
       display: inline-block;
       white-space: nowrap;
-      animation: marquee 20s linear infinite; /* Lambatin jadi 20s */
+      animation: marquee 20s linear infinite; /* Tetep 20s biar kebaca */
     }
     @keyframes marquee {
       0% { transform: translateX(100%); }
@@ -134,21 +135,6 @@
 
     <!-- JavaScript untuk Carousel dan Swiper -->
     <script>
-      // Daftar nama file gambar (ganti sesuai nama file lo)
-      const watuGajahImages = [
-        'kolam-keceh.jpg',
-        'batu-gajah.jpg',
-        'jembatan-kayu.jpg',
-        'angel-wings.jpg'
-      ];
-      const salokaImages = [
-        'danau-baruklinting.jpg',
-        'cakrawala.jpg',
-        'lumbung-ilmu.jpg',
-        'pakubumi.jpg',
-        'roller-coaster.jpg'
-      ];
-
       // Fungsi buat generate slide carousel
       function createSlides(containerId, images, folder) {
         const wrapper = document.getElementById(containerId);
@@ -160,30 +146,147 @@
         });
       }
 
-      // Generate slide untuk kedua carousel
-      createSlides('watu-gajah-slides', watuGajahImages, 'watu-gajah');
-      createSlides('saloka-slides', salokaImages, 'saloka');
+      // Ambil daftar gambar dari images.json
+      fetch('images.json')
+        .then(response => response.json())
+        .then(data => {
+          // Generate slide untuk kedua carousel
+          createSlides('watu-gajah-slides', data.watuGajah, 'watu-gajah');
+          createSlides('saloka-slides', data.saloka, 'saloka');
 
-      // Inisialisasi Swiper
-      new Swiper('.watu-gajah-carousel', {
-        slidesPerView: 1,
-        spaceBetween: 10,
-        pagination: { el: '.swiper-pagination', clickable: true },
-        breakpoints: {
-          640: { slidesPerView: 2 },
-          1024: { slidesPerView: 3 }
-        }
-      });
-      new Swiper('.saloka-carousel', {
-        slidesPerView: 1,
-        spaceBetween: 10,
-        pagination: { el: '.swiper-pagination', clickable: true },
-        breakpoints: {
-          640: { slidesPerView: 2 },
-          1024: { slidesPerView: 3 }
-        }
-      });
+          // Inisialisasi Swiper setelah slide dibuat
+          new Swiper('.watu-gajah-carousel', {
+            slidesPerView: 1,
+            spaceBetween: 10,
+            pagination: { el: '.swiper-pagination', clickable: true },
+            breakpoints: {
+              640: { slidesPerView: 2 },
+              1024: { slidesPerView: 3 }
+            }
+          });
+          new Swiper('.saloka-carousel', {
+            slidesPerView: 1,
+            spaceBetween: 10,
+            pagination: { el: '.swiper-pagination', clickable: true },
+            breakpoints: {
+              640: { slidesPerView: 2 },
+              1024: { slidesPerView: 3 }
+            }
+          });
+        })
+        .catch(error => console.error('Error loading images.json:', error));
     </script>
   </div>
 </body>
 </html>
+```
+
+#### 2. `images.json`
+File ini nyimpan daftar nama file gambar. Lo update ini kalo nambah/hapus foto.
+
+<xaiArtifact artifact_id="9817313f-7087-432c-b4df-465c325d9956" artifact_version_id="33bd84ec-a374-4af6-9c7e-ba8cf2a034d3" title="images.json" contentType="application/json">
+```json
+{
+  "watuGajah": [
+    "kolam-keceh.jpg",
+    "batu-gajah.jpg",
+    "jembatan-kayu.jpg",
+    "angel-wings.jpg"
+  ],
+  "saloka": [
+    "danau-baruklinting.jpg",
+    "cakrawala.jpg",
+    "lumbung-ilmu.jpg",
+    "pakubumi.jpg",
+    "roller-coaster.jpg"
+  ]
+}
+```
+
+### Cara Deploy via GitHub Web
+1. **Bikin Repo Baru** (kalo belum ada):
+   - Buka [GitHub](https://github.com), login.
+   - Klik **+** > **New repository**, nama `outing-class`, pilih **Public**, centang **Add a README file** (opsional), klik **Create repository**.
+
+2. **Upload index.html**:
+   - Di repo (`https://github.com/username-lo/outing-class`), klik **Add file** > **Upload files**.
+   - Drag and drop `index.html` (dari kode di atas) atau klik **choose your files**.
+   - Commit dengan pesan “Upload index.html”.
+
+3. **Upload images.json**:
+   - Klik **Add file** > **Create new file**.
+   - Nama file: `images.json`, copy-paste isi JSON di atas.
+   - Commit dengan pesan “Add images.json”.
+   - Kalo nama file foto lo beda, edit `images.json` di GitHub (klik file, ikon pensil, ganti nama file sesuai yang lo punya, commit).
+
+4. **Upload Foto ke Folder images**:
+   - **Folder images/watu-gajah/**:
+     - Klik **Add file** > **Create new file**, ketik `images/watu-gajah/dummy.jpg`, biarin kosong, commit (“Bikin folder watu-gajah”).
+     - Klik **Add file** > **Upload files**, pilih foto dari Google Drive (misal `kolam-keceh.jpg`, dll), upload ke `images/watu-gajah/`, commit (“Upload foto Watu Gajah”).
+   - **Folder images/saloka/**:
+     - Sama, buat `images/saloka/dummy.jpg`, commit.
+     - Upload foto Saloka (misal `danau-baruklinting.jpg`, dll) ke `images/saloka/`, commit (“Upload foto Saloka”).
+
+5. **Update images.json (Kalo Nama File Beda)**:
+   - Buka `images.json` di repo, klik ikon pensil.
+   - Ganti daftar nama file sesuai yang lo upload. Contoh, kalo file lo `kolam_keceh_1.jpg`:
+     ```json
+     {
+       "watuGajah": [
+         "kolam_keceh_1.jpg",
+         "batu_gajah_2.jpg",
+         "jembatan_kayu.jpg",
+         "angel_wings.jpg"
+       ],
+       "saloka": [
+         "danau_baruklinting_1.jpg",
+         "cakrawala_new.jpg",
+         "lumbung_ilmu.jpg",
+         "pakubumi.jpg",
+         "roller_coaster.jpg"
+       ]
+     }
+     ```
+   - Commit dengan pesan “Update images.json”.
+
+6. **Aktifin GitHub Pages**:
+   - Buka **Settings** > **Pages**.
+   - Pilih `Deploy from a branch`, branch `main`, folder `/ (root)`, klik **Save**.
+   - Cek URL (misal `https://username-lo.github.io/outing-class`) setelah 1-2 menit.
+
+7. **Cek di Browser**:
+   - Buka URL GitHub Pages.
+   - Pastiin carousel Watu Gajah dan Saloka nampilin semua foto dari folder, dan running text berjalan pelan (20s).
+
+### Cara Nambah Foto Baru
+- Upload foto baru ke `images/watu-gajah/` atau `images/saloka/` via **Add file** > **Upload files**.
+- Buka `images.json` di repo, tambah nama file baru ke array `watuGajah` atau `saloka`. Contoh:
+  ```json
+  "watuGajah": [
+    "kolam-keceh.jpg",
+    "batu-gajah.jpg",
+    "jembatan-kayu.jpg",
+    "angel-wings.jpg",
+    "foto_baru.jpg"
+  ]
+  ```
+- Commit, dan foto otomatis muncul di carousel tanpa ubah `index.html`.
+
+### Troubleshoot
+- **Foto Ga Muncul**:
+  - Cek `images.json`, pastiin nama file sama persis (case-sensitive) sama yang di folder.
+  - Buka repo, pastiin file ada di `images/watu-gajah/` atau `images/saloka/`.
+  - Buka F12 > **Console** di browser, cek error (misal 404 atau “Failed to fetch images.json”).
+- **images.json Error**:
+  - Pastiin format JSON valid (cek di [JSONLint](https://jsonlint.com)).
+  - Kalo ga ke-load, cek file ada di root repo.
+- **Cache**:
+  - Buka URL di tab incognito (Ctrl+Shift+N) buat bypass cache.
+
+### Tips Santai
+- **Nama File**: Bebas, asal masukin ke `images.json`. Hindari spasi/karakter aneh (contoh: `foto_baru.jpg` lebih aman).
+- **Kompres Foto**: Pake [TinyPNG](https://tinypng.com) biar loading cepet.
+- **Test Lokal**: Download `index.html`, `images.json`, dan folder `images/` ke kompi, buka `index.html` di browser buat cek.
+- **Candytone Aesthetic**: Tetep pake gradient pink-blue, header vibrant, dan card putih, mobile-first.
+
+Kalau masih ga jalan atau butuh bantuan cek error, lempar detailnya ke gue, bro! 😎
