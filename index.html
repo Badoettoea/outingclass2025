@@ -265,29 +265,4 @@
               type="checkbox"
               class="h-5 w-5 rounded border-[#cde9df] border-2 bg-transparent text-[#019863] checked:bg-[#019863] checked:border-[#019863] checked:bg-[image:--checkbox-tick-svg] focus:ring-0 focus:ring-offset-0 focus:border-[#cde9df] focus:outline-none"
             />
-            <p class="text-[#0c1c17] text-base font-normal leading-normal">Minuman cadangan</p>
-          </label>
-        </div>
-      </div>
-      <div><div class="h-5 bg-[#f8fcfa]"></div></div>
-    </div>
-    <script>
-      function setupCarousel(carouselId) {
-        const carousel = document.getElementById(carouselId);
-        const inner = carousel.querySelector('.carousel-inner');
-        const items = inner.querySelectorAll('.carousel-item');
-        let currentIndex = 0;
-
-        function slide() {
-          currentIndex = (currentIndex + 1) % items.length;
-          inner.style.transform = `translateX(-${currentIndex * 100}%)`;
-        }
-
-        setInterval(slide, 3000); // Slide every 3 seconds
-      }
-
-      setupCarousel('watuGajahCarousel');
-      setupCarousel('salokaCarousel');
-    </script>
-  </body>
-</html>
+            <p
