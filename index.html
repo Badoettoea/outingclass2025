@@ -36,6 +36,15 @@
         0% { transform: translateX(100%); }
         100% { transform: translateX(-100%); }
       }
+      .image-fallback {
+        background-color: #f0f0f0;
+        color: #666;
+        text-align: center;
+        line-height: 1.5;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
     </style>
   </head>
   <body>
@@ -56,7 +65,7 @@
         <h2 class="text-[#0c1c17] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Rundown</h2>
         <div class="grid grid-cols-[40px_1fr] gap-x-2 px-4">
           <div class="flex flex-col items-center gap-1 pt-3">
-            <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-6" style='background-image: url("/images/watu-gajah/kolam-keceh.jpg");'></div>
+            <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-6" style='background-image: url("/images/watu-gajah/3.webp");' onerror="this.classList.add('image-fallback'); this.style.backgroundImage='none'; this.innerHTML='Image not found';"></div>
             <div class="w-[1.5px] bg-[#cde9df] h-2 grow"></div>
           </div>
           <div class="flex flex-1 flex-col py-3">
@@ -121,7 +130,7 @@
           <div class="carousel-inner">
             <div class="carousel-item">
               <div class="flex h-full flex-1 flex-col gap-4 rounded-lg p-4">
-                <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded flex flex-col" style='background-image: url("/images/watu-gajah/3.webp");'></div>
+                <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded flex flex-col" style='background-image: url("/images/watu-gajah/3.webp");' onerror="this.classList.add('image-fallback'); this.style.backgroundImage='none'; this.innerHTML='Image not found';"></div>
                 <div>
                   <p class="text-[#0c1c17] text-base font-medium leading-normal">Kolam Keceh & Waterboom</p>
                 </div>
@@ -129,7 +138,7 @@
             </div>
             <div class="carousel-item">
               <div class="flex h-full flex-1 flex-col gap-4 rounded-lg p-4">
-                <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded flex flex-col" style='background-image: url("/images/watu-gajah/terapi-ikan.jpeg");'></div>
+                <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded flex flex-col" style='background-image: url("/images/watu-gajah/terapi-ikan.jpeg");' onerror="this.classList.add('image-fallback'); this.style.backgroundImage='none'; this.innerHTML='Image not found';"></div>
                 <div>
                   <p class="text-[#0c1c17] text-base font-medium leading-normal">Kolam Terapi Ikan</p>
                 </div>
@@ -137,7 +146,7 @@
             </div>
             <div class="carousel-item">
               <div class="flex h-full flex-1 flex-col gap-4 rounded-lg p-4">
-                <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded flex flex-col" style='background-image: url("/images/watu-gajah/4.webp");'></div>
+                <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded flex flex-col" style='background-image: url("/images/watu-gajah/4.webp");' onerror="this.classList.add('image-fallback'); this.style.backgroundImage='none'; this.innerHTML='Image not found';"></div>
                 <div>
                   <p class="text-[#0c1c17] text-base font-medium leading-normal">Taman Bunga Vertikal</p>
                 </div>
@@ -145,7 +154,7 @@
             </div>
             <div class="carousel-item">
               <div class="flex h-full flex-1 flex-col gap-4 rounded-lg p-4">
-                <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded flex flex-col" style='background-image: url("/images/watu-gajah/dinosaurus.webp");'></div>
+                <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded flex flex-col" style='background-image: url("/images/watu-gajah/dinosaurus.webp");' onerror="this.classList.add('image-fallback'); this.style.backgroundImage='none'; this.innerHTML='Image not found';"></div>
                 <div>
                   <p class="text-[#0c1c17] text-base font-medium leading-normal">Patung Dinosaurus Raksasa / Lukisan Tembok 3D</p>
                 </div>
@@ -162,7 +171,7 @@
           <div class="carousel-inner">
             <div class="carousel-item">
               <div class="flex h-full flex-1 flex-col gap-4 rounded-lg p-4">
-                <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded flex flex-col" style='background-image: url("/images/saloka/danau-baruklinting.jpg");'></div>
+                <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded flex flex-col" style='background-image: url("/images/saloka/danau-baruklinting.jpg");' onerror="this.classList.add('image-fallback'); this.style.backgroundImage='none'; this.innerHTML='Image not found';"></div>
                 <div>
                   <p class="text-[#0c1c17] text-base font-medium leading-normal">Danau Baruklinting</p>
                 </div>
@@ -170,7 +179,7 @@
             </div>
             <div class="carousel-item">
               <div class="flex h-full flex-1 flex-col gap-4 rounded-lg p-4">
-                <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded flex flex-col" style='background-image: url("/images/saloka/cakrawala.jpg");'></div>
+                <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded flex flex-col" style='background-image: url("/images/saloka/cakrawala.jpg");' onerror="this.classList.add('image-fallback'); this.style.backgroundImage='none'; this.innerHTML='Image not found';"></div>
                 <div>
                   <p class="text-[#0c1c17] text-base font-medium leading-normal">Cakrawala: Bianglala Raksasa</p>
                 </div>
@@ -178,7 +187,7 @@
             </div>
             <div class="carousel-item">
               <div class="flex h-full flex-1 flex-col gap-4 rounded-lg p-4">
-                <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded flex flex-col" style='background-image: url("/images/saloka/lumbung-ilmu.jpg");'></div>
+                <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded flex flex-col" style='background-image: url("/images/saloka/lumbung-ilmu.jpg");' onerror="this.classList.add('image-fallback'); this.style.backgroundImage='none'; this.innerHTML='Image not found';"></div>
                 <div>
                   <p class="text-[#0c1c17] text-base font-medium leading-normal">Lumbung Ilmu Galileo</p>
                 </div>
@@ -186,7 +195,7 @@
             </div>
             <div class="carousel-item">
               <div class="flex h-full flex-1 flex-col gap-4 rounded-lg p-4">
-                <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded flex flex-col" style='background-image: url("/images/saloka/pakubumi.webp");'></div>
+                <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded flex flex-col" style='background-image: url("/images/saloka/pakubumi.webp");' onerror="this.classList.add('image-fallback'); this.style.backgroundImage='none'; this.innerHTML='Image not found';"></div>
                 <div>
                   <p class="text-[#0c1c17] text-base font-medium leading-normal">Pakubumi: Drop Tower</p>
                 </div>
@@ -194,7 +203,7 @@
             </div>
             <div class="carousel-item">
               <div class="flex h-full flex-1 flex-col gap-4 rounded-lg p-4">
-                <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded flex flex-col" style='background-image: url("/images/saloka/roller-coaster.jpg");'></div>
+                <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded flex flex-col" style='background-image: url("/images/saloka/roller-coaster.jpg");' onerror="this.classList.add('image-fallback'); this.style.backgroundImage='none'; this.innerHTML='Image not found';"></div>
                 <div>
                   <p class="text-[#0c1c17] text-base font-medium leading-normal">Roller Coaster</p>
                 </div>
@@ -202,7 +211,7 @@
             </div>
             <div class="carousel-item">
               <div class="flex h-full flex-1 flex-col gap-4 rounded-lg p-4">
-                <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded flex flex-col" style='background-image: url("/images/saloka/rumah-hantu.jpg");'></div>
+                <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded flex flex-col" style='background-image: url("/images/saloka/rumah-hantu.jpg");' onerror="this.classList.add('image-fallback'); this.style.backgroundImage='none'; this.innerHTML='Image not found';"></div>
                 <div>
                   <p class="text-[#0c1c17] text-base font-medium leading-normal">Wahana Rumah Hantu</p>
                 </div>
@@ -282,4 +291,3 @@
     </script>
   </body>
 </html>
-```
