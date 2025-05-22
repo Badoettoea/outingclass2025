@@ -1,293 +1,360 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="" />
-    <link
-      rel="stylesheet"
-      as="style"
-      onload="this.rel='stylesheet'"
-      href="https://fonts.googleapis.com/css2?display=swap&family=Noto+Sans%3Awght%40400%3B500%3B700%3B900&family=Space+Grotesk%3Awght%40400%3B500%3B700"
-    />
-    <title>Outing Class Rundown</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+    <title>Outing Class SDN Bungo 3</title>
     <link rel="icon" type="image/x-icon" href="data:image/x-icon;base64," />
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <style>
+      :root {
+        --primary: #46a080;
+        --secondary: #1e40af;
+        --accent: #f59e0b;
+      }
+      body {
+        @apply font-poppins bg-gradient-to-b from-blue-50 to-green-50;
+      }
+      .header {
+        @apply sticky top-0 z-10 bg-white/90 backdrop-blur-md shadow-md;
+      }
+      .timeline-item {
+        @apply relative flex items-start gap-4 py-4;
+      }
+      .timeline-icon {
+        @apply flex-shrink-0 w-12 h-12 rounded-full bg-primary text-white flex items-center justify-center shadow-lg transform transition hover:scale-110;
+      }
+      .timeline-line {
+        @apply absolute left-6 top-16 w-1 bg-primary/30 h-[calc(100%-4rem)];
+      }
       .carousel {
-        position: relative;
-        overflow: hidden;
-        width: 100%;
+        @apply relative overflow-hidden w-full rounded-xl shadow-lg;
       }
       .carousel-inner {
-        display: flex;
-        transition: transform 0.5s ease;
+        @apply flex transition-transform duration-500 ease-in-out;
       }
       .carousel-item {
-        flex: 0 0 100%;
-        min-width: 100%;
+        @apply flex-shrink-0 w-full;
+      }
+      .carousel-nav {
+        @apply absolute top-1/2 -translate-y-1/2 flex justify-between w-full px-4;
+      }
+      .carousel-nav button {
+        @apply bg-white/80 hover:bg-white text-primary w-10 h-10 rounded-full flex items-center justify-center shadow-md transition hover:scale-110;
+      }
+      .carousel-dots {
+        @apply absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2;
+      }
+      .carousel-dot {
+        @apply w-3 h-3 rounded-full bg-gray-400 transition;
+      }
+      .carousel-dot.active {
+        @apply bg-primary scale-125;
       }
       .running-text {
-        animation: scroll 30s linear infinite;
-        white-space: nowrap;
-        overflow: hidden;
+        @apply text-accent font-medium text-lg bg-white/80 py-2 px-4 rounded-b-lg shadow-md;
+        animation: scroll 20s linear infinite;
+      }
+      .running-text:hover {
+        animation-play-state: paused;
       }
       @keyframes scroll {
         0% { transform: translateX(100%); }
         100% { transform: translateX(-100%); }
       }
-      .image-fallback {
-        background-color: #f0f0f0;
-        color: #666;
-        text-align: center;
-        line-height: 1.5;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+      .checklist-item {
+        @apply flex items-center gap-3 py-2 transition-all hover:bg-green-100 rounded-lg;
+      }
+      .checklist-item input {
+        @apply h-6 w-6 rounded-md border-primary/50 text-primary focus:ring-primary/50 transition-all;
+      }
+      .checklist-item input:checked {
+        @apply transform scale-110;
+      }
+      .fade-in {
+        animation: fadeIn 0.5s ease-in;
+      }
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .section {
+        @apply max-w-4xl mx-auto py-8 px-4;
       }
     </style>
   </head>
   <body>
-    <div
-      class="relative flex size-full min-h-screen flex-col bg-[#f8fcfa] justify-between group/design-root overflow-x-hidden"
-      style='--checkbox-tick-svg: url("data:image/svg+xml,%3csvg viewBox=%270 0 16 16%27 fill=%27rgb(248,252,250)%27 xmlns=%27http://www.w3.org/2000/svg%27%3e%3cpath d=%27M12.207 4.793a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0l-2-2a1 1 0 011.414-1.414L6.5 9.086l4.293-4.293a1 1 0 011.414 0z%27/%3e%3c/svg%3e"); font-family: "Space Grotesk", "Noto Sans", sans-serif;'
-    >
-      <div>
-        <div class="flex items-center bg-[#f8fcfa] p-4 pb-2 justify-between">
-          <div class="text-[#0c1c17] flex size-12 shrink-0 items-center" data-icon="ArrowLeft" data-size="24px" data-weight="regular">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
-              <path d="M224,128a8,8,0,0,1-8,8H59.31l58.35,58.34a8,8,0,0,1-11.32,11.32l-72-72a8,8,0,0,1,0-11.32l72-72a8,8,0,0,1,11.32,11.32L59.31,120H216A8,8,0,0,1,224,128Z"></path>
-            </svg>
-          </div>
-          <h2 class="text-[#0c1c17] text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center pr-12">Rundown Outing Class<br>SDN BUNGO 3</br></h2>
+    <header class="header">
+      <div class="flex items-center justify-between p-4">
+        <button class="text-secondary" onclick="history.back()">
+          <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" viewBox="0 0 256 256">
+            <path d="M224,128a8,8,0,0,1-8,8H59.31l58.35,58.34a8,8,0,0,1-11.32,11.32l-72-72a8,8,0,0,1,0-11.32l72-72a8,8,0,0,1,11.32,11.32L59.31,120H216A8,8,0,0,1,224,128Z"></path>
+          </svg>
+        </button>
+        <div class="flex items-center gap-3">
+          <img src="https://via.placeholder.com/40?text=SDN" alt="SDN Bungo 3 Logo" class="w-10 h-10 rounded-full">
+          <h1 class="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-secondary to-primary">
+            Outing Class SDN Bungo 3
+          </h1>
         </div>
+      </div>
+    </header>
 
-        <h2 class="text-[#0c1c17] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Rundown</h2>
-        <div class="grid grid-cols-[40px_1fr] gap-x-2 px-4">
-          <div class="flex flex-col items-center gap-1 pt-3">
-            <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-6" style='background-image: url("https://badoettoea.github.io/outingclass2025/images/watu-gajah/3.webp");' onerror="this.classList.add('image-fallback'); this.style.backgroundImage='none'; this.innerHTML='Image not found';"></div>
-            <div class="w-[1.5px] bg-[#cde9df] h-2 grow"></div>
-          </div>
-          <div class="flex flex-1 flex-col py-3">
-            <p class="text-[#0c1c17] text-base font-medium leading-normal">🌄 Pagi: Watu Gajah (3 Jam - Ekspres)</p>
-            <p class="text-[#46a080] text-sm font-normal leading-normal">06:00 - 12:30</p>
-            <ul class="text-[#0c1c17] text-sm font-normal leading-normal list-disc pl-5">
-              <li>06:00 - 06:30: Kumpul, briefing, naik bus</li>
-              <li>06:30 - 09:30: Perjalanan ke Watu Gajah</li>
-              <li>09:30 - 12:30:</li>
-              <ul class="list-disc pl-5">
-                <li>Kolam Keceh & Waterboom (60 menit)</li>
-                <li>🪨 Batu Gajah (10 menit) - Foto cepat di batu ikonik, naik ke punggung untuk panorama</li>
-                <li>🌉 Jembatan Kayu & Rumah Pohon (15 menit) - Spot foto grup aesthetic</li>
-                <li>👼 Angel Wings (15 menit) - Pose sayap malaikat dengan view lembah</li>
-                <li>⛰️ Puncak Pandang (20 menit) - View 360° terbaik, foto landscape</li>
+    <main class="section">
+      <section class="fade-in">
+        <h2 class="text-3xl font-bold text-secondary mb-6">Rundown Kegiatan</h2>
+        <div class="space-y-4">
+          <div class="timeline-item">
+            <div class="timeline-icon">🌄</div>
+            <div class="timeline-line"></div>
+            <div class="flex-1 bg-white rounded-lg p-4 shadow-md hover:shadow-lg transition">
+              <p class="text-lg font-semibold text-primary">Pagi: Watu Gajah (3 Jam - Ekspres)</p>
+              <p class="text-accent font-medium">06:00 - 12:30</p>
+              <ul class="text-gray-700 text-sm list-disc pl-5 mt-2">
+                <li>06:00 - 06:30: Kumpul, briefing, naik bus</li>
+                <li>06:30 - 09:30: Perjalanan ke Watu Gajah</li>
+                <li>09:30 - 12:30:</li>
+                <ul class="list-disc pl-5">
+                  <li>Kolam Keceh & Waterboom (60 menit)</li>
+                  <li>🪨 Batu Gajah (10 menit) - Foto cepat di batu ikonik</li>
+                  <li>🌉 Jembatan Kayu & Rumah Pohon (15 menit) - Spot foto grup</li>
+                  <li>👼 Angel Wings (15 menit) - Pose sayap malaikat</li>
+                  <li>⛰️ Puncak Pandang (20 menit) - View 360° terbaik</li>
+                </ul>
               </ul>
-            </ul>
-          </div>
-          <div class="flex flex-col items-center gap-1">
-            <div class="w-[1.5px] bg-[#cde9df] h-2"></div>
-            <div class="text-[#0c1c17]" data-icon="TextHThree" data-size="24px" data-weight="regular">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
-                <path d="M152,56V176a8,8,0,0,1-16,0V124H48v52a8,8,0,0,1-16,0V56a8,8,0,0,1,16,0v52h88V56a8,8,0,0,1,16,0Zm73.52,90.63,21-30A8,8,0,0,0,240,104H192a8,8,0,0,0,0,16h32.63l-19.18,27.41A8,8,0,0,0,212,160a20,20,0,1,1-14.29,34,8,8,0,1,0-11.42,11.19A36,36,0,0,0,248,180,36.07,36.07,0,0,0,225.52,146.63Z"></path>
-              </svg>
             </div>
-            <div class="w-[1.5px] bg-[#cde9df] h-2 grow"></div>
           </div>
-          <div class="flex flex-1 flex-col py-3">
-            <p class="text-[#0c1c17] text-base font-medium leading-normal">☀️ Siang: ISOMA & Ke Saloka</p>
-            <p class="text-[#46a080] text-sm font-normal leading-normal">12:30 - 14:00</p>
-            <ul class="text-[#0c1c17] text-sm font-normal leading-normal list-disc pl-5">
-              <li>12:30 - 13:00: Makan siang (lunch box)</li>
-              <li>13:00 - 14:00: Perjalanan ke Saloka Theme Park</li>
-            </ul>
-          </div>
-          <div class="flex flex-col items-center gap-1">
-            <div class="w-[1.5px] bg-[#cde9df] h-2"></div>
-            <div class="text-[#0c1c17]" data-icon="TextHThree" data-size="24px" data-weight="regular">
-              <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" fill="currentColor" viewBox="0 0 256 256">
-                <path d="M152,56V176a8,8,0,0,1-16,0V124H48v52a8,8,0,0,1-16,0V56a8,8,0,0,1,16,0v52h88V56a8,8,0,0,1,16,0Zm73.52,90.63,21-30A8,8,0,0,0,240,104H192a8,8,0,0,0,0,16h32.63l-19.18,27.41A8,8,0,0,0,212,160a20,20,0,1,1-14.29,34,8,8,0,1,0-11.42,11.19A36,36,0,0,0,248,180,36.07,36.07,0,0,0,225.52,146.63Z"></path>
-              </svg>
+          <div class="timeline-item">
+            <div class="timeline-icon">☀️</div>
+            <div class="timeline-line"></div>
+            <div class="flex-1 bg-white rounded-lg p-4 shadow-md hover:shadow-lg transition">
+              <p class="text-lg font-semibold text-primary">Siang: ISOMA & Ke Saloka</p>
+              <p class="text-accent font-medium">12:30 - 14:00</p>
+              <ul class="text-gray-700 text-sm list-disc pl-5 mt-2">
+                <li>12:30 - 13:00: Makan siang (lunch box)</li>
+                <li>13:00 - 14:00: Perjalanan ke Saloka Theme Park</li>
+              </ul>
             </div>
-            <div class="w-[1.5px] bg-[#cde9df] h-2 grow"></div>
           </div>
-          <div class="flex flex-1 flex-col py-3">
-            <p class="text-[#0c1c17] text-base font-medium leading-normal">🎢 Sore - Malam: Saloka Full Experience</p>
-            <p class="text-[#46a080] text-sm font-normal leading-normal">14:00 - 21:30</p>
-            <ul class="text-[#0c1c17] text-sm font-normal leading-normal list-disc pl-5">
-              <li>14:00 - 15:00: Wahana Cepat (Antrean pendek): Taman Langit (sky bike dengan pemandangan), Dino Park (foto dengan dinosaurus animatronik)</li>
-              <li>15:00 - 15:30: Sholat Ashar di musala Saloka</li>
-              <li>15:30 - 17:30: Wahana Seru (Prioritaskan favorit!): Rajawali (roller coaster), Banjir Banda (water ride, siapkan baju ganti), Pasar Setan (explore spot horor)</li>
-              <li>17:30 - 18:00: Kumpul di theater Baru Klinting, cari spot terbaik</li>
-              <li>18:00 - 18:45: 🎭 Baru Klinting Show (Teater spektakuler dengan efek api & akrobat)</li>
-              <li>18:45 - 19:30: Makan malam + beli merchandise</li>
-              <li>19:30 - 21:30: Perjalanan pulang</li>
-            </ul>
+          <div class="timeline-item">
+            <div class="timeline-icon">🎢</div>
+            <div class="flex-1 bg-white rounded-lg p-4 shadow-md hover:shadow-lg transition">
+              <p class="text-lg font-semibold text-primary">Sore - Malam: Saloka Full Experience</p>
+              <p class="text-accent font-medium">14:00 - 21:30</p>
+              <ul class="text-gray-700 text-sm list-disc pl-5 mt-2">
+                <li>14:00 - 15:00: Wahana Cepat: Taman Langit, Dino Park</li>
+                <li>15:00 - 15:30: Sholat Ashar di musala Saloka</li>
+                <li>15:30 - 17:30: Wahana Seru: Rajawali, Banjir Banda, Pasar Setan</li>
+                <li>17:30 - 18:00: Kumpul di theater Baru Klinting</li>
+                <li>18:00 - 18:45: 🎭 Baru Klinting Show (Teater efek api & akrobat)</li>
+                <li>18:45 - 19:30: Makan malam + beli merchandise</li>
+                <li>19:30 - 21:30: Perjalanan pulang</li>
+              </ul>
+            </div>
           </div>
         </div>
+      </section>
 
-        <h2 class="text-[#0c1c17] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Watu Gajah - Spot Wajib</h2>
+      <section class="fade-in mt-12">
+        <h2 class="text-3xl font-bold text-secondary mb-6">Watu Gajah - Spot Wajib</h2>
         <div class="carousel" id="watuGajahCarousel">
           <div class="carousel-inner">
             <div class="carousel-item">
-              <div class="flex h-full flex-1 flex-col gap-4 rounded-lg p-4">
-                <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded flex flex-col" style='background-image: url("https://badoettoea.github.io/outingclass2025/images/watu-gajah/3.webp");' onerror="this.classList.add('image-fallback'); this.style.backgroundImage='none'; this.innerHTML='Image not found';"></div>
-                <div>
-                  <p class="text-[#0c1c17] text-base font-medium leading-normal">Kolam Keceh & Waterboom</p>
-                </div>
+              <div class="flex flex-col gap-4 p-4">
+                <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg shadow-md" style='background-image: url("https://badoettoea.github.io/outingclass2025/images/watu-gajah/3.webp");' onerror="this.classList.add('image-fallback'); this.style.backgroundImage='none'; this.innerHTML='Image not found';"></div>
+                <p class="text-lg font-medium text-primary">Kolam Keceh & Waterboom</p>
               </div>
             </div>
             <div class="carousel-item">
-              <div class="flex h-full flex-1 flex-col gap-4 rounded-lg p-4">
-                <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded flex flex-col" style='background-image: url("https://badoettoea.github.io/outingclass2025/images/watu-gajah/terapi-ikan.jpeg");' onerror="this.classList.add('image-fallback'); this.style.backgroundImage='none'; this.innerHTML='Image not found';"></div>
-                <div>
-                  <p class="text-[#0c1c17] text-base font-medium leading-normal">Kolam Terapi Ikan</p>
-                </div>
+              <div class="flex flex-col gap-4 p-4">
+                <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg shadow-md" style='background-image: url("https://badoettoea.github.io/outingclass2025/images/watu-gajah/terapi-ikan.jpeg");' onerror="this.classList.add('image-fallback'); this.style.backgroundImage='none'; this.innerHTML='Image not found';"></div>
+                <p class="text-lg font-medium text-primary">Kolam Terapi Ikan</p>
               </div>
             </div>
             <div class="carousel-item">
-              <div class="flex h-full flex-1 flex-col gap-4 rounded-lg p-4">
-                <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded flex flex-col" style='background-image: url("https://badoettoea.github.io/outingclass2025/images/watu-gajah/4.webp");' onerror="this.classList.add('image-fallback'); this.style.backgroundImage='none'; this.innerHTML='Image not found';"></div>
-                <div>
-                  <p class="text-[#0c1c17] text-base font-medium leading-normal">Taman Bunga Vertikal</p>
-                </div>
+              <div class="flex flex-col gap-4 p-4">
+                <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg shadow-md" style='background-image: url("https://badoettoea.github.io/outingclass2025/images/watu-gajah/4.webp");' onerror="this.classList.add('image-fallback'); this.style.backgroundImage='none'; this.innerHTML='Image not found';"></div>
+                <p class="text-lg font-medium text-primary">Taman Bunga Vertikal</p>
               </div>
             </div>
             <div class="carousel-item">
-              <div class="flex h-full flex-1 flex-col gap-4 rounded-lg p-4">
-                <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded flex flex-col" style='background-image: url("https://badoettoea.github.io/outingclass2025/images/watu-gajah/dinosaurus.webp");' onerror="this.classList.add('image-fallback'); this.style.backgroundImage='none'; this.innerHTML='Image not found';"></div>
-                <div>
-                  <p class="text-[#0c1c17] text-base font-medium leading-normal">Patung Dinosaurus Raksasa / Lukisan Tembok 3D</p>
-                </div>
+              <div class="flex flex-col gap-4 p-4">
+                <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg shadow-md" style='background-image: url("https://badoettoea.github.io/outingclass2025/images/watu-gajah/dinosaurus.webp");' onerror="this.classList.add('image-fallback'); this.style.backgroundImage='none'; this.innerHTML='Image not found';"></div>
+                <p class="text-lg font-medium text-primary">Patung Dinosaurus Raksasa / Lukisan Tembok 3D</p>
               </div>
             </div>
           </div>
-          <div class="running-text text-[#46a080] text-sm font-normal leading-normal px-4 py-2">
+          <div class="carousel-nav">
+            <button onclick="moveCarousel('watuGajahCarousel', -1)">&#10094;</button>
+            <button onclick="moveCarousel('watuGajahCarousel', 1)">&#10095;</button>
+          </div>
+          <div class="carousel-dots" id="watuGajahDots"></div>
+          <div class="running-text">
             Spot Wajib: Kolam Keceh & Waterboom - Kolam Terapi Ikan - Taman Bunga Vertikal - Patung Dinosaurus Raksasa / Lukisan Tembok 3D
           </div>
         </div>
+      </section>
 
-        <h2 class="text-[#0c1c17] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Saloka Theme Park - Spot Wajib</h2>
+      <section class="fade-in mt-12">
+        <h2 class="text-3xl font-bold text-secondary mb-6">Saloka Theme Park - Spot Wajib</h2>
         <div class="carousel" id="salokaCarousel">
           <div class="carousel-inner">
             <div class="carousel-item">
-              <div class="flex h-full flex-1 flex-col gap-4 rounded-lg p-4">
-                <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded flex flex-col" style='background-image: url("https://badoettoea.github.io/outingclass2025/images/saloka/danau-baruklinting.jpg");' onerror="this.classList.add('image-fallback'); this.style.backgroundImage='none'; this.innerHTML='Image not found';"></div>
-                <div>
-                  <p class="text-[#0c1c17] text-base font-medium leading-normal">Danau Baruklinting</p>
-                </div>
+              <div class="flex flex-col gap-4 p-4">
+                <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg shadow-md" style='background-image: url("https://badoettoea.github.io/outingclass2025/images/saloka/danau-baruklinting.jpg");' onerror="this.classList.add('image-fallback'); this.style.backgroundImage='none'; this.innerHTML='Image not found';"></div>
+                <p class="text-lg font-medium text-primary">Danau Baruklinting</p>
               </div>
             </div>
             <div class="carousel-item">
-              <div class="flex h-full flex-1 flex-col gap-4 rounded-lg p-4">
-                <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded flex flex-col" style='background-image: url("https://badoettoea.github.io/outingclass2025/images/saloka/cakrawala.jpg");' onerror="this.classList.add('image-fallback'); this.style.backgroundImage='none'; this.innerHTML='Image not found';"></div>
-                <div>
-                  <p class="text-[#0c1c17] text-base font-medium leading-normal">Cakrawala: Bianglala Raksasa</p>
-                </div>
+              <div class="flex flex-col gap-4 p-4">
+                <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg shadow-md" style='background-image: url("https://badoettoea.github.io/outingclass2025/images/saloka/cakrawala.jpg");' onerror="this.classList.add('image-fallback'); this.style.backgroundImage='none'; this.innerHTML='Image not found';"></div>
+                <p class="text-lg font-medium text-primary">Cakrawala: Bianglala Raksasa</p>
               </div>
             </div>
             <div class="carousel-item">
-              <div class="flex h-full flex-1 flex-col gap-4 rounded-lg p-4">
-                <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded flex flex-col" style='background-image: url("https://badoettoea.github.io/outingclass2025/images/saloka/lumbung-ilmu.jpg");' onerror="this.classList.add('image-fallback'); this.style.backgroundImage='none'; this.innerHTML='Image not found';"></div>
-                <div>
-                  <p class="text-[#0c1c17] text-base font-medium leading-normal">Lumbung Ilmu Galileo</p>
-                </div>
+              <div class="flex flex-col gap-4 p-4">
+                <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg shadow-md" style='background-image: url("https://badoettoea.github.io/outingclass2025/images/saloka/lumbung-ilmu.jpg");' onerror="this.classList.add('image-fallback'); this.style.backgroundImage='none'; this.innerHTML='Image not found';"></div>
+                <p class="text-lg font-medium text-primary">Lumbung Ilmu Galileo</p>
               </div>
             </div>
             <div class="carousel-item">
-              <div class="flex h-full flex-1 flex-col gap-4 rounded-lg p-4">
-                <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded flex flex-col" style='background-image: url("https://badoettoea.github.io/outingclass2025/images/saloka/pakubumi.webp");' onerror="this.classList.add('image-fallback'); this.style.backgroundImage='none'; this.innerHTML='Image not found';"></div>
-                <div>
-                  <p class="text-[#0c1c17] text-base font-medium leading-normal">Pakubumi: Drop Tower</p>
-                </div>
+              <div class="flex flex-col gap-4 p-4">
+                <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg shadow-md" style='background-image: url("https://badoettoea.github.io/outingclass2025/images/saloka/pakubumi.webp");' onerror="this.classList.add('image-fallback'); this.style.backgroundImage='none'; this.innerHTML='Image not found';"></div>
+                <p class="text-lg font-medium text-primary">Pakubumi: Drop Tower</p>
               </div>
             </div>
             <div class="carousel-item">
-              <div class="flex h-full flex-1 flex-col gap-4 rounded-lg p-4">
-                <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded flex flex-col" style='background-image: url("https://badoettoea.github.io/outingclass2025/images/saloka/roller-coaster.jpg");' onerror="this.classList.add('image-fallback'); this.style.backgroundImage='none'; this.innerHTML='Image not found';"></div>
-                <div>
-                  <p class="text-[#0c1c17] text-base font-medium leading-normal">Roller Coaster</p>
-                </div>
+              <div class="flex flex-col gap-4 p-4">
+                <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg shadow-md" style='background-image: url("https://badoettoea.github.io/outingclass2025/images/saloka/roller-coaster.jpg");' onerror="this.classList.add('image-fallback'); this.style.backgroundImage='none'; this.innerHTML='Image not found';"></div>
+                <p class="text-lg font-medium text-primary">Roller Coaster</p>
               </div>
             </div>
             <div class="carousel-item">
-              <div class="flex h-full flex-1 flex-col gap-4 rounded-lg p-4">
-                <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded flex flex-col" style='background-image: url("https://badoettoea.github.io/outingclass2025/images/saloka/rumah-hantu.jpg");' onerror="this.classList.add('image-fallback'); this.style.backgroundImage='none'; this.innerHTML='Image not found';"></div>
-                <div>
-                  <p class="text-[#0c1c17] text-base font-medium leading-normal">Wahana Rumah Hantu</p>
-                </div>
+              <div class="flex flex-col gap-4 p-4">
+                <div class="w-full bg-center bg-no-repeat aspect-video bg-cover rounded-lg shadow-md" style='background-image: url("https://badoettoea.github.io/outingclass2025/images/saloka/rumah-hantu.jpg");' onerror="this.classList.add('image-fallback'); this.style.backgroundImage='none'; this.innerHTML='Image not found';"></div>
+                <p class="text-lg font-medium text-primary">Wahana Rumah Hantu</p>
               </div>
             </div>
           </div>
-          <div class="running-text text-[#46a080] text-sm font-normal leading-normal px-4 py-2">
-            Spot Wajib Saloka Theme Park: Danau Baruklinting - Cakrawala: Bianglala Raksasa - Lumbung Ilmu Galileo - Pakubumi: Drop Tower - Roller Coaster - Wahana Rumah Hantu
+          <div class="carousel-nav">
+            <button onclick="moveCarousel('salokaCarousel', -1)">&#10094;</button>
+            <button onclick="moveCarousel('salokaCarousel', 1)">&#10095;</button>
+          </div>
+          <div class="carousel-dots" id="salokaDots"></div>
+          <div class="running-text">
+            Spot Wajib Saloka: Danau Baruklinting - Cakrawala - Lumbung Ilmu Galileo - Pakubumi - Roller Coaster - Rumah Hantu
           </div>
         </div>
+      </section>
 
-        <h2 class="text-[#0c1c17] text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5">Catatan: Barang yang Harus Dibawa</h2>
-        <div class="px-4">
-          <label class="flex gap-x-3 py-3 flexed flex-row">
-            <input
-              type="checkbox"
-              class="h-5 w-5 rounded border-[#cde9df] border-2 bg-transparent text-[#019863] checked:bg-[#019863] checked:border-[#019863] checked:bg-[image:--checkbox-tick-svg] focus:ring-0 focus:ring-offset-0 focus:border-[#cde9df] focus:outline-none"
-            />
-            <p class="text-[#0c1c17] text-base font-normal leading-normal">Pakaian olahraga</p>
+      <section class="fade-in mt-12">
+        <h2 class="text-3xl font-bold text-secondary mb-6">Catatan: Barang yang Harus Dibawa</h2>
+        <div class="bg-white rounded-lg p-6 shadow-md">
+          <label class="checklist-item">
+            <input type="checkbox" class="checklist-checkbox">
+            <p class="text-gray-700 text-base">Pakaian olahraga</p>
           </label>
-          <label class="flex gap-x-3 py-3 flex-row">
-            <input
-              type="checkbox"
-              class="h-5 w-5 rounded border-[#cde9df] border-2 bg-transparent text-[#019863] checked:bg-[#019863] checked:border-[#019863] checked:bg-[image:--checkbox-tick-svg] focus:ring-0 focus:ring-offset-0 focus:border-[#cde9df] focus:outline-none"
-            />
-            <p class="text-[#0c1c17] text-base font-normal leading-normal">Pakaian ganti</p>
+          <label class="checklist-item">
+            <input type="checkbox" class="checklist-checkbox">
+            <p class="text-gray-700 text-base">Pakaian ganti</p>
           </label>
-          <label class="flex gap-x-3 py-3 flex-row">
-            <input
-              type="checkbox"
-              class="h-5 w-5 rounded border-[#cde9df] border-2 bg-transparent text-[#019863] checked:bg-[#019863] checked:border-[#019863] checked:bg-[image:--checkbox-tick-svg] focus:ring-0 focus:ring-offset-0 focus:border-[#cde9df] focus:outline-none"
-            />
-            <p class="text-[#0c1c17] text-base font-normal leading-normal">Handuk portable</p>
+          <label class="checklist-item">
+            <input type="checkbox" class="checklist-checkbox">
+            <p class="text-gray-700 text-base">Handuk portable</p>
           </label>
-          <label class="flex gap-x-3 py-3 flex-row">
-            <input
-              type="checkbox"
-              class="h-5 w-5 rounded border-[#cde9df] border-2 bg-transparent text-[#019863] checked:bg-[#019863] checked:border-[#019863] checked:bg-[image:--checkbox-tick-svg] focus:ring-0 focus:ring-offset-0 focus:border-[#cde9df] focus:outline-none"
-            />
-            <p class="text-[#0c1c17] text-base font-normal leading-normal">Kantong plastik untuk pakaian basah</p>
+          <label class="checklist-item">
+            <input type="checkbox" class="checklist-checkbox">
+            <p class="text-gray-700 text-base">Kantong plastik untuk pakaian basah</p>
           </label>
-          <label class="flex gap-x-3 py-3 flex-row">
-            <input
-              type="checkbox"
-              class="h-5 w-5 rounded border-[#cde9df] border-2 bg-transparent text-[#019863] checked:bg-[#019863] checked:border-[#019863] checked:bg-[image:--checkbox-tick-svg] focus:ring-0 focus:ring-offset-0 focus:border-[#cde9df] focus:outline-none"
-            />
-            <p class="text-[#0c1c17] text-base font-normal leading-normal">Snack ringan</p>
+          <label class="checklist-item">
+            <input type="checkbox" class="checklist-checkbox">
+            <p class="text-gray-700 text-base">Snack ringan</p>
           </label>
-          <label class="flex gap-x-3 py-3 flex-row">
-            <input
-              type="checkbox"
-              class="h-5 w-5 rounded border-[#cde9df] border-2 bg-transparent text-[#019863] checked:bg-[#019863] checked:border-[#019863] checked:bg-[image:--checkbox-tick-svg] focus:ring-0 focus:ring-offset-0 focus:border-[#cde9df] focus:outline-none"
-            />
-            <p class="text-[#0c1c17] text-base font-normal leading-normal">Minuman cadangan</p>
+          <label class="checklist-item">
+            <input type="checkbox" class="checklist-checkbox">
+            <p class="text-gray-700 text-base">Minuman cadangan</p>
           </label>
         </div>
+      </section>
+    </main>
+
+    <footer class="bg-secondary text-white py-6 mt-12">
+      <div class="max-w-4xl mx-auto px-4 text-center">
+        <p class="text-lg font-semibold">SDN Bungo 3</p>
+        <p class="text-sm">Outing Class 2025 - Watu Gajah & Saloka Theme Park</p>
+        <p class="text-sm mt-2">Kontak: (021) 123-4567 | Email: sdn.bungo3@gmail.com</p>
       </div>
-      <div><div class="h-5 bg-[#f8fcfa]"></div></div>
-    </div>
+    </footer>
+
     <script>
       function setupCarousel(carouselId) {
         const carousel = document.getElementById(carouselId);
         const inner = carousel.querySelector('.carousel-inner');
         const items = inner.querySelectorAll('.carousel-item');
+        const dotsContainer = document.getElementById(carouselId.replace('Carousel', 'Dots'));
         let currentIndex = 0;
 
-        function slide() {
-          currentIndex = (currentIndex + 1) % items.length;
+        // Create dots
+        items.forEach((_, i) => {
+          const dot = document.createElement('div');
+          dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+          dot.onclick = () => moveToSlide(carouselId, i);
+          dotsContainer.appendChild(dot);
+        });
+
+        function updateCarousel() {
           inner.style.transform = `translateX(-${currentIndex * 100}%)`;
+          dotsContainer.querySelectorAll('.carousel-dot').forEach((dot, i) => {
+            dot.className = 'carousel-dot' + (i === currentIndex ? ' active' : '');
+          });
         }
 
-        setInterval(slide, 3000); // Slide every 3 seconds
+        function autoSlide() {
+          currentIndex = (currentIndex + 1) % items.length;
+          updateCarousel();
+        }
+
+        let autoSlideInterval = setInterval(autoSlide, 4000);
+
+        carousel.addEventListener('mouseenter', () => clearInterval(autoSlideInterval));
+        carousel.addEventListener('mouseleave', () => autoSlideInterval = setInterval(autoSlide, 4000));
+
+        window[carouselId] = { updateCarousel };
+      }
+
+      function moveCarousel(carouselId, direction) {
+        const carousel = document.getElementById(carouselId);
+        const inner = carousel.querySelector('.carousel-inner');
+        const items = inner.querySelectorAll('.carousel-item');
+        let currentIndex = parseInt(inner.style.transform?.replace(/[^0-9-]/g, '') || '0') / -100;
+        currentIndex = (currentIndex + direction + items.length) % items.length;
+        window[carouselId].updateCarousel();
+      }
+
+      function moveToSlide(carouselId, index) {
+        const inner = document.getElementById(carouselId).querySelector('.carousel-inner');
+        const items = inner.querySelectorAll('.carousel-item');
+        currentIndex = index;
+        window[carouselId].updateCarousel();
       }
 
       setupCarousel('watuGajahCarousel');
       setupCarousel('salokaCarousel');
+
+      // Fade-in on scroll
+      const sections = document.querySelectorAll('.fade-in');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('opacity-100', 'translate-y-0');
+            entry.target.classList.remove('opacity-0', 'translate-y-10');
+          }
+        });
+      }, { threshold: 0.1 });
+      sections.forEach(section => observer.observe(section));
     </script>
   </body>
 </html>
