@@ -2,201 +2,184 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Rundown Outing SDN BUNGO 3 - 2025</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Outing Class SDN BUNGO 3 - 2025</title>
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/6454/6454991.png" />
   <style>
     body {
-      font-family: 'Segoe UI', sans-serif;
       margin: 0;
-      background: linear-gradient(145deg, #fefefe, #f5f5ff);
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(145deg, #f0f9ff, #ffffff);
       color: #333;
+      overflow-x: hidden;
     }
-    header, footer {
-      background: linear-gradient(to right, #FF2DF1, #15B392);
-      color: white;
-      padding: 1.5rem;
-      text-align: center;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-    }
-    h1 { margin: 0; font-size: 1rem; }
-
-    section { padding: 1rem; }
-
-    .time-block {
-      background: rgba(255, 255, 255, 0.5);
-      backdrop-filter: blur(12px);
-      border-radius: 16px;
-      padding: 1rem;
-      margin-bottom: 1.5rem;
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
-    }
-
-    .time-block h2 {
-      margin-top: 0;
-      font-size: 1rem;
-      color: #d63384;
-    }
-
-    .activity, ul { margin: 0.5rem 0; }
-    ul { padding-left: 1.2rem; }
-    li { margin: 0.4rem 0; }
-
-    .carousel {
-      position: relative;
-      width: 100%;
-      overflow: hidden;
-      border-radius: 20px;
-      margin-bottom: 2rem;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.15);
-    }
-
-    .slides {
+    header {
+      background: #fefefe;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      padding: 16px;
       display: flex;
-      transition: transform 0.6s ease-in-out;
+      justify-content: space-between;
+      align-items: center;
     }
-
-    .slides img {
-      width: 100%;
-      height: 220px;
+    header h1 {
+      margin: 0;
+      font-size: 20px;
+    }
+    .section {
+      padding: 24px;
+      max-width: 960px;
+      margin: auto;
+    }
+    .carousel {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      gap: 16px;
+    }
+    .carousel img {
+      width: 300px;
+      height: 200px;
       object-fit: cover;
-      flex-shrink: 0;
-      filter: brightness(1.05) saturate(1.1);
-      box-shadow: inset 0 0 0 1000px rgba(255,255,255,0.05);
-    }
-
-    .nav-buttons {
-      text-align: center;
-      margin-top: 0.5rem;
-    }
-
-    .nav-buttons button {
-      background: #ff91af;
-      color: white;
-      border: none;
-      border-radius: 50%;
-      width: 32px;
-      height: 32px;
-      margin: 0 5px;
+      border-radius: 12px;
+      scroll-snap-align: start;
       cursor: pointer;
-      box-shadow: 0 3px 10px rgba(0,0,0,0.2);
-      font-size: 1.2rem;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
     }
-
-    footer {
-      font-size: 0.9rem;
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 100;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.9);
     }
-
-    @media (min-width: 600px) {
-      h1 { font-size: 2rem; }
-      .slides img { height: 300px; }
+    .modal-content {
+      margin: auto;
+      display: block;
+      max-width: 80%;
+      max-height: 90%;
+    }
+    .close {
+      position: absolute;
+      top: 20px;
+      right: 35px;
+      color: #fff;
+      font-size: 40px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .card {
+      flex: 1 1 150px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      padding: 10px;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+    .card:hover {
+      transform: scale(1.05);
+    }
+    .card img {
+      width: 100%;
+      border-radius: 8px;
+      margin-top: 8px;
     }
   </style>
 </head>
 <body>
-
   <header>
-  <div style="display: flex; align-items: center; justify-content: space-between;">
-    <h1>Rundown Outing Class<br>SDN BUNGO 3 | 2025</h1>
-    <img src="https://cdn-icons-gif.flaticon.com/6454/6454991.gif" alt="Eclipse Icon" style="width: 48px; height: 48px; margin-left: 10px;">
+    <h1>Outing Class 2025 - SDN BUNGO 3</h1>
+    <img src="https://cdn-icons-png.flaticon.com/512/6454/6454991.png" alt="icon" width="36" height="36" />
+  </header>
+
+  <main>
+    <div class="section">
+      <h2>🗓️ Rundown Kegiatan</h2>
+      <ul>
+        <li><strong>06:00 - 06:30</strong> : Kumpul, briefing, naik bus</li>
+        <li><strong>06:30 - 09:30</strong> : Perjalanan ke Watu Gajah</li>
+        <li><strong>09:30 - 12:30</strong> : Kolam Keceh, Waterboom, Spot Foto</li>
+        <li><strong>12:30 - 13:00</strong> : Makan siang</li>
+        <li><strong>13:00 - 14:00</strong> : Perjalanan ke Saloka Theme Park</li>
+        <li><strong>14:00 - 21:30</strong> : Wahana Saloka + Show Baru Klinting</li>
+        <li><strong>21:30</strong> : Perjalanan pulang</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>🖼️ Galeri Kegiatan</h2>
+      <div class="carousel" id="carousel"></div>
+    </div>
+
+    <div class="section">
+      <h2>🚌 Denah Duduk di Bis</h2>
+      <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+        <div class="card" onclick="openDenah(1)">
+          <h3>Bis 1</h3>
+          <img src="https://raw.githubusercontent.com/Badoettoea/outingclass2025/main/images/denah/denah-bis-1.jpg" alt="Bis 1" />
+        </div>
+        <div class="card" onclick="openDenah(2)">
+          <h3>Bis 2</h3>
+          <img src="https://raw.githubusercontent.com/Badoettoea/outingclass2025/main/images/denah/denah-bis-2.jpg" alt="Bis 2" />
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div id="imgModal" class="modal">
+    <span class="close" onclick="document.getElementById('imgModal').style.display='none'">&times;</span>
+    <img class="modal-content" id="imgView">
   </div>
-</header>
 
-
-  <section>
-    <div class="carousel">
-      <div class="slides" id="carouselSlides"></div>
+  <div id="denahModal" class="modal">
+    <span class="close" onclick="closeDenah()">&times;</span>
+    <div style="display: flex; flex-direction: row; justify-content: center; align-items: flex-start; padding: 30px; gap: 30px; flex-wrap: wrap;">
+      <img id="denahImage" class="modal-content" style="max-width: 60%; border-radius: 10px;" />
+      <div id="namaList" style="color: white; text-align: left; max-width: 300px; font-size: 16px; column-count: 2; column-gap: 20px;"></div>
     </div>
-    <div class="nav-buttons">
-      <button onclick="prevSlide()">‹</button>
-      <button onclick="nextSlide()">›</button>
-    </div>
-
-    <!-- Rundown konten -->
-    <div class="time-block">
-      <h2>🌄 Pagi: Watu Gajah (06:00 - 12:30)</h2>
-      <ul>
-        <li>06:00 - 06:30: Kumpul, briefing, naik bus</li>
-        <li>06:30 - 09:30: Perjalanan ke Watu Gajah</li>
-        <li>09:30 - 12:30:</li>
-        <ul>
-          <li>🛝 Kolam Keceh & Waterboom</li>
-          <li>🪨 Batu Gajah - Foto ikonik</li>
-          <li>🌉 Jembatan Kayu & Rumah Pohon</li>
-          <li>👼 Angel Wings</li>
-          <li>⛰️ Puncak Pandang</li>
-        </ul>
-      </ul>
-    </div>
-
-    <div class="time-block">
-      <h2>☀️ Siang: ISOMA & Ke Saloka (12:30 - 14:00)</h2>
-      <ul>
-        <li>12:30 - 13:00: Makan siang (lunch box)</li>
-        <li>13:00 - 14:00: Perjalanan ke Saloka Theme Park</li>
-      </ul>
-    </div>
-
-    <div class="time-block">
-      <h2>🎢 Sore - Malam: Saloka Full Experience (14:00 - 21:30)</h2>
-      <ul>
-        <li>14:00 - 15:00: Taman Langit, Dino Park</li>
-        <li>15:00 - 15:30: Sholat Ashar di musala</li>
-        <li>15:30 - 17:30: Rajawali, Banjir Banda, Pasar Setan</li>
-        <li>17:30 - 18:00: Kumpul di theater Baru Klinting</li>
-        <li>18:00 - 18:45: 🎭 Baru Klinting Show</li>
-        <li>18:45 - 19:30: Makan malam + beli merchandise</li>
-        <li>19:30 - 21:30: Perjalanan pulang</li>
-      </ul>
-    </div>
-
-    <div class="time-block">
-      <h2>🧳 Barang yang Harus Dibawa</h2>
-      <ul>
-        <li>Pakaian olahraga</li>
-        <li>Pakaian ganti</li>
-        <li>Handuk portable</li>
-        <li>Kantong plastik untuk pakaian basah</li>
-        <li>Snack ringan</li>
-        <li>Minuman cadangan</li>
-      </ul>
-    </div>
-  </section>
-
-  <footer>
-    SDN BUNGO 3 | Outing Class 2025
-  </footer>
+  </div>
 
   <script>
-    const folders = ['watu-gajah', 'saloka'];
-    const filesPerFolder = 7; // ubah sesuai jumlah maksimal
-    const imageBase = 'https://raw.githubusercontent.com/Badoettoea/outingclass2025/main/images/';
-
-    const slides = document.getElementById('carouselSlides');
-
-    folders.forEach(folder => {
-      for (let i = 1; i <= filesPerFolder; i++) {
-        const img = document.createElement('img');
-        img.src = `${imageBase}${folder}/${i}.jpg`;
-        img.alt = `Foto ${folder} ${i}`;
-        slides.appendChild(img);
-      }
+    const imageUrls = [
+      ...Array.from({ length: 6 }, (_, i) => `https://raw.githubusercontent.com/Badoettoea/outingclass2025/main/images/watu-gajah/${i+1}.jpg`),
+      ...Array.from({ length: 6 }, (_, i) => `https://raw.githubusercontent.com/Badoettoea/outingclass2025/main/images/saloka/${i+1}.jpg`)
+    ];
+    const container = document.getElementById('carousel');
+    imageUrls.forEach(url => {
+      const img = document.createElement('img');
+      img.src = url;
+      img.onclick = () => {
+        document.getElementById('imgModal').style.display = 'block';
+        document.getElementById('imgView').src = url;
+      };
+      container.appendChild(img);
     });
 
-    let currentIndex = 0;
+    const denahData = {
+      1: {
+        img: 'https://raw.githubusercontent.com/Badoettoea/outingclass2025/main/images/denah/denah-bis-1.jpg',
+        names: ["Alya", "Bima", "Citra", "Deni", "Eka", "Fajar", "Gina", "Heri", "Indah", "Joko", "Kiki", "Lina", "Mira", "Nino", "Oni", "Putri", "Qori", "Rafi", "Santi", "Tomi"]
+      },
+      2: {
+        img: 'https://raw.githubusercontent.com/Badoettoea/outingclass2025/main/images/denah/denah-bis-2.jpg',
+        names: ["Umar", "Vina", "Wawan", "Xena", "Yusuf", "Zara", "Andi", "Bella", "Caca", "Dodi", "Eli", "Fani", "Gilang", "Hana", "Irfan", "Jihan", "Kamal", "Luki", "Mega", "Nisa"]
+      }
+    };
 
-    function showSlide(index) {
-      const total = slides.children.length;
-      if (index >= total) index = 0;
-      if (index < 0) index = total - 1;
-      slides.style.transform = `translateX(-${index * 100}%)`;
-      currentIndex = index;
+    function openDenah(no) {
+      const data = denahData[no];
+      document.getElementById('denahImage').src = data.img;
+      document.getElementById('namaList').innerHTML = data.names.map(n => `<div>${n}</div>`).join('');
+      document.getElementById('denahModal').style.display = 'block';
     }
 
-    function nextSlide() { showSlide(currentIndex + 1); }
-    function prevSlide() { showSlide(currentIndex - 1); }
-
-    setInterval(nextSlide, 5000); // 5 detik otomatis
+    function closeDenah() {
+      document.getElementById('denahModal').style.display = 'none';
+    }
   </script>
-
 </body>
 </html>
