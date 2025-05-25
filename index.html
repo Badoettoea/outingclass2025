@@ -11,11 +11,21 @@
     body {
       font-family: 'Nunito', sans-serif;
     }
+    .carousel-container {
+      position: relative;
+      overflow: hidden;
+    }
     .carousel-slide {
-      display: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
     }
     .carousel-slide.active {
-      display: block;
+      opacity: 1;
     }
   </style>
 </head>
@@ -98,7 +108,7 @@
     </section>
 
     <section class="mb-12" id="location">
-      <h2 class="text-3xl font-bold mb-6 text-center text-blue-700">Location</h2>
+      <h2 class="text-3xl font-bold mb-6 text-center text-blue-700">Lokasi</h2>
       <div class="max-w-4xl mx-auto bg-white rounded-lg shadow-md p-6">
         <p class="text-lg mb-6">
           Kegiatan ini akan dilaksanakan di <strong>Watu Gajah Park</strong> dan <strong>Saloka Theme Park</strong>, 
@@ -109,7 +119,7 @@
         
         <div class="relative rounded-lg shadow-lg overflow-hidden mb-6" id="photoCarousel">
           <div class="carousel-container relative w-full h-96">
-            </div>
+          </div>
           <button type="button" aria-label="Previous image" class="carousel-btn prev absolute left-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-75 transition-all duration-300">
             <i class="fas fa-chevron-left"></i>
           </button>
@@ -117,7 +127,7 @@
             <i class="fas fa-chevron-right"></i>
           </button>
           <div class="carousel-dots flex justify-center mt-4 space-x-2 pb-4">
-            </div>
+          </div>
         </div>
         
         <iframe allowfullscreen class="rounded-lg shadow-md w-full h-96" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3958.015790561061!2d110.45644907474986!3d-7.280761692785604!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e708265970e9af7%3A0xa572723ddf2098e6!2sSaloka%20Theme%20Park!5e0!3m2!1sen!2sid!4v1716286888157!5m2!1sen!2sid" style="border:0;" title="Map to Saloka Theme Park"></iframe>
@@ -132,7 +142,7 @@
           <div class="bg-gray-100 p-4 md:p-6 rounded-lg shadow-lg max-w-xs sm:max-w-sm md:max-w-md mx-auto">
             <div class="mb-4 p-2 bg-gray-300 rounded text-center font-medium">DEPAN - SOPIR</div>
             <div class="space-y-1 md:space-y-2" id="bus1-seats">
-              </div>
+            </div>
           </div>
         </div>
 
@@ -141,7 +151,7 @@
           <div class="bg-gray-100 p-4 md:p-6 rounded-lg shadow-lg max-w-xs sm:max-w-sm md:max-w-md mx-auto">
             <div class="mb-4 p-2 bg-gray-300 rounded text-center font-medium">DEPAN - SOPIR</div>
             <div class="space-y-1 md:space-y-2" id="bus2-seats">
-              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -182,29 +192,29 @@
 
     // Carousel functionality
     const carouselImages = [
-      "https://lh3.googleusercontent.com/d/17gyHVwPl_nRN1IhRoNdB6UofarWz4hUM=s1000",
-      "https://lh3.googleusercontent.com/d/1krqSB87gM8PTP6XuxVkkPJHX0qANmgHP=s1000",
-      "https://lh3.googleusercontent.com/d/1yAU3I6UdZ5wJKx4YD_IY8kPzMfP1T76j=s1000",
-      "https://lh3.googleusercontent.com/d/1LxvAOfIJarS8qyzFNKDuibxDySwNeFzy=s1000",
-      "https://lh3.googleusercontent.com/d/1WKd5LVuTJ_EgLidsbVuFHllsoKIoKoJs=s1000",
-      "https://lh3.googleusercontent.com/d/1_l-wExzm7nHRcOKMUI9BCn8827qjjDQV=s1000",
-      "https://lh3.googleusercontent.com/d/12nFGDKZfUPzkUx2p6_s8z3CQecf0of5Y=s1000",
-      "https://lh3.googleusercontent.com/d/1TtCpI1iJonzivEzjmbjYff368i7lXfMg=s1000",
-      "https://lh3.googleusercontent.com/d/10ktsPUgPERoRXILGrK_6f9cdUdrFl11W=s1000",
-      "https://lh3.googleusercontent.com/d/1x7koiPgM0HakmmkmAPQ_mOv6f8KK4gLo=s1000",
-      "https://lh3.googleusercontent.com/d/1_Fcwk2TWkNi8SfDTu9e2MBD9SBfw3zQS=s1000",
-      "https://lh3.googleusercontent.com/d/1VtCkoVbqqXTNw2RSSfkTc4GwNC3r0rhS=s1000",
-      "https://lh3.googleusercontent.com/d/1qg6YaTuwnsmuV4CnAMMGeN26ak-MQEJ5=s1000",
-      "https://lh3.googleusercontent.com/d/17C01J2AnZ7iS8HYxeWZg_8ikAs9XbFZs=s1000",
-      "https://lh3.googleusercontent.com/d/180tewBgOup4tS2tOguspTbcJjYjgaRbU=s1000",
-      "https://lh3.googleusercontent.com/d/1PmWYMfvkn3bMzqztc-bmGzySz8rxqAp6=s1000"
-    ];
+      "https://lh3.googleusercontent.com/d/17gyHVwPl_nRN1IhRoNdB6UofarWz4hUM=s1000",
+      "https://lh3.googleusercontent.com/d/1krqSB87gM8PTP6XuxVkkPJHX0qANmgHP=s1000",
+      "https://lh3.googleusercontent.com/d/1yAU3I6UdZ5wJKx4YD_IY8kPzMfP1T76j=s1000",
+      "https://lh3.googleusercontent.com/d/1LxvAOfIJarS8qyzFNKDuibxDySwNeFzy=s1000",
+      "https://lh3.googleusercontent.com/d/1WKd5LVuTJ_EgLidsbVuFHllsoKIoKoJs=s1000",
+      "https://lh3.googleusercontent.com/d/1_l-wExzm7nHRcOKMUI9BCn8827qjjDQV=s1000",
+      "https://lh3.googleusercontent.com/d/12nFGDKZfUPzkUx2p6_s8z3CQecf0of5Y=s1000",
+      "https://lh3.googleusercontent.com/d/1TtCpI1iJonzivEzjmbjYff368i7lXfMg=s1000",
+      "https://lh3.googleusercontent.com/d/10ktsPUgPERoRXILGrK_6f9cdUdrFl11W=s1000",
+      "https://lh3.googleusercontent.com/d/1x7koiPgM0HakmmkmAPQ_mOv6f8KK4gLo=s1000",
+      "https://lh3.googleusercontent.com/d/1_Fcwk2TWkNi8SfDTu9e2MBD9SBfw3zQS=s1000",
+      "https://lh3.googleusercontent.com/d/1VtCkoVbqqXTNw2RSSfkTc4GwNC3r0rhS=s1000",
+      "https://lh3.googleusercontent.com/d/1qg6YaTuwnsmuV4CnAMMGeN26ak-MQEJ5=s1000",
+      "https://lh3.googleusercontent.com/d/17C01J2AnZ7iS8HYxeWZg_8ikAs9XbFZs=s1000",
+      "https://lh3.googleusercontent.com/d/180tewBgOup4tS2tOguspTbcJjYjgaRbU=s1000",
+      "https://lh3.googleusercontent.com/d/1PmWYMfvkn3bMzqztc-bmGzySz8rxqAp6=s1000"
+    ];
 
     function initCarousel() {
       const container = document.querySelector('.carousel-container');
       const dotsContainer = document.querySelector('.carousel-dots');
       
-      // Clear existing slides and dots if initCarousel is called multiple times
+      // Clear existing slides and dots
       container.innerHTML = '';
       dotsContainer.innerHTML = '';
 
@@ -213,7 +223,7 @@
         const slide = document.createElement('div');
         slide.className = `carousel-slide ${index === 0 ? 'active' : ''}`;
         slide.innerHTML = `<img src="${img}" alt="Outing Class Photo ${index+1}" class="w-full h-full object-cover">`;
-        container.appendChild(slide); // Append, not insertBefore(container.firstChild) for correct order
+        container.appendChild(slide);
         
         // Create dots
         const dot = document.createElement('button');
@@ -250,7 +260,7 @@
     // Seat chart generation
     function generateSeats(busId, rows, lastRowSeats) {
       const container = document.getElementById(`${busId}-seats`);
-      container.innerHTML = ''; // Clear existing seats before generating
+      container.innerHTML = '';
 
       // Generate regular rows
       for (let i = 1; i <= rows; i++) {
@@ -285,11 +295,9 @@
     const modalStudentName = document.getElementById('modalStudentName');
     const closeSeatModalBtn = document.getElementById('closeSeatModalBtn');
 
-    // Placeholder student data (replace with actual data)
+    // Placeholder student data
     const studentAssignments = {
-      // Bus 1 examples
       "1-1A": "Ahmad Subarjo", "1-1B": "Bunga Citra", "1-11D": "Zainal Arifin", "1-L1": "Kevin Sanjaya", "1-L6": "Lia Eden",
-      // Bus 2 examples
       "2-1A": "Maria Selena", "2-1B": "Nanda Kusuma", "2-7D": "Yoga Adhitama", "2-L1": "Putri Ayu", "2-L5": "Rizky Billar",
     };
 
@@ -308,8 +316,8 @@
       initCarousel();
       
       // Generate seats for both buses
-      generateSeats('bus1', 11, 6); // Bus 1: 11 rows + 6 last row seats
-      generateSeats('bus2', 7, 5);  // Bus 2: 7 rows + 5 last row seats
+      generateSeats('bus1', 11, 6);
+      generateSeats('bus2', 7, 5);
       
       // Add event listeners to all seat buttons
       document.querySelectorAll('.seat-button').forEach(button => {
