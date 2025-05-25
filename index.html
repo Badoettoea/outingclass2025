@@ -12,6 +12,30 @@
       font-family: 'Poppins', sans-serif;
       padding-top: 80px;
     }
+    .carousel-container {
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      border-radius: 12px;
+    }
+    .carousel-slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+    }
+    .carousel-slide.active {
+      opacity: 1;
+    }
+    .carousel-slide img {
+      transition: transform 0.3s ease;
+    }
+    .carousel-slide img:hover {
+      transform: scale(1.05);
+    }
     .section-animate {
       opacity: 0;
       transform: translateY(20px);
@@ -71,6 +95,249 @@
   </header>
 
   <main class="flex-grow container mx-auto px-4 py-12">
+    <section class="mb-16 section-animate" id="overview">
+      <h2 class="text-4xl font-extrabold mb-6 text-center text-indigo-700">Ringkasan</h2>
+      <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl p-8 transform hover:shadow-2xl transition-shadow duration-300">
+        <p class="text-lg leading-relaxed text-gray-700">
+          Outing class SDN BUNGO 3 merupakan kegiatan khusus yang dirancang untuk memberikan siswa pengalaman edukatif dan menyenangkan di luar kelas. 
+          Kegiatan ini akan membantu siswa belajar tentang alam, kerja sama tim, dan budaya lokal sambil menikmati berbagai kegiatan 
+          yang direncanakan oleh guru dan staf.
+        </p>
+        <div class="overflow-hidden rounded-xl mt-6">
+          <img alt="Kegiatan Outing Class" class="w-full object-cover h-96 transform hover:scale-105 transition-transform duration-300" src="https://storage.googleapis.com/a1aa/image/9a468090-5965-41c2-c468-51aec0b17beb.jpg" loading="lazy"/>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-16 section-animate" id="schedule">    
+      <h2 class="text-4xl font-extrabold mb-6 text-center text-indigo-700">Jadwal Kegiatan</h2>
+      <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl p-8 transform hover:shadow-2xl transition-shadow duration-300">
+        <ol class="list-decimal list-inside space-y-6 text-lg">
+          <li><span class="font-semibold text-indigo-600">06:00 - 06:30</span> - Berkumpul di sekolah, absensi, dan briefing kegiatan</li>
+          <li><span class="font-semibold text-indigo-600">06:30 - 09:30</span> - Perjalanan ke Watu Gajah (ice breaking di bus)</li>
+          <li><span class="font-semibold text-indigo-600">09:30 - 12:00</span> - Eksplorasi Watu Gajah:
+            <ul class="list-disc list-inside ml-6 mt-2 text-gray-700">
+              <li>Batu Gajah (spot ikonik)</li>
+              <li>Jembatan Kayu & Rumah Pohon</li>
+              <li>Puncak Pandang (view 360°)</li>
+              <li>Angel Wings (spot foto)</li>
+            </ul>
+          </li>
+          <li><span class="font-semibold text-indigo-600">12:00 - 12:30</span> - ISOMA (makan siang lunch box)</li>
+          <li><span class="font-semibold text-indigo-600">12:30 - 13:30</span> - Perjalanan ke Saloka Theme Park</li>
+          <li><span class="font-semibold text-indigo-600">13:30 - 15:00</span> - Wahana Saloka:
+            <ul class="list-disc list-inside ml-6 mt-2 text-gray-700">
+              <li>Taman Langit (sky bike)</li>
+              <li>Dino Park (foto dengan dinosaurus)</li>
+              <li>Pasar Setan (explore area horor)</li>
+            </ul>
+          </li>
+          <li><span class="font-semibold text-indigo-600">15:00 - 15:30</span> - Sholat Ashar di mushala Saloka</li>
+          <li><span class="font-semibold text-indigo-600">15:30 - 17:30</span> - Lanjut wahana:
+            <ul class="list-disc list-inside ml-6 mt-2 text-gray-700">
+              <li>Rajawali (roller coaster)</li>
+              <li>Banjir Banda (water ride)</li>
+              <li>Pohon Akrobat (untuk anak-anak)</li>
+            </ul>
+          </li>
+          <li><span class="font-semibold text-indigo-600">17:30 - 18:00</span> - Persiapan menyaksikan Baru Klinting Show</li>
+          <li><span class="font-semibold text-indigo-600">18:00 - 18:45</span> - Nonton Baru Klinting Show (teater outdoor)</li>
+          <li><span class="font-semibold text-indigo-600">18:45 - 19:30</span> - Makan malam & beli merchandise</li>
+          <li><span class="font-semibold text-indigo-600">19:30 - 21:30</span> - Perjalanan pulang ke sekolah</li>
+          <li><span class="font-semibold text-indigo-600">21:30</span> - Sampai di sekolah, pembubaran</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="mb-16 section-animate" id="location">
+      <h2 class="text-4xl font-extrabold mb-6 text-center text-indigo-700">Lokasi</h2>
+      <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl p-8 transform hover:shadow-2xl transition-shadow duration-300">
+        <p class="text-lg mb-6 text-gray-700">
+          Kegiatan ini akan dilaksanakan di <strong>Watu Gajah Park</strong> dan <strong>Saloka Theme Park</strong>, 
+          sebuah taman hiburan menarik yang menawarkan berbagai wahana dan atraksi. 
+          Area ini memiliki tanaman hijau yang rimbun, jalur pejalan kaki, dan ruang terbuka yang cocok untuk 
+          kegiatan belajar dan aktivitas luar ruangan.
+        </p>
+        
+        <div class="relative rounded-xl shadow-lg overflow-hidden mb-6" id="photoCarousel">
+          <div class="carousel-container relative w-full h-96">
+          </div>
+          <button type="button" aria-label="Previous image" class="carousel-btn prev absolute left-4 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-blue-500 to-indigo-500 text-white p-3 rounded-full hover:from-blue-600 hover:to-indigo-600 transition-all duration-300">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <button class="carousel-btn next absolute right-4 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-blue-500 to-indigo-500 text-white/logosdn.png" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet"/>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      padding-top: 80px;
+    }
+    .carousel-container {
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      border-radius: 12px;
+    }
+    .carousel-slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity 0.5s ease-in-out;
+    }
+    .carousel-slide.active {
+      opacity: 1;
+    }
+    .carousel-slide img {
+      transition: transform 0.3s ease;
+    }
+    .carousel-slide img:hover {
+      transform: scale(1.05);
+    }
+    .section-animate {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeInUp 0.6s ease-out forwards;
+    }
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .seat-button {
+      transition: all 0.3s ease;
+    }
+    .seat-button.occupied {
+      background-color: #3b82f6;
+      color: white;
+    }
+    .seat-button:hover {
+      transform: scale(1.1);
+    }
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      transition: transform 0.3s ease-in-out;
+      transform: translateY(0);
+    }
+    header.hidden {
+      transform: translateY(-100%);
+    }
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 4px solid rgba(0, 0, 0, 0.1);
+      border-radius: 50%;
+      border-top-color: #3b82f6;
+      animation: spin 1s ease-in-out infinite;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body class="bg-gray-100 text-gray-900 min-h-screen flex flex-col">
+  <header id="mainHeader" class="bg-gradient-to-r from-orange-500 to-orange-700 text-white shadow-lg z-40">
+    <div class="container mx-auto px-4 py-5 flex items-center justify-center">
+      <div class="flex items-center space-x-3">
+        <img alt="Logo SDN BUNGO 3" class="w-12 h-12 rounded-full object-cover" src="https://raw.githubusercontent.com/Badoettoea/outingclass2025/93ee778664d164752b37af8ab7ae8eec4371a169/images/logo-sdn-bungo3.png"/>
+        <h1 class="text-2xl md:text-3xl font-extrabold tracking-tight text-center">
+          <span class="block">Rundown Outing Class</span>
+          <span class="block">SDN BUNGO 3</span>
+        </h1>
+      </div>
+    </div>
+  </header>
+
+  <main class="flex-grow container mx-auto px-4 py-12">
+    <section class="mb-16 section-animate" id="overview">
+      <h2 class="text-4xl font-extrabold mb-6 text-center text-indigo-700">Ringkasan</h2>
+      <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl p-8 transform hover:shadow-2xl transition-shadow duration-300">
+        <p class="text-lg leading-relaxed text-gray-700">
+          Outing class SDN BUNGO 3 merupakan kegiatan khusus yang dirancang untuk memberikan siswa pengalaman edukatif dan menyenangkan di luar kelas. 
+          Kegiatan ini akan membantu siswa belajar tentang alam, kerja sama tim, dan budaya lokal sambil menikmati berbagai kegiatan 
+          yang direncanakan oleh guru dan staf.
+        </p>
+        <div class="overflow-hidden rounded-xl mt-6">
+          <img alt="Kegiatan Outing Class" class="w-full object-cover h-96 transform hover:scale-105 transition-transform duration-300" src="https://storage.googleapis.com/a1aa/image/9a468090-5965-41c2-c468-51aec0b17beb.jpg" loading="lazy"/>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-16 section-animate" id="schedule">    
+      <h2 class="text-4xl font-extrabold mb-6 text-center text-indigo-700">Jadwal Kegiatan</h2>
+      <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl p-8 transform hover:shadow-2xl transition-shadow duration-300">
+        <ol class="list-decimal list-inside space-y-6 text-lg">
+          <li><span class="font-semibold text-indigo-600">06:00 - 06:30</span> - Berkumpul di sekolah, absensi, dan briefing kegiatan</li>
+          <li><span class="font-semibold text-indigo-600">06:30 - 09:30</span> - Perjalanan ke Watu Gajah (ice breaking di bus)</li>
+          <li><span class="font-semibold text-indigo-600">09:30 - 12:00</span> - Eksplorasi Watu Gajah:
+            <ul class="list-disc list-inside ml-6 mt-2 text-gray-700">
+              <li>Batu Gajah (spot ikonik)</li>
+              <li>Jembatan Kayu & Rumah Pohon</li>
+              <li>Puncak Pandang (view 360°)</li>
+              <li>Angel Wings (spot foto)</li>
+            </ul>
+          </li>
+          <li><span class="font-semibold text-indigo-600">12:00 - 12:30</span> - ISOMA (makan siang lunch box)</li>
+          <li><span class="font-semibold text-indigo-600">12:30 - 13:30</span> - Perjalanan ke Saloka Theme Park</li>
+          <li><span class="font-semibold text-indigo-600">13:30 - 15:00</span> - Wahana Saloka:
+            <ul class="list-disc list-inside ml-6 mt-2 text-gray-700">
+              <li>Taman Langit (sky bike)</li>
+              <li>Dino Park (foto dengan dinosaurus)</li>
+              <li>Pasar Setan (explore area horor)</li>
+            </ul>
+          </li>
+          <li><span class="font-semibold text-indigo-600">15:00 - 15:30</span> - Sholat Ashar di mushala Saloka</li>
+          <li><span class="font-semibold text-indigo-600">15:30 - 17:30</span> - Lanjut wahana:
+            <ul class="list-disc list-inside ml-6 mt-2 text-gray-700">
+              <li>Rajawali (roller coaster)</li>
+              <li>Banjir Banda (water ride)</li>
+              <li>Pohon Akrobat (untuk anak-anak)</li>
+            </ul>
+          </li>
+          <li><span class="font-semibold text-indigo-600">17:30 - 18:00</span> - Persiapan menyaksikan Baru Klinting Show</li>
+          <li><span class="font-semibold text-indigo-600">18:00 - 18:45</span> - Nonton Baru Klinting Show (teater outdoor)</li>
+          <li><span class="font-semibold text-indigo-600">18:45 - 19:30</span> - Makan malam & beli merchandise</li>
+          <li><span class="font-semibold text-indigo-600">19:30 - 21:30</span> - Perjalanan pulang ke sekolah</li>
+          <li><span class="font-semibold text-indigo-600">21:30</span> - Sampai di sekolah, pembubaran</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="mb-16 section-animate" id="location">
+      <h2 class="text-4xl font-extrabold mb-6 text-center text-indigo-700">Lokasi</h2>
+      <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl p-8 transform hover:shadow-2xl transition-shadow duration-300">
+        <p class="text-lg mb-6 text-gray-700">
+          Kegiatan ini akan dilaksanakan di <strong>Watu Gajah Park</strong> dan <strong>Saloka Theme Park</strong>, 
+          sebuah taman hiburan menarik yang menawarkan berbagai wahana dan atraksi. 
+          Area ini memiliki tanaman hijau yang rimbun, jalur pejalan kaki, dan ruang terbuka yang cocok untuk 
+          kegiatan belajar dan aktivitas luar ruangan.
+        </p>
+        
+        <div class="relative rounded-xl shadow-lg overflow-hidden mb-6" id="photoCarousel">
+          <div class="carousel-container relative w-full h-96">
+          </div>
+          <button type="button" aria-label="Previous image" class="carousel-btn prev absolute left-4 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-blue-500 to-indigo-500 text-white p-3 rounded-full hover:from-blue-600 hover:to-indigo-600 transition-all duration-300">
+            <i class="fas fa-chevron-left"></i>
+          </button>
+          <button class="carousel-btn next absolute right-4 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-blue-500 to-indigo-500 text-white p-3 rounded-full hover:from-blue-600 hover:to-indigo-600 transition-all duration-300">
+            <i class="fas fa-chevron-right"></i>
+          </button>
+          <div class="carousel-dots flex justify-center mt-4 space-x-2 pb-4">
+          </div>
+        </div>
+        
+        <iframe allowfullscreen class="rounded-xl shadow-md w-full h-96" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3958.015790561061!2d110.45644907474986!3d-7.280761692785604!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e708265970e9af7%3A0xa572723ddf2098e6!2sSaloka%20Theme%20Park!5e0!3m2!1sen!2sid!4v1716286888157!5m2!1sen!2sid" style="border:0;" title="Map to Saloka Theme Park"></iframe>
+      </div>
+    </section>
+
     <section class="mb-16 section-animate" id="denah-duduk">
       <h2 class="text-4xl font-extrabold mb-6 text-center text-indigo-700">Denah Duduk Bis</h2>
       <div class="max-w-5xl mx-auto space-y-12">
@@ -144,6 +411,72 @@
         ticking = true;
       }
     });
+
+    // Carousel functionality
+    const carouselImages = [
+      "https://lh3.googleusercontent.com/d/17gyHVwPl_nRN1IhRoNdB6UofarWz4hUM=s1000",
+      "https://lh3.googleusercontent.com/d/1krqSB87gM8PTP6XuxVkkPJHX0qANmgHP=s1000",
+      "https://lh3.googleusercontent.com/d/1yAU3I6UdZ5wJKx4YD_IY8kPzMfP1T76j=s1000",
+      "https://lh3.googleusercontent.com/d/1LxvAOfIJarS8qyzFNKDuibxDySwNeFzy=s1000",
+      "https://lh3.googleusercontent.com/d/1WKd5LVuTJ_EgLidsbVuFHllsoKIoKoJs=s1000",
+      "https://lh3.googleusercontent.com/d/1_l-wExzm7nHRcOKMUI9BCn8827qjjDQV=s1000",
+      "https://lh3.googleusercontent.com/d/12nFGDKZfUPzkUx2p6_s8z3CQecf0of5Y=s1000",
+      "https://lh3.googleusercontent.com/d/1TtCpI1iJonzivEzjmbjYff368i7lXfMg=s1000",
+      "https://lh3.googleusercontent.com/d/10ktsPUgPERoRXILGrK_6f9cdUdrFl11W=s1000",
+      "https://lh3.googleusercontent.com/d/1x7koiPgM0HakmmkmAPQ_mOv6f8KK4gLo=s1000",
+      "https://lh3.googleus
+ercontent.com/d/1_Fcwk2TWkNi8SfDTu9e2MBD9SBfw3zQS=s1000",
+      "https://lh3.googleus
+ercontent.com/d/1VtCkoVbqqXTNw2RSSfkTc4GwNC3r0rhS=s1000",
+      "https://lh3.googleus
+ercontent.com/d/1qg6YaTuwnsmuV4CnAMMGeN26ak-MQEJ5=s1000",
+      "https://lh3.googleus
+ercontent.com/d/17C01J2AnZ7iS8HYxeWZg_8ikAs9XbFZs=s1000",
+      "https://lh3.googleus
+ercontent.com/d/1PmWYMfvkn3bMzqztc-bmGzySz8rxqAp6=s1000"
+    ];
+
+    function initCarousel() {
+      const container = document.querySelector('.carousel-container');
+      const dotsContainer = document.querySelector('.carousel-dots');
+      
+      container.innerHTML = '';
+      dotsContainer.innerHTML = '';
+
+      carouselImages.forEach((img, index) => {
+        const slide = document.createElement('div');
+        slide.className = `carousel-slide ${index === 0 ? 'active' : ''}`;
+        slide.innerHTML = `<img src="${img}" alt="Outing Class Photo ${index+1}" class="w-full h-full object-cover">`;
+        container.appendChild(slide);
+        
+        const dot = document.createElement('button');
+        dot.className = `dot w-3 h-3 rounded-full ${index === 0 ? 'bg-indigo-600' : 'bg-gray-300 hover:bg-gray-400'}`;
+        dot.dataset.slide = index;
+        dotsContainer.appendChild(dot);
+      });
+      
+      let currentSlide = 0;
+      const slides = document.querySelectorAll('.carousel-slide');
+      const dots = document.querySelectorAll('.dot');
+      
+      function showSlide(n) {
+        slides.forEach(slide => slide.classList.remove('active'));
+        dots.forEach(dot => dot.classList.replace('bg-indigo-600', 'bg-gray-300'));
+        
+        currentSlide = (n + slides.length) % slides.length;
+        slides[currentSlide].classList.add('active');
+        dots[currentSlide].classList.replace('bg-gray-300', 'bg-indigo-600');
+      }
+      
+      document.querySelector('.carousel-btn.prev').addEventListener('click', () => showSlide(currentSlide - 1));
+      document.querySelector('.carousel-btn.next').addEventListener('click', () => showSlide(currentSlide + 1));
+      
+      dots.forEach(dot => {
+        dot.addEventListener('click', () => showSlide(parseInt(dot.dataset.slide)));
+      });
+      
+      setInterval(() => showSlide(currentSlide + 1), 5000);
+    }
 
     // Global variable to store seating assignments
     let seatingAssignments = {};
@@ -245,6 +578,8 @@
 
     // Initialize everything when DOM is loaded
     document.addEventListener('DOMContentLoaded', async () => {
+      initCarousel();
+      
       try {
         // Fetch seating data from CSV
         seatingAssignments = await fetchSeatingData();
