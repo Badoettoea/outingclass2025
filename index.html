@@ -32,6 +32,7 @@
     }
     .carousel-slide img {
       transition: transform 0.3s ease;
+      cursor: pointer;
     }
     .carousel-slide img:hover {
       transform: scale(1.05);
@@ -78,6 +79,11 @@
     }
     @keyframes spin {
       to { transform: rotate(360deg); }
+    }
+    #imageModal img {
+      max-height: 80vh;
+      max-width: 90vw;
+      object-fit: contain;
     }
   </style>
 </head>
@@ -210,6 +216,7 @@
     </div>
   </footer>
 
+  <!-- Seat Modal -->
   <div id="seatModal" class="fixed inset-0 bg-gray-900 bg-opacity-75 overflow-y-auto h-full w-full flex items-center justify-center hidden z-50">
     <div class="relative mx-auto p-6 border w-11/12 md:w-96 shadow-2xl rounded-xl bg-white">
       <div class="mt-3 text-center">
@@ -223,6 +230,20 @@
             Tutup
           </button>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Image Modal -->
+  <div id="imageModal" class="fixed inset-0 bg-gray-900 bg-opacity-75 overflow-y-auto h-full w-full flex items-center justify-center hidden z-50">
+    <div class="relative mx-auto p-4 border shadow-2xl rounded-xl bg-white">
+      <div class="flex justify-end">
+        <button id="closeImageModalBtn" class="text-gray-500 hover:text-gray-700 focus:outline-none">
+          <i class="fas fa-times text-2xl"></i>
+        </button>
+      </div>
+      <div class="mt-2 flex justify-center">
+        <img id="modalImage" src="" alt="Carousel Image" class="rounded-lg"/>
       </div>
     </div>
   </div>
@@ -258,15 +279,15 @@
       "https://lh3.googleusercontent.com/d/1LxvAOfIJarS8qyzFNKDuibxDySwNeFzy=s1000",
       "https://lh3.googleusercontent.com/d/1WKd5LVuTJ_EgLidsbVuFHllsoKIoKoJs=s1000",
       "https://lh3.googleusercontent.com/d/1_l-wExzm7nHRcOKMUI9BCn8827qjjDQV=s1000",
-      "https://lh3.googleusercontent.com/d/12nFGDKZfUPzkUx2p6_s8z3CQecf0of5Y=s1000",
-      "https://lh3.googleusercontent.com/d/1TtCpI1iJonzivEzjmbjYff368i7lXfMg=s1000",
-      "https://lh3.googleusercontent.com/d/10ktsPUgPERoRXILGrK_6f9cdUdrFl11W=s1000",
-      "https://lh3.googleusercontent.com/d/1x7koiPgM0HakmmkmAPQ_mOv6f8KK4gLo=s1000",
-      "https://lh3.googleusercontent.com/d/1_Fcwk2TWkNi8SfDTu9e2MBD9SBfw3zQS=s1000",
-      "https://lh3.googleusercontent.com/d/1VtCkoVbqqXTNw2RSSfkTc4GwNC3r0rhS=s1000",
-      "https://lh3.googleusercontent.com/d/1qg6YaTuwnsmuV4CnAMMGeN26ak-MQEJ5=s1000",
-      "https://lh3.googleusercontent.com/d/17C01J2AnZ7iS8HYxeWZg_8ikAs9XbFZs=s1000",
-      "https://lh3.googleusercontent.com/d/1PmWYMfvkn3bMzqztc-bmGzySz8rxqAp6=s1000"
+      "https://lh3.googleapis.com/u/0/d/12nFGDKZfUPzkUx2p6_s8z3CQecf0of5Y=s1000",
+      "https://lh3.googleapis.com/u/0/d/1TtCpI1iJonzivEzjmbjYff368i7lXfMg=s1000",
+      "https://lh3.googleapis.com/u/0/d/10ktsPUgPERoRXILGrK_6f9cdUdrFl11W=s1000",
+      "https://lh3.googleapis.com/u/0/d/1x7koiPgM0HakmmkmAPQ_mOv6f8KK4gLo=s1000",
+      "https://lh3.googleapis.com/u/0/d/1_Fcwk2TWkNi8SfDTu9e2MBD9SBfw3zQS=s1000",
+      "https://lh3.googleapis.com/u/0/d/1VtCkoVbqqXTNw2RSSfkTc4GwNC3r0rhS=s1000",
+      "https://lh3.googleapis.com/u/0/d/1qg6YaTuwnsmuV4CnAMMGeN26ak-MQEJ5=s1000",
+      "https://lh3.googleapis.com/u/0/d/17C01J2AnZ7iS8HYxeWZg_8ikAs9XbFZs=s1000",
+      "https://lh3.googleapis.com/u/0/d/1PmWYMfvkn3bMzqztc-bmGzySz8rxqAp6=s1000"
     ];
 
     function initCarousel() {
@@ -279,7 +300,7 @@
       carouselImages.forEach((img, index) => {
         const slide = document.createElement('div');
         slide.className = `carousel-slide ${index === 0 ? 'active' : ''}`;
-        slide.innerHTML = `<img src="${img}" alt="Outing Class Photo ${index+1}" class="w-full h-full object-cover">`;
+        slide.innerHTML = `<img src="${img}" alt="Outing Class Photo ${index+1}" class="w-full h-full object-cover" data-index="${index}">`;
         container.appendChild(slide);
         
         const dot = document.createElement('button');
@@ -308,7 +329,32 @@
         dot.addEventListener('click', () => showSlide(parseInt(dot.dataset.slide)));
       });
       
+      // Add click event for images to open modal
+      slides.forEach(slide => {
+        const img = slide.querySelector('img');
+        img.addEventListener('click', () => {
+          const index = parseInt(img.dataset.index);
+          const modal = document.getElementById('imageModal');
+          const modalImg = document.getElementById('modalImage');
+          modalImg.src = carouselImages[index];
+          modal.classList.remove('hidden');
+        });
+      });
+      
       setInterval(() => showSlide(currentSlide + 1), 5000);
+    }
+
+    // Image Modal Logic
+    const imageModal = document.getElementById('imageModal');
+    const closeImageModalBtn = document.getElementById('closeImageModalBtn');
+
+    if (closeImageModalBtn) {
+      closeImageModalBtn.addEventListener('click', () => imageModal.classList.add('hidden'));
+    }
+    if (imageModal) {
+      imageModal.addEventListener('click', (event) => {
+        if (event.target === imageModal) imageModal.classList.add('hidden');
+      });
     }
 
     // Global variable to store seating assignments
@@ -430,25 +476,25 @@
           button.addEventListener('click', handleSeatClick);
         });
         
-        // Modal close button
+        // Seat modal close button
         if (closeSeatModalBtn) {
           closeSeatModalBtn.addEventListener('click', () => seatModal.classList.add('hidden'));
         }
         
-        // Close modal when clicking outside
+        // Close seat modal when clicking outside
         if (seatModal) {
-          seatModal.addEventListener('click', (event) => { 
-            if (event.target === seatModal) seatModal.classList.add('hidden'); 
+          seatModal.addEventListener('click', (event) => {
+            if (event.target === seatModal) seatModal.classList.add('hidden');
           });
         }
       } catch (error) {
         console.error('Error initializing seating chart:', error);
         modalStudentName.textContent = "Gagal memuat data. Silakan coba lagi nanti.";
-        modalStudentName.className = "text-base text-red-500";
+        modalStudentName.className = "text-base text-red-600";
         document.querySelectorAll('.spinner').forEach(spinner => spinner.classList.add('hidden'));
-        document.querySelectorAll('#bus1-seats, #bus2-seats').forEach(container => {
-          container.classList.remove('hidden');
-          container.innerHTML = '<p class="text-center text-red-500">Gagal memuat denah duduk.</p>';
+        document.querySelectorAll('#bus1-seats, #bus2-seats').forEach(div => {
+          div.classList.remove('hidden');
+          div.innerHTML = '<p class="text-center text-red-600">Gagal memuat denah duduk.</p>';
         });
       }
     });
