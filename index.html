@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1" name="viewport"/>
-  <title>Rundown Outing Class SDN BUNGO 3</title>
+  <title>Rundown Eduwisata SDN BUNGO 3</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet"/>
@@ -79,6 +79,24 @@
     @keyframes spin {
       to { transform: rotate(360deg); }
     }
+    /* Table styles */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #e5e7eb;
+    }
+    th {
+      background-color: #3b82f6;
+      color: white;
+      font-weight: 600;
+    }
+    tr:hover {
+      background-color: #f3f4f6;
+    }
   </style>
 </head>
 <body class="bg-gray-100 text-gray-900 min-h-screen flex flex-col">
@@ -87,7 +105,7 @@
       <div class="flex items-center space-x-3">
         <img alt="Logo SDN BUNGO 3" class="w-12 h-12 rounded-full object-cover" src="https://raw.githubusercontent.com/Badoettoea/outingclass2025/93ee778664d164752b37af8ab7ae8eec4371a169/images/logo-sdn-bungo3.png"/>
         <h1 class="text-2xl md:text-3xl font-extrabold tracking-tight text-center">
-          <span class="block">Rundown Outing Class</span>
+          <span class="block">Rundown Eduwisata</span>
           <span class="block">SDN BUNGO 3</span>
         </h1>
       </div>
@@ -99,12 +117,12 @@
       <h2 class="text-4xl font-extrabold mb-6 text-center text-indigo-700">Ringkasan</h2>
       <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl p-8 transform hover:shadow-2xl transition-shadow duration-300">
         <p class="text-lg leading-relaxed text-gray-700">
-          Outing class SDN BUNGO 3 merupakan kegiatan khusus yang dirancang untuk memberikan siswa pengalaman edukatif dan menyenangkan di luar kelas. 
+          Eduwisata SDN BUNGO 3 merupakan kegiatan khusus yang dirancang untuk memberikan siswa pengalaman edukatif dan menyenangkan di luar kelas. 
           Kegiatan ini akan membantu siswa belajar tentang alam, kerja sama tim, dan budaya lokal sambil menikmati berbagai kegiatan 
           yang direncanakan oleh guru dan staf.
         </p>
         <div class="overflow-hidden rounded-xl mt-6">
-          <img alt="Kegiatan Outing Class" class="w-full object-cover h-96 transform hover:scale-105 transition-transform duration-300" src="https://storage.googleapis.com/a1aa/image/9a468090-5965-41c2-c468-51aec0b17beb.jpg" loading="lazy"/>
+          <img alt="Kegiatan Eduwisata" class="w-full object-cover h-96 transform hover:scale-105 transition-transform duration-300" src="https://storage.googleapis.com/a1aa/image/9a468090-5965-41c2-c468-51aec0b17beb.jpg" loading="lazy"/>
         </div>
       </div>
     </section>
@@ -113,7 +131,7 @@
       <h2 class="text-4xl font-extrabold mb-6 text-center text-indigo-700">Jadwal Kegiatan</h2>
       <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl p-8 transform hover:shadow-2xl transition-shadow duration-300">
         <ol class="list-decimal list-inside space-y-6 text-lg">
-          <li><span class="font-semibold text-indigo-600">06:00 - 06:30</span> - Berkumpul di sekolah, absensi, dan briefing kegiatan</li>
+          <li><span class="font-semibold text-indigo-600">06:00 - 06:30</span> - Berkumpul di titik penjemputan bus, absensi, dan briefing kegiatan</li>
           <li><span class="font-semibold text-indigo-600">06:30 - 09:30</span> - Perjalanan ke Watu Gajah (ice breaking di bus)</li>
           <li><span class="font-semibold text-indigo-600">09:30 - 12:00</span> - Eksplorasi Watu Gajah:
             <ul class="list-disc list-inside ml-6 mt-2 text-gray-700">
@@ -177,7 +195,7 @@
     </section>
 
     <section class="mb-16 section-animate" id="denah-duduk">
-      <h2 class="text-4xl font-extrabold mb-6 text-center text-indigo-700">Denah Duduk Bis</h2>
+      <h2 class="text-4xl font-extrabold mb-6 text-center text-indigo-700">Denah Duduk Bus</h2>
       <div class="max-w-5xl mx-auto space-y-12">
         <div class="bus-container">
           <h3 class="text-2xl font-bold mb-6 text-center text-indigo-600">Bus 1 (50 Kursi)</h3>
@@ -191,13 +209,51 @@
         </div>
 
         <div class="bus-container">
-          <h3 class="text-2xl font-bold mb-6 text-center text-indigo-600">Bus 2 (33 Kursi)</h3>
+          <h3 class="text-2xl font-bold mb-6 text-center text-indigo-600">Bus 2 (35 Kursi)</h3>
           <div class="bg-gray-50 p-6 rounded-2xl shadow-xl max-w-md mx-auto">
             <div class="mb-4 p-3 bg-indigo-100 rounded-xl text-center font-semibold text-indigo-800">DEPAN - SOPIR</div>
             <div class="flex justify-center"><div class="spinner"></div></div>
             <div class="space-y-2 hidden" id="bus2-seats">
               <!-- Seats will be generated here -->
             </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="mb-16 section-animate" id="daftar-siswa">
+      <h2 class="text-4xl font-extrabold mb-6 text-center text-indigo-700">Denah Duduk</h2>
+      <div class="max-w-5xl mx-auto space-y-12">
+        <div class="bus-students">
+          <h3 class="text-2xl font-bold mb-6 text-center text-indigo-600">Bus 1</h3>
+          <div class="bg-gray-50 p-6 rounded-2xl shadow-xl max-w-md mx-auto">
+            <table>
+              <thead>
+                <tr>
+                  <th>No. Kursi</th>
+                  <th>Nama</th>
+                </tr>
+              </thead>
+              <tbody id="bus1-students">
+                <!-- Student names for Bus 1 will be populated here -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="bus-students">
+          <h3 class="text-2xl font-bold mb-6 text-center text-indigo-600">Bus 2</h3>
+          <div class="bg-gray-50 p-6 rounded-2xl shadow-xl max-w-md mx-auto">
+            <table>
+              <thead>
+                <tr>
+                  <th>No. Kursi</th>
+                  <th>Nama</th>
+                </tr>
+              </thead>
+              <tbody id="bus2-students">
+                <!-- Student names for Bus 2 will be populated here -->
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
@@ -279,7 +335,7 @@
       carouselImages.forEach((img, index) => {
         const slide = document.createElement('div');
         slide.className = `carousel-slide ${index === 0 ? 'active' : ''}`;
-        slide.innerHTML = `<img src="${img}" alt="Outing Class Photo ${index+1}" class="w-full h-full object-cover">`;
+        slide.innerHTML = `<img src="${img}" alt="Eduwisata Photo ${index+1}" class="w-full h-full object-cover">`;
         container.appendChild(slide);
         
         const dot = document.createElement('button');
@@ -347,12 +403,44 @@
       return result;
     }
 
+    // Function to populate student tables
+    function populateStudentTables() {
+      const bus1Students = document.getElementById('bus1-students');
+      const bus2Students = document.getElementById('bus2-students');
+      bus1Students.innerHTML = '';
+      bus2Students.innerHTML = '';
+
+      const bus1List = [];
+      const bus2List = [];
+
+      for (const [key, studentName] of Object.entries(seatingAssignments)) {
+        const [bus, seat] = key.split('-');
+        if (studentName) {
+          const row = `<tr><td>${seat}</td><td>${studentName}</td></tr>`;
+          if (bus === 'bus1') {
+            bus1List.push({ seat, row });
+          } else if (bus === 'bus2') {
+            bus2List.push({ seat, row });
+          }
+        }
+      }
+
+      // Sort lists by seat number
+      bus1List.sort((a, b) => a.seat.localeCompare(b.seat, undefined, { numeric: true }));
+      bus2List.sort((a, b) => a.seat.localeCompare(b.seat, undefined, { numeric: true }));
+
+      // Populate tables or show empty message
+      bus1Students.innerHTML = bus1List.length > 0 ? bus1List.map(item => item.row).join('') : '<tr><td colspan="2" class="text-gray-500 italic text-center">Belum ada data siswa.</td></tr>';
+      bus2Students.innerHTML = bus2List.length > 0 ? bus2List.map(item => item.row).join('') : '<tr><td colspan="2" class="text-gray-500 italic text-center">Belum ada data siswa.</td></tr>';
+    }
+
     // Seat chart generation
-    function generateSeats(busId, rows, lastRowSeats) {
+    function generateSeats(busId, rows, lastRowSeats, extraRowSeats = []) {
       const container = document.getElementById(`${busId}-seats`);
       const spinner = container.previousElementSibling;
       container.innerHTML = '';
 
+      // Generate regular rows
       for (let i = 1; i <= rows; i++) {
         const row = document.createElement('div');
         row.className = 'flex justify-center items-center space-x-2';
@@ -365,7 +453,38 @@
         `;
         container.appendChild(row);
       }
-      
+
+      // Generate extra row with specific seats (e.g., 8C and 8D for bus2)
+      if (extraRowSeats.length > 0) {
+        const extraRow = document.createElement('div');
+        extraRow.className = 'flex justify-center items-center space-x-2 pt-2';
+        let extraRowHTML = '';
+        if (extraRowSeats.includes('A')) {
+          extraRowHTML += `<button data-bus="${busId}" data-seat="${rows + 1}A" class="seat-button ${seatingAssignments[`${busId}-${rows + 1}A`] ? 'occupied' : ''} bg-gray-300 hover:bg-indigo-400 text-gray-800 font-bold py-2 px-2 rounded-xl text-sm w-10 h-10 flex items-center justify-center cursor-pointer">${rows + 1}A</button>`;
+        } else {
+          extraRowHTML += `<div class="w-10 h-10"></div>`;
+        }
+        if (extraRowSeats.includes('B')) {
+          extraRowHTML += `<button data-bus="${busId}" data-seat="${rows + 1}B" class="seat-button ${seatingAssignments[`${busId}-${rows + 1}B`] ? 'occupied' : ''} bg-gray-300 hover:bg-indigo-400 text-gray-800 font-bold py-2 px-2 rounded-xl text-sm w-10 h-10 flex items-center justify-center cursor-pointer">${rows + 1}B</button>`;
+        } else {
+          extraRowHTML += `<div class="w-10 h-10"></div>`;
+        }
+        extraRowHTML += `<div class="w-8 h-10"></div>`;
+        if (extraRowSeats.includes('C')) {
+          extraRowHTML += `<button data-bus="${busId}" data-seat="${rows + 1}C" class="seat-button ${seatingAssignments[`${busId}-${rows + 1}C`] ? 'occupied' : ''} bg-gray-300 hover:bg-indigo-400 text-gray-800 font-bold py-2 px-2 rounded-xl text-sm w-10 h-10 flex items-center justify-center cursor-pointer">${rows + 1}C</button>`;
+        } else {
+          extraRowHTML += `<div class="w-10 h-10"></div>`;
+        }
+        if (extraRowSeats.includes('D')) {
+          extraRowHTML += `<button data-bus="${busId}" data-seat="${rows + 1}D" class="seat-button ${seatingAssignments[`${busId}-${rows + 1}D`] ? 'occupied' : ''} bg-gray-300 hover:bg-indigo-400 text-gray-800 font-bold py-2 px-2 rounded-xl text-sm w-10 h-10 flex items-center justify-center cursor-pointer">${rows + 1}D</button>`;
+        } else {
+          extraRowHTML += `<div class="w-10 h-10"></div>`;
+        }
+        extraRow.innerHTML = extraRowHTML;
+        container.appendChild(extraRow);
+      }
+
+      // Generate last row
       const lastRow = document.createElement('div');
       lastRow.className = 'flex justify-center items-center space-x-2 pt-4';
       for (let i = 1; i <= lastRowSeats; i++) {
@@ -423,8 +542,11 @@
 
         // Generate seat charts
         generateSeats('bus1', 11, 6);
-        generateSeats('bus2', 7, 5);
+        generateSeats('bus2', 7, 5, ['C', 'D']); // 7 rows + 8C, 8D + 5 last row seats
         
+        // Populate student tables
+        populateStudentTables();
+
         // Add event listeners to seat buttons
         document.querySelectorAll('.seat-button').forEach(button => {
           button.addEventListener('click', handleSeatClick);
