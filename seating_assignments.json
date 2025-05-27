@@ -1,6 +1,0 @@
-[
-  {"bus": "bus1", "seat": "", "student_name": "Ani", "gender": "P", "pair_with": "Budi", "is_parent": "N", "child_name": "", "pin": "12"},
-  {"bus": "bus1", "seat": "", "student_name": "Budi", "gender": "L", "pair_with": "Ani", "is_parent": "N", "child_name": "", "pin": "34"},
-  {"bus": "bus1", "seat": "", "student_name": "Ibu Ani", "gender": "F", "pair_with": "", "is_parent": "Y", "child_name": "Ani", "pin": "56"},
-  {"bus": "bus2", "seat": "", "student_name": "Cindy", "gender": "P", "pair_with": "", "is_parent": "N", "child_name": "", "pin": "90"}
-]
