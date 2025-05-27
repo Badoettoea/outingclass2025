@@ -1,858 +1,409 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Rundown Eduwisata SDN BUNGO 3</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
   <style>
     body {
       font-family: 'Poppins', sans-serif;
-      padding-top: 80px;
+      background-color: #f8f9fa;
     }
-    .carousel-container {
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-      border-radius: 12px;
+
+    .navbar-brand img {
+      width: 50px;
     }
-    .carousel-slide {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      opacity: 0;
-      transition: opacity 0.5s ease-in-out;
+
+    .section-title {
+      color: #2c3e50;
+      font-weight: 700;
     }
-    .carousel-slide.active {
-      opacity: 1;
+
+    .card {
+      margin-bottom: 20px;
     }
-    .carousel-slide img {
-      width: 100%;
-      height: 100%;
-      transition: transform 0.3s ease;
+
+    .seat-map {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
     }
-    .carousel-slide img:hover {
-      transform: scale(1.05);
-    }
-    .section-animate {
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeInUp 0.6s ease-out forwards;
-    }
-    @keyframes fadeInUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-    .seat-button {
-      transition: all 0.3s ease;
-    }
-    .seat-button.occupied {
-      background-color: #3b82f6;
-      color: white;
-    }
-    .seat-button:hover {
-      transform: scale(1.1);
-    }
-    header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      transition: transform 0.3s ease-in-out;
-      transform: translateY(0);
-    }
-    header.hidden {
-      transform: translateY(-100%);
-    }
-    .spinner {
-      width: 40px;
-      height: 40px;
-      border: 4px solid rgba(0, 0, 0, 0.1);
-      border-radius: 50%;
-      border-top-color: #3b82f6;
-      animation: spin 1s ease-in-out infinite;
-    }
-    @keyframes spin {
-      to { transform: rotate(360deg); }
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-    th, td {
-      padding: 12px;
-      text-align: left;
-      border-bottom: 1px solid #e5e7eb;
-    }
-    th {
-      background-color: #3b82f6;
-      color: white;
-      font-weight: 600;
-    }
-    tr:hover {
-      background-color: #f3f4f6;
-    }
-    .error-message {
-      color: #ef4444;
-      margin-top: 1rem;
-      text-align: center;
-      font-size: 0.875rem;
-      font-weight: 500;
-    }
-    .parent-row {
-      font-weight: bold;
+
+    .seat-map div {
+      background-color: #e9ecef;
+      padding: 10px;
+      border-radius: 5px;
     }
   </style>
+  <!-- Supabase CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
-<body class="bg-gray-100 text-gray-900 min-h-screen flex flex-col">
-  <header id="mainHeader" class="bg-gradient-to-r from-orange-500 to-orange-700 text-white shadow-lg z-40">
-    <div class="container mx-auto px-4 py-5 flex items-center justify-center">
-      <div class="flex items-center space-x-3">
-        <img alt="Logo SDN BUNGO 3" class="w-12 h-12 rounded-full object-cover" src="https://raw.githubusercontent.com/Badoettoea/outingclass2025/93ee778664d164752b37af8ab7ae8eec4371a169/images/logo-sdn-bungo3.png"/>
-        <h1 class="text-2xl md:text-3xl font-extrabold tracking-tight text-center">
-          <span class="block">Rundown Eduwisata</span>
-          <span class="block">SDN BUNGO 3</span>
-        </h1>
-      </div>
+
+<body>
+  <header>
+    <div class="container text-center py-4">
+      <img src="images/logo.png" alt="SDN BUNGO 3 Logo" class="img-fluid">
+      <h1>Rundown Eduwisata</h1>
+      <h2>SDN BUNGO 3</h2>
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav mx-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="#ringkasan">Ringkasan</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#jadwal">Jadwal Kegiatan</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#lokasi">Lokasi</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#denah">Denah Duduk Bus</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#pengacak">Pengacak Denah Duduk</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
     </div>
   </header>
 
-  <main class="flex-grow container mx-auto px-4 py-12">
-    <section class="mb-16 section-animate" id="overview">
-      <h2 class="text-4xl font-extrabold mb-6 text-center text-indigo-700">Ringkasan</h2>
-      <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl p-8 transform hover:shadow-2xl transition-shadow duration-300">
-        <p class="text-lg leading-relaxed text-gray-700">
-          Eduwisata SDN BUNGO 3 merupakan kegiatan khusus yang dirancang untuk memberikan siswa pengalaman edukatif dan menyenangkan di luar kelas. 
-          Kegiatan ini akan membantu siswa belajar tentang alam, kerja sama tim, dan budaya lokal sambil menikmati berbagai kegiatan 
-          yang direncanakan oleh guru dan staf.
-        </p>
-        <div class="overflow-hidden rounded-xl mt-6">
-          <img alt="Kegiatan Eduwisata" class="w-full object-cover h-96 transform hover:scale-105 transition-transform duration-300" src="https://storage.googleapis.com/a1aa/image/9a468090-5965-41c2-c468-51aec0b17beb.jpg" loading="lazy"/>
+  <main class="container my-5">
+    <section id="ringkasan" class="mb-5">
+      <div class="card">
+        <div class="card-body">
+          <h2 class="section-title">Ringkasan</h2>
+          <p>
+            Eduwisata SDN BUNGO 3 merupakan kegiatan khusus yang dirancang untuk memberikan siswa pengalaman edukatif dan
+            menyenangkan di luar kelas. Kegiatan ini akan membantu siswa belajar tentang alam, kerja sama tim, dan budaya
+            lokal sambil menikmati berbagai kegiatan yang direncanakan oleh guru dan staf.
+          </p>
+          <img src="images/children-playing.jpg" alt="Children Playing" class="img-fluid mt-3">
         </div>
       </div>
     </section>
 
-    <section class="mb-16 section-animate" id="schedule">    
-      <h2 class="text-4xl font-extrabold mb-6 text-center text-indigo-700">Jadwal Kegiatan</h2>
-      <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl p-8 transform hover:shadow-2xl transition-shadow duration-300">
-        <ol class="list-decimal list-inside space-y-6 text-lg">
-          <li><span class="font-semibold text-indigo-600">06:00 - 06:30</span> - Berkumpul di titik penjemputan bus, absensi, dan briefing kegiatan</li>
-          <li><span class="font-semibold text-indigo-600">06:30 - 09:30</span> - Perjalanan ke Watu Gajah (ice breaking di bus)</li>
-          <li><span class="font-semibold text-indigo-600">09:30 - 12:00</span> - Eksplorasi Watu Gajah:
-            <ul class="list-disc list-inside ml-6 mt-2 text-gray-700">
-              <li>Batu Gajah (spot ikonik)</li>
-              <li>Jembatan Kayu & Rumah Pohon</li>
-              <li>Puncak Pandang (view 360°)</li>
-              <li>Angel Wings (spot foto)</li>
-            </ul>
-          </li>
-          <li><span class="font-semibold text-indigo-600">12:00 - 12:30</span> - ISOMA (makan siang lunch box)</li>
-          <li><span class="font-semibold text-indigo-600">12:30 - 13:30</span> - Perjalanan ke Saloka Theme Park</li>
-          <li><span class="font-semibold text-indigo-600">13:30 - 15:00</span> - Wahana Saloka:
-            <ul class="list-disc list-inside ml-6 mt-2 text-gray-700">
-              <li>Taman Langit (sky bike)</li>
-              <li>Dino Park (foto dengan dinosaurus)</li>
-              <li>Pasar Setan (explore area horor)</li>
-            </ul>
-          </li>
-          <li><span class="font-semibold text-indigo-600">15:00 - 15:30</span> - Sholat Ashar di mushala Saloka</li>
-          <li><span class="font-semibold text-indigo-600">15:30 - 17:30</span> - Lanjut wahana:
-            <ul class="list-disc list-inside ml-6 mt-2 text-gray-700">
-              <li>Rajawali (roller coaster)</li>
-              <li>Banjir Banda (water ride)</li>
-              <li>Pohon Akrobat (untuk anak-anak)</li>
-            </ul>
-          </li>
-          <li><span class="font-semibold text-indigo-600">17:30 - 18:00</span> - Persiapan menyaksikan Baru Klinting Show</li>
-          <li><span class="font-semibold text-indigo-600">18:00 - 18:45</span> - Nonton Baru Klinting Show (teater outdoor)</li>
-          <li><span class="font-semibold text-indigo-600">18:45 - 19:30</span> - Makan malam & beli merchandise</li>
-          <li><span class="font-semibold text-indigo-600">19:30 - 21:30</span> - Perjalanan pulang ke sekolah</li>
-          <li><span class="font-semibold text-indigo-600">21:30</span> - Sampai di sekolah, pembubaran</li>
-        </ol>
-      </div>
-    </section>
-
-    <section class="mb-16 section-animate" id="location">
-      <h2 class="text-4xl font-extrabold mb-6 text-center text-indigo-700">Lokasi</h2>
-      <div class="max-w-4xl mx-auto bg-white rounded-2xl shadow-xl p-8 transform hover:shadow-2xl transition-shadow duration-300">
-        <p class="text-lg mb-6 text-gray-700">
-          Kegiatan ini akan dilaksanakan di <strong>Watu Gajah Park</strong> dan <strong>Saloka Theme Park</strong>, 
-          sebuah taman hiburan menarik yang menawarkan berbagai wahana dan atraksi. 
-          Area ini memiliki tanaman hijau yang rimbun, jalur pejalan kaki, dan ruang terbuka yang cocok untuk 
-          kegiatan belajar dan aktivitas luar ruangan.
-        </p>
-        
-        <div class="relative rounded-xl shadow-lg overflow-hidden mb-6" id="photoCarousel">
-          <div class="carousel-container relative w-full h-96">
-          </div>
-          <button type="button" aria-label="Previous image" class="carousel-btn prev absolute left-4 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-blue-500 to-indigo-500 text-white p-3 rounded-full hover:from-blue-600 hover:to-indigo-600 transition-all duration-300">
-            <i class="fas fa-chevron-left"></i>
-          </button>
-          <button class="carousel-btn next absolute right-4 top-1/2 transform -translate-y-1/2 bg-gradient-to-r from-blue-500 to-indigo-500 text-white p-3 rounded-full hover:from-blue-600 hover:to-indigo-600 transition-all duration-300">
-            <i class="fas fa-chevron-right"></i>
-          </button>
-          <div class="carousel-dots flex justify-center mt-4 space-x-2 pb-4">
-          </div>
+    <section id="jadwal" class="mb-5">
+      <h2 class="section-title">Jadwal Kegiatan</h2>
+      <div class="card">
+        <div class="card-body">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">06:00 - 06:30 - Berkumpul di titik penjemputan bus, absensi, dan briefing
+              kegiatan</li>
+            <li class="list-group-item">06:30 - 09:30 - Perjalanan ke Watu Gajah (ice breaking di bus)</li>
+            <li class="list-group-item">09:30 - 12:00 - Eksplorasi Watu Gajah:<br>
+              - Batu Gajah (spot ikonik)<br>
+              - Jembatan Kayu & Rumah Pohon<br>
+              - Puncak Pandang (view 360°)<br>
+              - Angel Wings (spot foto)</li>
+            <li class="list-group-item">12:00 - 12:30 - ISOMA (makan siang lunch box)</li>
+            <li class="list-group-item">12:30 - 13:30 - Perjalanan ke Saloka Theme Park</li>
+            <li class="list-group-item">13:30 - 15:00 - Wahana Saloka:<br>
+              - Taman Langit (sky bike)<br>
+              - Dino Park (foto dengan dinosaurus)<br>
+              - Pasar Setan (explore area horor)</li>
+            <li class="list-group-item">15:00 - 15:30 - Sholat Ashar di mushala Saloka</li>
+            <li class="list-group-item">15:30 - 17:30 - Lanjut wahana:<br>
+              - Rajawali (roller coaster)<br>
+              - Banjir Banda (water ride)<br>
+              - Pohon Akrobat (untuk anak-anak)</li>
+            <li class="list-group-item">17:30 - 18:00 - Persiapan menyaksikan Baru Klinting Show</li>
+            <li class="list-group-item">18:00 - 18:45 - Nonton Baru Klinting Show (teater outdoor)</li>
+            <li class="list-group-item">18:45 - 19:30 - Makan malam & beli merchandise</li>
+            <li class="list-group-item">19:30 - 21:30 - Perjalanan pulang ke sekolah</li>
+            <li class="list-group-item">21:30 - Sampai di sekolah, pembubaran</li>
+          </ul>
         </div>
-        
-        <iframe allowfullscreen class="rounded-xl shadow-md w-full h-96" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3958.015790561061!2d110.45644907474986!3d-7.280761692785604!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e708265970e9af7%3A0xa572723ddf2098e6%2sSaloka%20Theme%20Park!5e0!3m2!1sen!2sid!4v1716286888157!5m2!1sen!2sid" style="Map to Saloka Theme Park"></iframe>
       </div>
     </section>
 
-    <section class="mb-16 section-animate" id="denah-duduk">
-      <h2 class="text-4xl font-extrabold mb-6 text-center text-indigo-700">Denah Duduk Bus</h2>
-      <div class="max-w-5xl mx-auto space-y-0">
-        <div class="bus-container">
-          <h3 class="text-2xl font-bold mb-6 text-center text-indigo-600">Bus 1 (50 Kursi)</h3>
-            <div class="bg-gray-50 p-4 rounded-2xl shadow-xl max-w-md mx-auto">
-            <div class="mb-4 p-2 bg-indigo-100 rounded-xl text-center">DEPAN - SOPIR</div>
-            <div class="flex justify-center"><div class="spinner"></div></div>
-            <div class="space-y-2 hidden" id="bus1-seats">
-              <!-- Seats will be generated here -->
+    <section id="lokasi" class="mb-5">
+      <h2 class="section-title">Lokasi</h2>
+      <div class="card">
+        <div class="card-body">
+          <p>
+            Kegiatan ini akan dilaksanakan di Watu Gajah Park dan Saloka Theme Park, sebuah taman hiburan menarik yang
+            menawarkan berbagai wahana dan atraksi. Area ini memiliki tanaman hijau yang rimbun, jalur pejalan kaki, dan
+            ruang terbuka yang cocok untuk kegiatan belajar dan aktivitas luar ruangan.
+          </p>
+          <div class="row mt-3">
+            <div class="col-md-6">
+              <img src="images/watu-gajah.png" alt="Watu Gajah Park" class="img-fluid">
             </div>
-          </div>
-        </div>
-
-        <div class="bus-container">
-          <h3 class="text-2xl font-bold mb-6 text-center text-indigo-600">Bus 2 (35 Kursi)</h3>
-          <div class="bg-gray-50 p-4 rounded-2xl shadow-xl max-w-md mx-auto">
-            <div class="mb-4 p-2 bg-indigo-100 rounded-xl text-center">DEPAN - SOPIR</div>
-            <div class="flex justify-center"><div class="spinner"></div></div>
-            <div class="space-y-2 hidden" id="bus2-seats">
-              <!-- Seats will be generated here -->
+            <div class="col-md-6">
+              <img src="images/saloka.png" alt="Saloka Theme Park" class="img-fluid">
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="mb-16 section-animate" id="daftar-siswa">
-      <h2 class="text-4xl font-extrabold mb-6 text-center text-indigo-700">Denah Duduk</h2>
-      <div class="max-w-5xl mx-auto space-y-12">
-        <div class="bus-students">
-          <h3 class="text-2xl font-bold mb-6 text-center text-indigo-600">Bus 1</h3>
-          <div class="bg-gray-50 p-6 rounded-2xl shadow-xl max-w-md mx-auto">
-            <table>
-              <thead>
-                <tr>
-                  <th>No. Kursi</th>
-                  <th>Nama</th>
-                </tr>
-              </thead>
-              <tbody id="bus1-students">
-                <!-- Student names for Bus 1 will be populated here -->
-              </tbody>
-            </table>
+    <section id="denah" class="mb-5">
+      <h2 class="section-title">Denah Duduk Bus</h2>
+      <div class="card">
+        <div class="card-body">
+          <h3>Bus 1 (50 Kursi)</h3>
+          <div class="seat-map">
+            <div>DEPAN - SOPIR</div>
+            <div id="bus1"></div>
           </div>
-        </div>
-
-        <div class="bus-students">
-          <h3 class="text-2xl font-bold mb-6 text-center text-indigo-600">Bus 2</h3>
-          <div class="bg-gray-50 p-6 rounded-2xl shadow-xl max-w-md mx-auto">
-            <table>
-              <thead>
-                <tr>
-                  <th>No. Kursi</th>
-                  <th>Nama</th>
-                </tr>
-              </thead>
-              <tbody id="bus2-students">
-                <!-- Student names for Bus 2 will be populated here -->
-              </tbody>
-            </table>
+          <h3 class="mt-4">Bus 2 (35 Kursi)</h3>
+          <div class="seat-map">
+            <div>DEPAN - SOPIR</div>
+            <div id="bus2"></div>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="mb-16 section-animate" id="seat-randomizer">
-      <h2 class="text-4xl font-extrabold mb-6 text-center text-indigo-700">Pengacak Denah Duduk</h2>
-      <div class="max-w-md mx-auto bg-white rounded-2xl shadow-xl p-6">
-        <div class="mb-4">
-          <label for="pin-input" class="block text-sm font-semibold text-gray-700">Masukkan PIN (2 Angka):</label>
-          <input type="text" id="pin-input" class="w-full p-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500" placeholder="Contoh: 12" maxlength="2" pattern="[0-9]{2}" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 2);">
+    <section id="denah-duduk" class="mb-5">
+      <h2 class="section-title">Denah Duduk</h2>
+      <div class="card">
+        <div class="card-body">
+          <h3>Bus 1</h3>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>No. Kursi</th>
+                <th>Nama</th>
+              </tr>
+            </thead>
+            <tbody id="bus1-table"></tbody>
+          </table>
+          <h3 class="mt-4">Bus 2</h3>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>No. Kursi</th>
+                <th>Nama</th>
+              </tr>
+            </thead>
+            <tbody id="bus2-table"></tbody>
+          </table>
         </div>
-        <button id="randomize-btn" class="w-full bg-gradient-to-r from-blue-500 to-indigo-500 text-white font-semibold py-2 px-4 rounded-xl hover:from-blue-600 hover:to-indigo-600 transition-all duration-300">
-          Acak Kursi Saya
-        </button>
-        <p id="error-message" class="error-message hidden"></p>
+      </div>
+    </section>
+
+    <section id="pengacak" class="mb-5">
+      <h2 class="section-title">Pengacak Denah Duduk</h2>
+      <div class="card">
+        <div class="card-body">
+          <div class="mb-3">
+            <label for="pin-input" class="form-label">Masukkan PIN (2 Angka)</label>
+            <input type="text" class="form-control" id="pin-input" maxlength="2">
+          </div>
+          <button id="shuffle-button" class="btn btn-primary">Acak Kursi Saya</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="kursi-info" class="mb-5">
+      <h2 class="section-title">Kursi Info</h2>
+      <div class="card">
+        <div class="card-body">
+          <div id="seat-info">Memuat data...</div>
+          <button id="close-info" class="btn btn-secondary mt-3">Tutup</button>
+        </div>
       </div>
     </section>
   </main>
 
-  <footer class="bg-gradient-to-r from-orange-500 to-orange-700 text-white py-8 mt-auto">
-    <div class="container mx-auto px-4 text-center">
-      <p class="text-lg font-semibold">© 2025 SDN BUNGO 3. All rights reserved.</p>
-    </div>
+  <footer class="text-center py-4">
+    <p>© 2025 SDN BUNGO 3. All rights reserved.</p>
   </footer>
 
-  <div id="seatModal" class="fixed inset-0 bg-gray-900 bg-opacity-75 overflow-y-auto h-full w-full flex items-center justify-center hidden z-50">
-    <div class="relative mx-auto p-6 border w-11/12 md:w-96 shadow-2xl rounded-xl bg-white">
-      <div class="mt-3 text-center">
-        <h3 class="text-xl font-bold text-gray-900" id="modalSeatInfo">Kursi Info</h3>
-        <div class="mt-2 px-7 py-3">
-          <p class="text-base text-gray-700" id="modalStudentName">Memuat data...</p>
-          <p class="text-sm text-gray-500" id="modalBusInfo"></p>
-        </div>
-        <div class="items-center px-4 py-3">
-          <button id="closeSeatModalBtn" class="px-4 py-2 bg-gradient-to-r from-blue-500 to-indigo-500 text-white text-base font-semibold rounded-xl w-full shadow-sm hover:from-blue-600 hover:to-indigo-600 focus:outline-none focus:ring-2 focus:ring-blue-300 transition-all duration-300">
-            Tutup
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    // Auto-hide header
-    let lastScrollY = window.scrollY;
-    const header = document.getElementById('mainHeader');
-    const headerHeight = header.offsetHeight;
-    let ticking = false;
+    // Inisialisasi Supabase
+    const supabase = Supabase.createClient('https://creklruajbmewnozdbaj.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNyZWtscnVhamJtZXdub3pkYmFqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDgzNTkyMzgsImV4cCI6MjA2MzkzNTIzOH0._RTqclOq-w09r0KaZbqGLpPdT04IRwJtdDf-esJpTyc');
 
-    window.addEventListener('scroll', () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          if (window.scrollY > lastScrollY && window.scrollY > headerHeight) {
-            header.classList.add('hidden');
-          } else {
-            header.classList.remove('hidden');
+    // Fungsi untuk memperbarui tampilan denah duduk
+    async function updateSeatDisplay() {
+      const bus1Map = document.querySelector('#bus1');
+      const bus2Map = document.querySelector('#bus2');
+      const bus1Table = document.querySelector('#bus1-table');
+      const bus2Table = document.querySelector('#bus2-table');
+      bus1Map.innerHTML = '';
+      bus2Map.innerHTML = '';
+      bus1Table.innerHTML = '';
+      bus2Table.innerHTML = '';
+
+      const { data, error } = await supabase
+        .from('seating')
+        .select('bus, seat, student_name')
+        .order('seat', { ascending: true });
+
+      if (error) {
+        console.error('Error fetching seating data:', error.message);
+        bus1Map.innerHTML = 'Gagal memuat data!';
+        bus2Map.innerHTML = 'Gagal memuat data!';
+        return;
+      }
+
+      data.forEach(student => {
+        if (student.bus && student.seat) {
+          const seatInfo = `<div>${student.seat}: ${student.student_name}</div>`;
+          const tableRow = `<tr><td>${student.seat}</td><td>${student.student_name}</td></tr>`;
+          if (student.bus === 'Bus 1') {
+            bus1Map.innerHTML += seatInfo;
+            bus1Table.innerHTML += tableRow;
+          } else if (student.bus === 'Bus 2') {
+            bus2Map.innerHTML += seatInfo;
+            bus2Table.innerHTML += tableRow;
           }
-          lastScrollY = window.scrollY;
-          ticking = false;
-        });
-        ticking = true;
-      }
-    });
-
-    // Carousel functionality
-    const carouselImages = [
-      "https://lh3.google.com/u/0/d/17gyHVwPl_nRN1lIhROeaB6UofarSz4hUM=s1000",
-      "https://lh3.google.com/u/0/d/1krqSB87gM8P0TP6hTuxV4kP1HX0qANmgHP=s1000",
-      "https://lh3.google.com/u/0/d/1yAU3I6UdZ5wJkLIds4YD_IY8kPzM0fP1T76j=s1000",
-      "https://lh3.google.com/l/0/d/1LxvAOfIJarS8qyzFNKDuibxDySwNeFzy=s1000",
-      "https://lh3.google.com/l/0/d/1WKd5LVuTJ_EgLid4sbVuFHl1soKIoKoJs=s1000",
-      "https://lh3.google.com/l/0/d/1_l-wExzm7nHRc-bkMUI9BCnL8827qjjDQV=s1000",
-      "https://lh3.google.com/l/0/d/12nFGDKZfUPzkwUk2p6_s8z3CQv6cf0of5Y=s1000",
-      "https://lh3.google.com/l/0/d/1TtYcI1iJonzivEzOmbjYff368g7l0XfMg=s1000",
-      "https://lh3.google.com/l/0/d/10kOkPUgZPERoRXlLGrK_6fNf9cdUdrUFl0W=s1000",
-      "https://lh3.google.com/l/0/d/1xUzKoiPgM0H0akmmkmAPQ_mOv0v8EfK4gLo=s1000",
-      "https://lh3.google.com/l/0/d/1_FcKw2TwTkNi8Sf0kDTu9e2MBDq0SBfv3zQS=s1000",
-      "https://lh3.google.com/l/0/d/1VtCkoVvObq0TXtN2vRSwqfsT5kGwNC3q0rhS=s1000",
-      "https://lh3.google.com/3/0/d/1qg6YaTuwnsmuV4CnMvBBNNGeN126tk-MQEJ5=s1000",
-      "https://lh3.google.com/3/0/d/17C0lJ2AnZ7iS8H0SxeW6g_0lkA0sX0bFZs=s1000",
-      "https://lh3.google.com/3/1/u/1PmW6Mfvzkn3bMzqM0ztc-bm2gZySz8r0xAqQ=s1000",
-    ];
-
-    function initCarousel() {
-      const container = document.querySelector('.carousel-container');
-      const dotsContainer = document.querySelector('.carousel-dots');
-      
-      container.innerHTML = '';
-      dotsContainer.innerHTML = '';
-
-      carouselImages.forEach((img, index) => {
-        const slide = document.createElement('div');
-        slide.className = `carousel-slide ${index === 0 ? 'active' : ''}`;
-        slide.innerHTML = `<img src="${img}" alt="Slide ${index + 1}" class="w-full h-full object-cover">`;
-        container.appendChild(slide);
-        
-        const dot = document.createElement('button');
-        dot.className = `dot w-3 h-3 rounded-full ${index === 0 ? 'bg-indigo-600' : 'bg-gray-300 hover:bg-gray-400'}`;
-        dot.dataset.index = index;
-        dotsContainer.appendChild(dot);
+        }
       });
-
-      const slides = Array.from(document.querySelectorAll('.carousel-slide'));
-      let currentSlide = 0;
-
-      function showSlide(n) {
-        slides.forEach(slide => slide.classList.remove('active'));
-        dots.forEach(dot => dot.classList.replace('bg-indigo-600', 'bg-gray-300'));
-
-        currentSlide = (n + slides.length) % slides.length;
-        slides[currentSlide].classList.add('active');
-        dots[currentSlide].classList.replace('bg-gray-300', 'bg-indigo-600');
-      }
-
-      document.querySelector('.carousel-btn.prev').classList.addEventListener('click', () => showSlide(currentSlide - 1));
-      document.querySelector('.carousel-btn.next').classList.addEventListener('click', () => showSlide(currentSlide + 1));
-      
-      dots.forEach(dot => {
-        dot.classList.addEventListener('click', () => showSlide(parseInt(dot.dataset.index)));
-      });
-
-      setInterval(() => showSlide(currentSlide + 1), 5000);
     }
 
-    // Global variable to store seating assignments
-    let seatingAssignments = [];
+    // Fungsi untuk menampilkan info kursi
+    async function showSeatInfo() {
+      const pin = document.querySelector('#pin-input').value;
+      if (pin.length !== 2 || isNaN(pin)) {
+        document.querySelector('#seat-info').innerHTML = 'PIN harus 2 angka!';
+        return;
+      }
 
-    // Function to fetch CSV data from GitHub
-    async function fetchSeatingData() {
-  try {
-    const response = await fetch('seating_assignments.json');
-    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-    const jsonData = await response.json();
-    const result = {};
-    const pins = new Set();
+      const { data, error } = await supabase
+        .from('seating')
+        .select('bus, seat, student_name')
+        .eq('pin', pin)
+        .single();
 
-    jsonData.forEach(row => {
-      const { bus, seat, student_name, gender, pair_with, is_parent, child_name, pin } = row;
-      if (pin && (student_name || is_parent === 'Y')) {
-        if (pins.has(pin)) {
-          alert(`Error: PIN ${pin} duplikat di JSON! Harap perbaiki.`);
+      if (error || !data) {
+        document.querySelector('#seat-info').innerHTML = 'Data kursi tidak ditemukan!';
+        return;
+      }
+
+      document.querySelector('#seat-info').innerHTML = 
+        `Kursi: ${data.bus} - ${data.seat} (${data.student_name})`;
+    }
+
+    // Fungsi pengacakan kursi
+    async personally significant to shuffleSeats() {
+      const pin = document.querySelector('#pin-input').value;
+      if (pin.length !== 2 || isNaN(pin)) {
+        alert('PIN harus 2 angka!');
+        return;
+      }
+
+      // Validasi PIN
+      const { data: validPin, error: pinError } = await supabase
+        .from('seating')
+        .select('id')
+        .eq('pin', pin)
+        .single();
+      if (pinError || !validPin) {
+        alert('PIN tidak valid!');
+        return;
+      }
+
+      // Ambil data dari Supabase
+      const { data, error } = await supabase
+        .from('seating')
+        .select('id, student_name, gender, pair_with, is_parent, child_name');
+      if (error) {
+        console.error('Error fetching data:', error.message);
+        alert('Gagal memuat data!');
+        return;
+      }
+
+      // Definisikan kapasitas bus
+      const bus1Seats = Array.from({ length: 50 }, (_, i) => ({ bus: 'Bus 1', seat: i + 1 }));
+      const bus2Seats = Array.from({ length: 35 }, (_, i) => ({ bus: 'Bus 2', seat: i + 1 }));
+      let availableSeats = [...bus1Seats, ...bus2Seats];
+
+      // Acak kursi
+      availableSeats = availableSeats.sort(() => Math.random() - 0.5);
+
+      // Kelompokkan siswa berdasarkan pair_with dan is_parent/child_name
+      const assignments = [];
+      const processedIds = new Set();
+
+      for (const student of data) {
+        if (processedIds.has(student.id)) continue;
+
+        const assignment = { id: student.id, bus: null, seat: null };
+
+        // Cek apakah siswa harus dipasangkan
+        if (student.pair_with || student.is_parent) {
+          const pairedStudents = [student];
+          if (student.pair_with) {
+            const pair = data.find(s => s.student_name === student.pair_with);
+            if (pair && !processedIds.has(pair.id)) pairedStudents.push(pair);
+          }
+          if (student.is_parent && student.child_name) {
+            const child = data.find(s => s.student_name === student.child_name);
+            if (child && !processedIds.has(child.id)) pairedStudents.push(child);
+          }
+
+          // Alokasikan kursi berdekatan untuk kelompok
+          for (let i = 0; i < pairedStudents.length; i++) {
+            if (availableSeats.length === 0) {
+              alert('Kursi tidak cukup!');
+              return;
+            }
+            assignments.push({
+              id: pairedStudents[i].id,
+              bus: availableSeats[0].bus,
+              seat: availableSeats[0].seat,
+            });
+            processedIds.add(pairedStudents[i].id);
+            availableSeats.shift();
+          }
+        } else {
+          // Alokasikan kursi untuk siswa tunggal
+          if (availableSeats.length === 0) {
+            alert('Kursi tidak cukup!');
+            return;
+          }
+          assignment.bus = availableSeats[0].bus;
+          assignment.seat = availableSeats[0].seat;
+          assignments.push(assignment);
+          processedIds.add(student.id);
+          availableSeats.shift();
+        }
+      }
+
+      // Perbarui tabel di Supabase
+      for (const assignment of assignments) {
+        const { error } = await supabase
+          .from('seating')
+          .update({ bus: assignment.bus, seat: assignment.seat })
+          .eq('id', assignment.id);
+        if (error) {
+          console.error('Error updating seat:', error.message);
+          alert('Gagal memperbarui kursi!');
           return;
         }
-        pins.add(pin);
-        const key = `${bus}-${seat || 'unassigned'}-${pin}`;
-        result[key] = {
-          studentName: student_name?.trim() || '',
-          gender: gender?.trim() || '',
-          pairWith: pair_with?.trim() || '',
-          isParent: is_parent?.trim() || 'N',
-          childName: child_name?.trim() || '',
-          pin: pin.trim()
-        };
       }
+
+      // Perbarui tampilan denah duduk dan info kursi
+      await updateSeatDisplay();
+      await showSeatInfo();
+    }
+
+    // Event listener untuk tombol
+    document.querySelector('#shuffle-button').addEventListener('click', shuffleSeats);
+    document.querySelector('#close-info').addEventListener('click', () => {
+      document.querySelector('#seat-info').innerHTML = 'Memuat data...';
+      document.querySelector('#pin-input').value = '';
     });
 
-    return result;
-  } catch (error) {
-    console.error('Error fetching seating data:', error);
-    return null;
-  }
-}
-
-
-    // Function to parse CSV data
-    function parseCSV(csvData) {
-      const lines = csvData.trim().split('\n');
-      const result = {};
-      const pins = new Set();
-      console.log('Parsing CSV data, total lines:', lines.length);
-
-      for (let i = 0; i <= lines.length; i++) {
-        const line = lines[i].trim();
-        if (!line) continue;
-
-        const parts = line.split(',');
-        if (parts.length < 8) {
-          console.warn(`Invalid row at line ${i + 1}:`, line);
-          continue;
-        }
-
-        const [bus, seat, studentName, gender, pairWith, parentName, childName, pin] = parts;
-        if (!bus || (!studentName && !isParent === 'Y') || !pin || !/^\d{2}$/.test(pin)) {
-          console.warn(`Invalid data at line ${i + 1}:`, line);
-          continue;
-        }
-
-        if (pins.has(pin)) {
-          console.error('Duplicate PIN detected at line ${i + 1}: ${pin}');
-          alert('Error: Duplicate PIN found in CSV at line ${i + 1}! Please fix.');
-          return null;
-        }
-        pins.add(pin);
-
-        const key = seat ? `${bus}-${seat}` : `${bus}-pin-${pin}`;
-        result[key] = {
-          studentName: studentName ? studentName.trim() : '',
-          gender: gender ? gender.trim() : '',
-          pairWith: pairWith ? pairWith.trim() : '',
-          isParent: isParent === 'Y' ? 'Y' : 'N',
-          childName: childName ? childName.trim() : '',
-          pin: pin.trim(),
-          seat: seat ? seat.trim() : null
-        };
-        console.log(`Parsed: key=${key}, PIN=${pin}, Name=${studentName}`);
-      }
-
-      console.log('Parsed seating assignments:', result);
-      return Object.keys(result).length > 0 ? result : null;
-    }
-
-    // Function to populate student tables
-    function populateStudentTables() {
-      const bus1Students = document.getElementById('bus1-students');
-      const bus2Students = document.getElementById('bus2-students');
-      bus1Students.innerHTML = '';
-      bus2Students.innerHTML = '';
-
-      const bus1List = [];
-      const bus2List = [];
-
-      for (const [key, data] of Object.entries(seatingAssignments)) {
-        if (!data.seat) continue;
-        const [bus] = key.split('-');
-        const genderClass = data.gender === 'P' || data.gender === 'F' ? 'bg-pink-100' : data.gender === 'L' || data.gender === 'M' ? 'bg-blue-100' : '';
-        const parentClass = data.isParent === 'Y' ? 'parent-row' : '';
-        const row = `<tr class="${genderClass} ${parentClass}"><td>${data.seat}</td><td>${data.studentName}${data.isParent === 'Y' ? ' (Ortu)' : ''}</td></tr>`;
-        if (bus === 'bus1') {
-          bus1List.push({ seat: data.seat, row });
-        } else if (bus === 'bus2') {
-          bus2List.push({ seat: data.seat });
-        }
-      }
-
-      bus1List.sort((a, b) => a.seat.localeCompare(b.seat, undefined, { numeric: true }));
-      bus2List.sort((a, b) => a.seat.localeCompare(b.seat, undefined, { numeric: true }));
-
-      bus1Students.innerHTML = bus1List.length ? bus1List.map(item => item.row).join(' ') : '<tr><td colspan="2" class="text-center text-gray-500 italic">No student data available.</td></tr>';
-      bus2Students.innerHTML = bus2List.length ? bus2List.map(item => item.row).join(' ') : '<tr><td colspan="2" class="text-center text-gray-500 italic">No student data available.</td></tr>';
-    }
-
-    // Function to generate seat chart
-    function generateSeats(busId, rows, lastRowSeats, extraRowSeats = []) {
-      const container = document.getElementById(`${busId}-seats`);
-      const spinner = container.previousElementSibling;
-      container.innerHTML = '';
-
-      for (let i = 1; i <= rows; i++) {
-        const row = document.createElement('div');
-        row.className = 'flex justify-between items-center space-x-2';
-        row.innerHTML = `
-          <button class="seat-button" data-bus="${busId}" data-seat="${i}A" class="seat-button ${seatingAssignments[`${busId}-${seat}A`]?.studentName ? 'occupied' : ''} bg-gray-300 hover:bg-indigo-400 text-gray-800 font-semibold py-1 px-3 rounded-md text-sm w-14 h-10 flex items-center justify-center cursor-pointer">${i}A</button>
-          <button data-bus="${busId}" data-seat="${i}B" class="seat-button ${seatingAssignments[`${busId}-${seat}B`]?.studentName ? 'occupied' : ''} bg-gray-300 hover:bg-indigo-400 text-gray-800 font-semibold py-1 px-3 rounded-md text-sm w-14 h-10 flex items-center justify-center cursor-pointer">${i}B</button>
-          <div class="w-10 h-10"></div>
-          <button data-bus="${busId}" data-seat="${i}C" class="seat-button ${seatingAssignments[`${busId}-${seat}C`]?.studentName ? 'occupied' : ''} bg-gray-300 hover:bg-indigo-400 text-gray-800 font-semibold py-1 px-3 rounded-md text-sm w-14 h-10 flex items-center justify-center cursor-pointer">${i}C</button>
-          <button data-bus="${busId}" data-seat="${i}D" class="seat-button ${seatingAssignments[`${busId}-${seat}D`]?.studentName ? 'occupied' : ''} bg-gray-300 hover:bg-indigo-400 text-gray-800 font-semibold py-1 px-3 rounded-md text-sm w-14 h-10 flex items-center justify-center cursor-pointer">${i}D</button>
-        `;
-        container.appendChild(row);
-      }
-
-      if (extraRowSeats.length) {
-        const extraRow = document.createElement('div');
-        extraRow.className = 'flex-row justify-center items-center space-x-2 pt-2';
-        let extraRowHTML = '';
-        extraRowHTML += extraRowSeats.includes('A') ? `<button data-bus="${busId}" data-seat="${rows + 1}A" class="seat-button ${seatingAssignments[`${busId}-${rows + 1}A`]?.studentName ? 'occupied' : ''} bg-grayconsistency.-300 hover:bg-indigo-400 text-gray-800 font-semibold py-1 px-3 rounded-md text-sm w-14 h-10 flex items-center justify-center cursor-pointer">${rows + 1}A</button>` : `<div class="w-14 h-10"></div>`;
-        extraRowHTML += extraRowSeats.includes('B') ? `<button data-bus="${busId}" data-seat="${rows + 1}B" class="seat-button ${seatingAssignments[`${busId}-${rows + 1}B`]?.studentName ? 'occupied' : ''} bg-gray-300 hover:bg-indigo-400 text-gray-800 font-semibold py-1 px-3 rounded-md text-sm w-14 h-10 flex items-center justify-center cursor-pointer">${rows + 1}B</button>` : `<div class="w-14 h-10"></div>`;
-        extraRowHTML += `<div class="w-10 h-10"></div>`;
-        extraRowHTML += extraRowSeats.includes('C') ? `<button data-bus="${busId}" data-seat="${rows + 1}C" class="seat-button ${seatingAssignments[`${busId}-${rows + 1}C`]?.studentName ? 'occupied' : ''} bg-gray-300 hover:bg-indigo-400 text-gray-800 font-semibold py-1 px-3 rounded-md text-sm w-14 h-10 flex items-center justify-center cursor-pointer">${rows + 1}C</button>` : `<div class="w-14 h-10"></div>`;
-        extraRowHTML += extraRowSeats.includes('D') ? `<button data-bus="${busId}" data-seat="${rows + 1}D" class="seat-button ${seatingAssignments[`${busId}-${rows + 1}D`]?.studentName ? 'occupied' : ''} bg-gray-300 hover:bg-indigo-400 text-gray-800 font-semibold py-1 px-3 rounded-md text-sm w-14 h-10 flex items-center justify-center cursor-pointer">${rows + 1}D</button>` : `<div class="w-14 h-10"></div>`;
-        extraRow.innerHTML = extraRowHTML;
-        container.appendChild(extraRow);
-      }
-
-      const lastRow = document.createElement('div');
-      lastRow.className = 'flex justify-center items-center space-x-2 pt-4';
-      for (let i = 1; i <= lastRowSeats.length; i++) {
-        lastRow.innerHTML += `
-          <button data-bus="${busId}" data-seat="L${i}" class="seat-button ${seatingAssignments[`${busId}-L${i}`]?.studentName ? 'occupied' : ''} bg-gray-300 hover:bg-indigo-400 text-gray-800 font-semibold py-1 px-3 rounded-md text-sm w-14 h-2 flex items-center justify-center cursor-pointer">L${i}</button>
-        `;
-        container.appendChild(lastRow);
-      }
-
-      spinner.classList.add('hidden');
-      container.classList.remove('hidden');
-    }
-
-    // Function to randomize seats
-    function randomizeSeats() {
-      const pinInput = document.getElementById('pin-input').value.trim();
-      const errorMessage = document.getElementById('error-message');
-
-      if (!/^\d{2}$/.test(pinInput)) {
-        errorMessage.textContent = 'PIN must be 2 digits (00-99)!';
-        errorMessage.classList.remove('hidden');
-        return false;
-      }
-      const pin = pinInput.toString().padStart(2, '0');
-      console.log('PIN input:', pin);
-
-      let targetStudent = null;
-      let targetStudentKey = '';
-      let isParent = false;
-      for (const [key, data] of Object.entries(seatingAssignments)) {
-        if (data.pin === pin) {
-          console.log('Found PIN:', data);
-          if (data.isParent === 'Y' && data.childName) {
-            isParent = true;
-            targetStudentKey = Object.keys(seatingAssignments).find(
-              k => seatingAssignments[k].studentName === data.childName && seatingAssignments[k].isParent === 'N'
-            );
-            targetStudent = data;
-          } else {
-            targetStudentKey = key;
-            targetStudent = data;
-          }
-          break;
-        }
-      }
-
-      if (!targetStudent || !targetStudentKey) {
-        errorMessage.textContent = 'PIN not found! Check your PIN or CSV.';
-        errorMessage.classList.remove('hidden');
-        console.log('Error: PIN not found in seatingAssignments');
-        return false;
-      }
-      errorMessage.classList.add('hidden');
-
-      const bus1Seats = [];
-      for (let row = 1; row <= 11; row++) {
-        for (let seat of ['A', 'B', 'C', 'D']) {
-          bus1Seats.push(`bus1-${row}${seat}`);
-        }
-      }
-      for (let i = 1; i <= 6; i++) {
-        bus1Seats.push(`bus1-L${i}`);
-      }
-
-      const bus2Seats = [];
-      for (let row = 1; row <= 7; row++) {
-        for (let seat of ['A', 'B', 'C', 'D']) {
-          bus2Seats.push(`bus2-${row}${seat}`);
-        }
-      }
-      bus2Seats.push('bus2-8C', 'bus2-8D');
-      for (let i = 1; i <= 5; i++) {
-        bus2Seats.push(`bus2-L${i}`);
-      }
-
-      const femaleSeats = [
-        ...bus1Seats.filter(seat => seat.includes('A') || seat.includes('B')),
-        ...bus2Seats.filter(seat => seat.includes('A') || seat.includes('B'))
-      ];
-      const maleSeats = [
-        ...bus1Seats.filter(seat => seat.includes('C') || seat.includes('D') || seat.includes('L')),
-        ...bus2Seats.filter(seat => seat.includes('C') || seat.includes('D') || seat.includes('L'))
-      );
-
-      const studentData = seatingAssignments[targetStudentKey];
-      const gender = studentData.gender;
-      const pairWith = studentData.pairWith;
-      const parentKeys = isParent ? Object.keys(seatingAssignments).filter(
-        key => seatingAssignments[key].childName === studentData.studentName && seatingAssignments[key].isParent === 'Y'
-      ) : [];
-
-      let currentSeats = [targetStudentKey].filter(k => !k.includes('pin-'));
-      if (pairWith) {
-        const pairKey = Object.keys(seatingAssignments).find(k =>
-          seatingAssignments[k].studentName === pairWith &&
-          seatingAssignments[k].isParent === 'N' &&
-          !k.includes('pin-')
-        );
-        if (pairKey) currentSeats.push(pairKey);
-      }
-      if (parentKeys.length) {
-        currentSeats.push(...parentKeys.filter(k => !k.includes('pin-')));
-      }
-      console.log('Current seats to relocate:', currentSeats);
-
-      const availableSeats = (gender === 'P' || gender === 'F' ? femaleSeats : maleSeats).filter(
-        seat => !seatingAssignments[seat]?.studentName || currentSeats.includes(seat)
-      );
-      const requiredSeats = parentKeys.length > 0 ? 3 : pairWith ? 2 : 1;
-      if (availableSeats.length < requiredSeats) {
-        errorMessage.textContent = `Not enough seats for ${parentKeys.length > 0 ? 'parent and child' : pairWith ? 'pair' : 'student'}`;
-        errorMessage.classList.remove('hidden');
-        console.log('Error: Not enough available seats:', availableSeats.length, 'required:', requiredSeats);
-        return false;
-      }
-
-      function shuffleArray(array) {
-        for (let i = array.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          [array[i], array[j]] = [array[j], array[i]];
-        }
-        return array;
-      }
-      const shuffledSeats = shuffleArray([...availableSeats]);
-      console.log('Shuffled available seats:', shuffledSeats);
-
-      const newAssignments = { ...seatingAssignments };
-      for (const seat of currentSeats) {
-        delete newAssignments[seat];
-      }
-
-      let newSeatIndex = 0;
-      if (parentKeys.length) {
-        let seatGroup = null;
-        for (let i = 0; i < shuffledSeats.length - 2; i++) {
-          const s1 = shuffledSeats[i];
-          const s2 = shuffledSeats[i + 1];
-          const s3 = shuffledSeats[i + 2];
-          const [bus1, seat1] = s1.split('-');
-          const [bus2, seat2] = s2.split('-');
-          const [bus3, seat3] = s3.split('-');
-          if (bus1 === bus2 && bus2 === bus3) {
-            const row1 = seat1.match(/\d+/)? Number(seat1.match(/\d+/)[0]) : 'L';
-            const row2 = seat2.match(/\d+/)? Number(seat2.match(/\d+/)[0]) : 'L';
-            const row3 = seat3.match(/\d+/)? Number(seat3.match(/\d+/)[0]) : 'L';
-            const letter1 = seat1.replace(/\d+/g, '');
-            const letter2 = seat2.replace(/\d+/g, '');
-            const letter3 = seat3.replace(/\d+/g, '');
-            if (row1 === row2 && row2 === row3 && (
-              (letter1 === 'A' && letter2 === 'B' && letter3 === 'C') ||
-              (letter1 === 'B' && letter2 === 'C' && letter3 === 'D')
-            )) {
-              seatGroup = [s1, s2, s3];
-              break;
-            }
-          }
-        }
-        if (seatGroup && parentKeys.length <= 2) {
-          newAssignments[seatGroup[0]] = { ...studentData, seat: seatGroup[0].split('-')[1] };
-          for (let i = 0; i < parentKeys.length; i++) {
-            newAssignments[seatGroup[i + 1]] = { ...seatingAssignments[parentKeys[i]], seat: seatGroup[i + 1].split('-')[1] };
-          }
-          newSeatIndex = 3;
-          console.log('Assigned parent-child seats:', seatGroup);
-        } else {
-          errorMessage.textContent = 'No adjacent seats available for parent and child!';
-          errorMessage.classList.remove('hidden');
-          console.log('Error: No adjacent seats for parent');
-          return false;
-        }
-      } else if (pairWith) {
-        let seatPair = null;
-        for (let i = 0; i < shuffledSeats.length - 1; i++) {
-          const s1 = shuffledSeats[i];
-          const s2 = shuffledSeats[i + 1];
-          const [bus1, seat1] = s1.split('-');
-          const [bus2, seat2] = s2.split('-');
-          if (bus1 === bus2) {
-            const row1 = seat1.match(/\d+/)? Number(seat1.match(/\d+/)[0]) : 'L';
-            const row2 = seat2.match(/\d+/)? Number(seat2.match(/\d+/)[0]) : 'L';
-            const letter1 = seat1.replace(/\d+/g, '');
-            const letter2 = seat2.replace(/\d+/g, '');
-            if (row1 === row2 && (
-              (letter1 === 'A' && letter2 === 'B') ||
-              (letter1 === 'C' && letter2 === 'D')
-            )) {
-              seatPair = [s1, s2];
-              break;
-            }
-          }
-        }
-        if (seatPair) {
-          newAssignments[seatPair[0]] = { ...studentData, seat: seatPair[0].split('-')[1] };
-          const pairKey = Object.keys(seatingAssignments).find(k =>
-            seatingAssignments[k].studentName === pairWith &&
-            seatingAssignments[k].isParent === 'N' &&
-            !k.includes('pin-')
-          );
-          if (pairKey) newAssignments[seatPair[1]] = { ...seatingAssignments[pairKey], seat: seatPair[1].split('-')[1] };
-          newSeatIndex = 2;
-          console.log('Assigned pair seats:', seatPair);
-        } else {
-          errorMessage.textContent = 'No adjacent seats available for pair!';
-          errorMessage.classList.remove('hidden');
-          console.log('Error: No adjacent seats for pair');
-          return false;
-        }
-      } else if (shuffledSeats.length > 0) {
-        newAssignments[shuffledSeats[0]] = { ...studentData, seat: shuffledSeats[0].split('-')[1] };
-        newSeatIndex = 1;
-        console.log('Assigned single seat:', shuffledSeats[0]);
-      }
-
-      for (const seat of [...bus1Seats, ...bus2Seats]) {
-        if (!newAssignments[seat]) {
-          newAssignments[seat] = { studentName: '', gender: '', pairWith: '', isParent: 'N', pin: '', seat: seat.split('-')[1] };
-        }
-      }
-
-      seatingAssignments = newAssignments;
-      localStorage.setItem('seatingAssignments', JSON.stringify(seatingAssignments));
-      console.log('Updated seatingAssignments:', seatingAssignments);
-
-      document.getElementById('bus1-seats').innerHTML = '';
-      document.getElementById('bus2-seats').innerHTML = '';
-      document.getElementById('bus1-students').innerHTML = '';
-      document.getElementById('bus2-students').innerHTML = '';
-
-      document.getElementById('bus1-seats').previousElementSibling.classList.remove('hidden');
-      document.getElementById('bus2-seats').previousElementSibling.classList.remove('hidden');
-      setTimeout(() => {
-        generateSeats('bus1', 11, 6);
-        generateSeats('bus2', 7, 5, ['C', 'D']);
-        populateStudentTables();
-
-        document.querySelectorAll('.seat-button').forEach(button => {
-          button.addEventListener('click', handleSeatClick);
-        });
-
-        document.getElementById('bus1-seats').previousElementSibling.classList.add('hidden');
-        document.getElementById('bus2-seats').previousElementSibling.classList.add('hidden');
-      }, 300);
-
-      alert('Your seat has been randomized!');
-    }
-
-    // Seat Modal Logic
-    const seatModal = document.getElementById('seatModal');
-    const modalSeatInfo = document.getElementById('modalSeatInfo');
-    const modalStudentName = document.getElementById('modalStudentName');
-    const modalBusInfo = document.getElementById('modalBusInfo');
-    const closeSeatModalBtn = document.getElementById('closeSeatModalBtn');
-
-    function handleSeatClick(event) {
-      const bus = event.target.dataset.bus;
-      const seat = event.target.dataset.seat;
-      const studentKey = `${bus}-${seat}`;
-      
-      console.log('Seat clicked:', { bus, seat, studentKey, studentData: seatingAssignments[studentKey] });
-      
-      modalSeatInfo.textContent = `Seat ${seat.toUpperCase()}`;
-      modalBusInfo.textContent = `Bus ${bus === 'bus1' ? '1' : '2'}`;
-      
-      const studentData = seatingAssignments[studentKey];
-      if (studentData && studentData.studentName) {
-        modalStudentName.textContent = `${studentData.studentName}${studentData.isParent === 'Y' ? ' (Parent)' : ''}`;
-        modalStudentName.className = 'text-base text-gray-700';
-      } else {
-        modalStudentName.textContent = 'Empty seat / No data';
-        modalStudentName.className = 'text-base text-gray-500 italic';
-      }
-      
-      seatModal.classList.remove('hidden');
-    }
-
-    // Initialize everything
-    document.addEventListener('DOMContentLoaded', async () => {
-      initCarousel();
-      
-      try {
-        seatingAssignments = await fetchSeatingData();
-        
-        if (!seatingAssignments) {
-          throw new Error('Failed to load seating assignments');
-        }
-
-        generateSeats('bus1', 11, 6);
-        generateSeats('bus2', 7, 5, ['C', 'D']);
-        populateStudentTables();
-
-        document.querySelectorAll('.seat-button').forEach(button => {
-          button.addEventListener('click', handleSeatClick);
-        });
-
-        document.getElementById('randomize-btn').addEventListener('click', randomizeSeats);
-        
-        closeSeatModalBtn.addEventListener('click', () => seatModal.classList.add('hidden'));
-        seatModal.addEventListener('click', (event) => {
-          if (event.target === seatModal) {
-            seatModal.classList.add('hidden');
-          }
-        });
-      } catch (error) {
-        console.error('Error initializing:', error);
-        modalStudentName.textContent = 'Failed to load data. Please try again.';
-        modalStudentName.className = 'text-base text-red-500';
-        document.querySelectorAll('.spinner').forEach(spinner => spinner.classList.add('hidden'));
-        document.querySelectorAll('#bus1-seats, #bus2-seats').forEach(container => {
-          container.classList.remove('hidden');
-          container.innerHTML = '<p class="text-center text-red-600">Failed to load seating chart.</p>';
-        });
-      }
-    });
+    // Inisialisasi tampilan denah duduk saat halaman dimuat
+    document.addEventListener('DOMContentLoaded', updateSeatDisplay);
   </script>
 </body>
+
 </html>
+```
