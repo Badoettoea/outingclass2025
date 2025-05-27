@@ -396,16 +396,40 @@
 
     // Function to fetch CSV data from GitHub
     async function fetchSeatingData() {
-      try {
-        const response = await fetch('https://raw.githubusercontent.com/BadoBadoettoea/outingclass/2025/main/seating_assignments.csv');
-        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-        const csvData = await response.text();
-        return parseCSV(csvData);
-      } catch (error) {
-        console.error('Error fetching CSV data:', error);
-        return null;
+  try {
+    const response = await fetch('seating_assignments.json');
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+    const jsonData = await response.json();
+    const result = {};
+    const pins = new Set();
+
+    jsonData.forEach(row => {
+      const { bus, seat, student_name, gender, pair_with, is_parent, child_name, pin } = row;
+      if (pin && (student_name || is_parent === 'Y')) {
+        if (pins.has(pin)) {
+          alert(`Error: PIN ${pin} duplikat di JSON! Harap perbaiki.`);
+          return;
+        }
+        pins.add(pin);
+        const key = `${bus}-${seat || 'unassigned'}-${pin}`;
+        result[key] = {
+          studentName: student_name?.trim() || '',
+          gender: gender?.trim() || '',
+          pairWith: pair_with?.trim() || '',
+          isParent: is_parent?.trim() || 'N',
+          childName: child_name?.trim() || '',
+          pin: pin.trim()
+        };
       }
-    }
+    });
+
+    return result;
+  } catch (error) {
+    console.error('Error fetching seating data:', error);
+    return null;
+  }
+}
+
 
     // Function to parse CSV data
     function parseCSV(csvData) {
