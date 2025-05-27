@@ -1,4 +1,4 @@
-bus,seat,student_name,gender,pair_with,is_parent,child_name,pin
+bus,seat,studentName,gender,pairWith,isParent,childName,pin
 bus1,,Ani,P,Budi,N,,12
 bus1,,Budi,L,Ani,N,,34
 bus1,,Ibu Ani,F,,Y,Ani,56
