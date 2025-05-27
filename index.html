@@ -14,9 +14,8 @@
     }
     .carousel-container {
       position: relative;
-      position: relative;
       overflow: hidden;
-      box-shadow: 0 4px 8px rgba(0, 0,0.1);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
       border-radius: 12px;
     }
     .carousel-slide {
@@ -33,7 +32,7 @@
     }
     .carousel-slide img {
       width: 100%;
-      height: transform 100%;
+      height: 100%;
       transition: transform 0.3s ease;
     }
     .carousel-slide img:hover {
@@ -82,7 +81,6 @@
     @keyframes spin {
       to { transform: rotate(360deg); }
     }
-    /* Table styles */
     table {
       width: 100%;
       border-collapse: collapse;
@@ -100,7 +98,6 @@
     tr:hover {
       background-color: #f3f4f6;
     }
-    /* Tambahan untuk error dan ortu */
     .error-message {
       color: #ef4444;
       margin-top: 1rem;
@@ -277,8 +274,8 @@
       <h2 class="text-4xl font-extrabold mb-6 text-center text-indigo-700">Pengacak Denah Duduk</h2>
       <div class="max-w-md mx-auto bg-white rounded-2xl shadow-xl p-6">
         <div class="mb-4">
-          <label for="pin-input" class="block text-sm font-semibold text-gray-700">Masukkan PIN (2 Angka)</label>
-          <input type="number" id="pin-input" class="w-full border-gray-300 focus:ring-indigo-500 focus:border-indigo-500" placeholder="Contoh: 12" maxlength="2" min="0" max="99" oninput="if(this.value.length > 2) this.value = this.value.slice(0, 2);">
+          <label for="pin-input" class="block text-sm font-semibold text-gray-700">Masukkan PIN (2 Angka):</label>
+          <input type="text" id="pin-input" class="w-full p-2 border border-gray-300 rounded-md focus:ring-indigo-500 focus:border-indigo-500" placeholder="Contoh: 12" maxlength="2" pattern="[0-9]{2}" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 2);">
         </div>
         <button id="randomize-btn" class="w-full bg-gradient-to-r from-blue-500 to-indigo-500 text-white font-semibold py-2 px-4 rounded-xl hover:from-blue-600 hover:to-indigo-600 transition-all duration-300">
           Acak Kursi Saya
@@ -292,18 +289,19 @@
     <div class="container mx-auto px-4 text-center">
       <p class="text-lg font-semibold">© 2025 SDN BUNGO 3. All rights reserved.</p>
     </div>
-  </footer>
+    </footer>
+  </div>
 
-  <div id="seatModal" class="fixed inset-0 bg-gray-900 bg-opacity-75 overflow-y-auto h-full w-full flex items-center justify-center hidden z-50">
+  <div id="seatModal" class="fixed inset-0 bg-gray-900 bg-opacity-75 overflow-y-auto h-full w-full flex items-center hidden z-50">
     <div class="relative mx-auto p-6 border w-11/12 md:w-96 shadow-2xl rounded-xl bg-white">
       <div class="mt-3 text-center">
         <h3 class="text-xl font-bold text-gray-900" id="modalSeatInfo">Kursi Info</h3>
         <div class="mt-2 px-7 py-3">
           <p class="text-base text-gray-700" id="modalStudentName">Memuat data...</p>
-          <p class="text-sm text-gray-500" id="modalBusInfo"></p>
+          <p class="text-sm text-gray-500" id="modalBus"></p>
         </div>
         <div class="items-center px-4 py-3">
-          <button id="closeSeatModalBtn" class="px-4 py-2 bg-gradient-to-r from-blue-500 to-indigo-500 text-white text-base font-semibold rounded-xl w-full shadow-sm hover:from-blue-600 hover:to-indigo-600 focus:outline-none focus:ring-2 focus:ring-blue-300 transition-all duration-300">
+          <button id="closeSeatModalBtn class="px-4 py-2 bg-gradient-to-r from-blue-500 to-indigo-500 text-white text-base font-semibold rounded-xl w-full shadow-sm hover:from-blue:600 hover:to-indigo-600 focus:outline-none focus:ring-2 focus:ring-blue-300 transition-all duration-300">
             Tutup
           </button>
         </div>
@@ -312,22 +310,21 @@
   </div>
 
   <script>
-    // Auto-hide header functionality
+    // Auto-hide header
     let lastScrollY = window.scrollY;
     const header = document.getElementById('mainHeader');
     const headerHeight = header.offsetHeight;
     let ticking = false;
 
     window.addEventListener('scroll', () => {
-      const currentScrollY = window.scrollY;
       if (!ticking) {
         window.requestAnimationFrame(() => {
-          if (currentScrollY > lastScrollY && currentScrollY > headerHeight) {
+          if (window.scrollY > lastScrollY && window.scrollY > headerHeight) {
             header.classList.add('hidden');
           } else {
             header.classList.remove('hidden');
           }
-          lastScrollY = currentScrollY;
+          lastScrollY = window.scrollY;
           ticking = false;
         });
         ticking = true;
@@ -338,19 +335,19 @@
     const carouselImages = [
       "https://lh3.googleusercontent.com/d/17gyHVwPl_nRN1IhRoNdB6UofarWz4hUM=s1000",
       "https://lh3.googleusercontent.com/d/1krqSB87gM8PTP6XuxVkkPJHX0qANmgHP=s1000",
-      "https://lh3.googleusercontent.com/d/1yAU3I6UdZ5wJKx4YD_IY8kPzMfP1T76j=s1000",
+      "https://lh3.googleusercontent.com/d/1yAU3I6UdZ5wJKDuLId4YD_IY8kPzMfP1T76j=s1000",
       "https://lh3.googleusercontent.com/d/1LxvAOfIJarS8qyzFNKDuibxDySwNeFzy=s1000",
-      "https://lh3.googleusercontent.com/d/1WKd5LVuTJ_EgLidsbVuFHllsoKIoKoJs=s1000",
+      "https://lh3.googleusercontent.com/d/1WKd5LVuTJ_EgLIdsbVuFHlsoKIoKoJs=s1000",
       "https://lh3.googleusercontent.com/d/1_l-wExzm7nHRcOKMUI9BCn8827qjjDQV=s1000",
-      "https://lh3.googleusercontent.com/d/12nFGDKZfUPzkUx2p6_s8z3CQecf0of5Y=s1000",
-      "https://lh3.googleusercontent.com/d/1TtCpI1iJonzivEzjmbjYff368i7lXfMg=s1000",
-      "https://lh3.googleusercontent.com/d/10ktsPUgPERoRXILGrK_6f9cdUdrFl11W=s1000",
-      "https://lh3.googleusercontent.com/d/1x7koiPgM0HakmmkmAPQ_mOv6f8KK4gLo=s1000",
-      "https://lh3.googleusercontent.com/d/1_Fcwk2TWkNi8SfDTu9e2MBD9SBfw3zQS=s1000",
-      "https://lh3.googleusercontent.com/d/1VtCkoVbqqXTNw2RSSfkTc4GwNC3r0rhS=s1000",
-      "https://lh3.googleusercontent.com/d/1qg6YaTuwnsmuV4CnAMMGeN26ak-MQEJ5=s1000",
-      "https://lh3.googleusercontent.com/d/17C01J2AnZ7iS8HYxeWZg_8ikAs9XbFZs=s1000",
-      "https://lh3.googleuserconten.com/d/1PmWYMfvkn3bMzqztc-bmGzySz8rxqAp6=s1000"
+      "https://lh3.googleusercontent.com/d/12nFGDKZfUPzkwUk2p6_s8z3CQecf0of5Y=s1000",
+      "https://lh3.googleusercontent.com/d/1TtCpI1iJonzivEzjmbjYff368g7l1XfMg=s1000",
+      "https://lh3.googleusercontent.com/d/10ktslPUgZPERoRXILGrK_6f9cdUdr0Fl1pW=s1000",
+      "https://lh3.googleusercontent.com/d/1x7PxoiPgM0H2akmmkmAPQ_mOv0f8EfK7gLo=s1000",
+      "https://lh3.googleusercontent.com/d/1_FcwkHw2TkNi8kSfDTQz9e2MBD9SBfv3zMw=s1000",
+      "https://lh3.googleusercontent.com/d/1VtCvwOb2VqTXtN2vRSSfksT5kGwNC3r0rhS=s1000",
+      "https://lh3.googleusercontent.com/d/1qg6yTaTuwzmsuM4vCnNBMGeN126tk-M0QE5J=s1000",
+      "https://lh3.googleusercontent.com/d/17C01N2AnZ7iS8Hy5xeW6g_0ikA0sXbFZs=s1000",
+      "https://lh3.googleusercontent.com/d/1PmW6Mfvzkn3bMzqztc3-bm2gZy5z8rxqAp6=s1000"
     ];
 
     function initCarousel() {
@@ -363,12 +360,12 @@
       carouselImages.forEach((img, index) => {
         const slide = document.createElement('div');
         slide.className = `carousel-slide ${index === 0 ? 'active' : ''}`;
-        slide.innerHTML = `<img src="${img}" alt="Eduwisata Photo ${index+1}" class="w-full h-full object-cover">`;
+        slide.innerHTML = `<img src="${img}" alt="Eduwisata Photo ${index + 1}" class="w-full h-full object-cover">`;
         container.appendChild(slide);
         
         const dot = document.createElement('button');
         dot.className = `dot w-3 h-3 rounded-full ${index === 0 ? 'bg-indigo-600' : 'bg-gray-300 hover:bg-gray-400'}`;
-        dot.dataset.slide = index;
+        dot.dataset.index = index;
         dotsContainer.appendChild(dot);
       });
       
@@ -416,33 +413,46 @@
       const lines = csv.trim().split('\n');
       const result = {};
       const pins = new Set();
+      console.log('Parsing CSV, total lines:', lines.length);
+
       for (let i = 1; i < lines.length; i++) {
         const line = lines[i].trim();
-        if (line) {
-          const [bus, seat, studentName, gender, pairWith, isParent, childName, pin] = line.split(',');
-          if (bus && (studentName || isParent === 'Y') && pin) {
-            if (pins.has(pin)) {
-              console.warn(`Duplicate PIN detected: ${pin} for ${studentName}`);
-              alert(`Error: PIN ${pin} duplikat di CSV! Harap perbaiki.`);
-              return null;
-            }
-            pins.add(pin);
-            const key = `${bus}-${seat || 'unassigned'}-${pin}`; // Fallback seat
-            result[key] = {
-              studentName: studentName ? studentName.trim() : '',
-              gender: gender ? gender.trim() : '',
-              pairWith: pairWith ? pairWith.trim() : '',
-              isParent: isParent ? isParent.trim() : 'N',
-              childName: childName ? childName.trim() : '',
-              pin: pin ? pin.trim() : ''
-            };
-          } else if (!pin) {
-            console.warn(`Missing PIN for ${studentName}`);
-          }
+        if (!line) continue;
+
+        const parts = line.split(',');
+        if (parts.length < 8) {
+          console.warn(`Invalid row at line ${i + 1}:`, line);
+          continue;
         }
+
+        const [bus, seat, studentName, gender, pairWith, isParent, childName, pin] = parts;
+        if (!bus || (!studentName && isParent !== 'Y') || !pin || !/^\d{2}$/.test(pin)) {
+          console.warn(`Invalid data at line ${i + 1}:`, { bus, studentName, pin, isParent });
+          continue;
+        }
+
+        if (pins.has(pin)) {
+          console.error(`Duplicate PIN at line ${i + 1}: ${pin}`);
+          alert(`Error: PIN ${pin} duplikat di CSV! Harap perbaiki.`);
+          return null;
+        }
+        pins.add(pin);
+
+        const key = seat ? `${bus}-${seat}` : `${bus}-pin-${pin}`;
+        result[key] = {
+          studentName: studentName.trim(),
+          gender: gender ? gender.trim() : '',
+          pairWith: pairWith ? pairWith.trim() : '',
+          isParent: isParent === 'Y' ? 'Y' : 'N',
+          childName: childName ? childName.trim() : '',
+          pin: pin.trim(),
+          seat: seat ? seat.trim() : null
+        };
+        console.log(`Parsed: key=${key}, PIN=${pin}, Name=${studentName}`);
       }
-      console.log('Parsed seating assignments:', result);
-      return result;
+
+      console.log('Parsed seatingAssignments:', result);
+      return Object.keys(result).length > 0 ? result : null;
     }
 
     // Function to populate student tables
@@ -456,24 +466,23 @@
       const bus2List = [];
 
       for (const [key, data] of Object.entries(seatingAssignments)) {
-        const [bus, seat] = key.split('-').slice(0, 2);
-        if (data.studentName && seat !== 'unassigned') {
-          const genderClass = data.gender === 'P' || data.gender === 'F' ? 'bg-pink-100' : data.gender === 'L' || data.gender === 'M' ? 'bg-blue-100' : '';
-          const parentClass = data.isParent === 'Y' ? 'parent-row' : '';
-          const row = `<tr class="${genderClass} ${parentClass}"><td>${seat}</td><td>${data.studentName}${data.isParent === 'Y' ? ' (Ortu)' : ''}</td></tr>`;
-          if (bus === 'bus1') {
-            bus1List.push({ seat, row });
-          } else if (bus === 'bus2') {
-            bus2List.push({ seat, row });
-          }
+        if (!data.seat) continue; // Skip unassigned seats
+        const [bus] = key.split('-');
+        const genderClass = data.gender === 'P' || data.gender === 'F' ? 'bg-pink-100' : data.gender === 'L' || data.gender === 'M' ? 'bg-blue-100' : '';
+        const parentClass = data.isParent === 'Y' ? 'parent-row' : '';
+        const row = `<tr class="${genderClass} ${parentClass}"><td>${data.seat}</td><td>${data.studentName}${data.isParent === 'Y' ? ' (Ortu)' : ''}</td></tr>`;
+        if (bus === 'bus1') {
+          bus1List.push({ seat: data.seat, row });
+        } else if (bus === 'bus2') {
+          bus2List.push({ seat: data.seat, row });
         }
       }
 
       bus1List.sort((a, b) => a.seat.localeCompare(b.seat, undefined, { numeric: true }));
       bus2List.sort((a, b) => a.seat.localeCompare(b.seat, undefined, { numeric: true }));
 
-      bus1Students.innerHTML = bus1List.length > 0 ? bus1List.map(item => item.row).join('') : '<tr><td colspan="2" class="text-gray-500 italic text-center">Belum ada data siswa.</td></tr>';
-      bus2Students.innerHTML = bus2List.length > 0 ? bus2List.map(item => item.row).join('') : '<tr><td colspan="2" class="text-gray-500 italic text-center">Belum ada data siswa.</td></tr>';
+      bus1Students.innerHTML = bus1List.length ? bus1List.map(item => item.row).join('') : '<tr><td colspan="2" class="text-gray-500 italic text-center">Belum ada data siswa.</td></tr>';
+      bus2Students.innerHTML = bus2List.length ? bus2List.map(item => item.row).join('') : '<tr><td colspan="2" class="text-gray-500 italic text-center">Belum ada data siswa.</td></tr>';
     }
 
     // Seat chart generation
@@ -482,102 +491,86 @@
       const spinner = container.previousElementSibling;
       container.innerHTML = '';
 
-      // Generate regular rows
       for (let i = 1; i <= rows; i++) {
         const row = document.createElement('div');
         row.className = 'flex justify-center items-center space-x-2';
         row.innerHTML = `
-          <button data-bus="${busId}" data-seat="${i}A" class="seat-button ${seatingAssignments[`${busId}-${i}A`]?.studentName ? 'occupied' : ''} bg-gray-300 hover:bg-indigo-400 text-gray-800 font-bold py-2 px-2 rounded-xl text-sm w-10 h-10 flex items-center justify-center cursor-pointer">${i}A</button>
-          <button data-bus="${busId}" data-seat="${i}B" class="seat-button ${seatingAssignments[`${busId}-${i}B`]?.studentName ? 'occupied' : ''} bg-gray-300 hover:bg-indigo-400 text-gray-800 font-bold py-2 px-2 rounded-xl text-sm w-10 h-10 flex items-center justify-center cursor-pointer">${i}B</button>
-          <div class="w-8 h-10"></div>
-          <button data-bus="${busId}" data-seat="${i}C" class="seat-button ${seatingAssignments[`${busId}-${i}C`]?.studentName ? 'occupied' : ''} bg-gray-300 hover:bg-indigo-400 text-gray-800 font-bold py-2 px-2 rounded-xl text-sm w-10 h-10 flex items-center justify-center cursor-pointer">${i}C</button>
-          <button data-bus="${busId}" data-seat="${i}D" class="seat-button ${seatingAssignments[`${busId}-${i}D`]?.studentName ? 'occupied' : ''} bg-gray-300 hover:bg-indigo-400 text-gray-800 font-bold py-2 px-2 rounded-xl text-sm w-10 h-10 flex items-center justify-center cursor-pointer">${i}D</button>
+          <button data-bus="${busId}" data-seat="${i}A" class="seat-button ${seatingAssignments[`${busId}-${i}A`]?.studentName ? 'occupied' : ''} bg-gray-300 hover:bg-indigo-400 text-gray-800 font-semibold py-1 px-2 rounded-md text-sm w-14 h-10 flex items-center justify-center cursor-pointer">${i}A</button>
+          <button data-bus="${busId}" data-seat="${i}B" class="seat-button ${seatingAssignments[`${busId}-${i}B`]?.studentName ? 'occupied' : ''} bg-gray-300 hover:bg-indigo-400 text-gray-800 font-semibold py-1 px-2 rounded-md text-sm w-14 h-10 flex items-center justify-center cursor-pointer">${i}B</button>
+          <div class="w-10 h-10"></div>
+          <button data-bus="${busId}" data-seat="${i}C" class="seat-button ${seatingAssignments[`${busId}-${i}C`]?.studentName ? 'occupied' : ''} bg-gray-300 hover:bg-indigo-400 text-gray-800 font-semibold py-1 px-2 rounded-md text-sm w-14 h-10 flex items-center justify-center cursor-pointer">${i}C</button>
+          <button data-bus="${busId}" data-seat="${i}D" class="seat-button ${seatingAssignments[`${busId}-${i}D`]?.studentName ? 'occupied' : ''} bg-gray-300 hover:bg-indigo-400 text-gray-800 font-semibold py-1 px-2 rounded-md text-sm w-14 h-10 flex items-center justify-center cursor-pointer">${i}D</button>
         `;
         container.appendChild(row);
       }
 
-      // Generate extra row with specific seats (e.g., 8C and 8D for bus2)
-      if (extraRowSeats.length > 0) {
+      if (extraRowSeats.length) {
         const extraRow = document.createElement('div');
         extraRow.className = 'flex justify-center items-center space-x-2 pt-2';
         let extraRowHTML = '';
-        if (extraRowSeats.includes('A')) {
-          extraRowHTML += `<button data-bus="${busId}" data-seat="${rows + 1}A" class="seat-button ${seatingAssignments[`${busId}-${rows + 1}A`]?.studentName ? 'occupied' : ''} bg-gray-300 hover:bg-indigo-400 text-gray-800 font-bold py-2 px-2 rounded-xl text-sm w-10 h-10 flex items-center justify-center cursor-pointer">${rows + 1}A</button>`;
-        } else {
-          extraRowHTML += `<div class="w-10 h-10"></div>`;
-        }
-        if (extraRowSeats.includes('B')) {
-          extraRowHTML += `<button data-bus="${busId}" data-seat="${rows + 1}B" class="seat-button ${seatingAssignments[`${busId}-${rows + 1}B`]?.studentName ? 'occupied' : ''} bg-gray-300 hover:bg-indigo-400 text-gray-800 font-bold py-2 px-2 rounded-xl text-sm w-10 h-10 flex items-center justify-center cursor-pointer">${rows + 1}B</button>`;
-        } else {
-          extraRowHTML += `<div class="w-10 h-10"></div>`;
-        }
-        extraRowHTML += `<div class="w-8 h-10"></div>`;
-        if (extraRowSeats.includes('C')) {
-          extraRowHTML += `<button data-bus="${busId}" data-seat="${rows + 1}C" class="seat-button ${seatingAssignments[`${busId}-${rows + 1}C`]?.studentName ? 'occupied' : ''} bg-gray-300 hover:bg-indigo-400 text-gray-800 font-bold py-2 px-2 rounded-xl text-sm w-10 h-10 flex items-center justify-center cursor-pointer">${rows + 1}C</button>`;
-        } else {
-          extraRowHTML += `<div class="w-10 h-10"></div>`;
-        }
-        if (extraRowSeats.includes('D')) {
-          extraRowHTML += `<button data-bus="${busId}" data-seat="${rows + 1}D" class="seat-button ${seatingAssignments[`${busId}-${rows + 1}D`]?.studentName ? 'occupied' : ''} bg-gray-300 hover:bg-indigo-400 text-gray-800 font-bold py-2 px-2 rounded-xl text-sm w-10 h-10 flex items-center justify-center cursor-pointer">${rows + 1}D</button>`;
-        } else {
-          extraRowHTML += `<div class="w-10 h-10"></div>`;
-        }
+        extraRowHTML += extraRowSeats.includes('A') ? `<button data-bus="${busId}" data-seat="${rows + 1}A" class="seat-button ${seatingAssignments[`${busId}-${rows + 1}A`]?.studentName ? 'occupied' : ''} bg-gray-300 hover:bg-indigo-400 text-gray-800 font-semibold py-1 px-2 rounded-md text-sm w-14 h-10 flex items-center justify-center cursor-pointer">${rows + 1}A</button>` : `<div class="w-14 h-10"></div>`;
+        extraRowHTML += extraRowSeats.includes('B') ? `<button data-bus="${busId}" data-seat="${rows + 1}B" class="seat-button ${seatingAssignments[`${busId}-${rows + 1}B`]?.studentName ? 'occupied' : ''} bg-gray-300 hover:bg-indigo-400 text-gray-800 font-semibold py-1 px-2 rounded-md text-sm w-14 h-10 flex items-center justify-center cursor-pointer">${rows + 1}B</button>` : `<div class="w-14 h-10"></div>`;
+        extraRowHTML += `<div class="w-10 h-10"></div>`;
+        extraRowHTML += extraRowSeats.includes('C') ? `<button data-bus="${busId}" data-seat="${rows + 1}C" class="seat-button ${seatingAssignments[`${busId}-${rows + 1}C`]?.studentName ? 'occupied' : ''} bg-gray-300 hover:bg-indigo-400 text-gray-800 font-semibold py-1 px-2 rounded-md text-sm w-14 h-10 flex items-center justify-center cursor-pointer">${rows + 1}C</button>` : `<div class="w-14 h-10"></div>`;
+        extraRowHTML += extraRowSeats.includes('D') ? `<button data-bus="${busId}" data-seat="${rows + 1}D" class="seat-button ${seatingAssignments[`${busId}-${rows + 1}D`]?.studentName ? 'occupied' : ''} bg-gray-300 hover:bg-indigo-400 text-gray-800 font-semibold py-1 px-2 rounded-md text-sm w-14 h-10 flex items-center justify-center cursor-pointer">${rows + 1}D</button>` : `<div class="w-14 h-10"></div>`;
         extraRow.innerHTML = extraRowHTML;
         container.appendChild(extraRow);
       }
 
-      // Generate last row
       const lastRow = document.createElement('div');
       lastRow.className = 'flex justify-center items-center space-x-2 pt-4';
       for (let i = 1; i <= lastRowSeats; i++) {
         lastRow.innerHTML += `
-          <button data-bus="${busId}" data-seat="L${i}" class="seat-button ${seatingAssignments[`${busId}-L${i}`]?.studentName ? 'occupied' : ''} bg-gray-300 hover:bg-indigo-400 text-gray-800 font-bold py-2 px-2 rounded-xl text-sm w-10 h-10 flex items-center justify-center cursor-pointer">L${i}</button>
+          <button data-bus="${busId}" data-seat="L${i}" class="seat-button ${seatingAssignments[`${busId}-L${i}`]?.studentName ? 'occupied' : ''} bg-gray-300 hover:bg-indigo-400 text-gray-800 font-semibold py-1 px-2 rounded-md text-sm w-14 h-10 flex items-center justify-center cursor-pointer">L${i}</button>
         `;
       }
       container.appendChild(lastRow);
 
-      // Hide spinner and show seats
       spinner.classList.add('hidden');
       container.classList.remove('hidden');
     }
 
-    // Function to randomize seats for specific student/parent
+    // Function to randomize seats
     function randomizeSeats() {
       const pinInput = document.getElementById('pin-input').value.trim();
       const errorMessage = document.getElementById('error-message');
 
-      // Validate PIN
       if (!/^\d{2}$/.test(pinInput)) {
         errorMessage.textContent = 'PIN harus 2 angka (00-99)!';
         errorMessage.classList.remove('hidden');
-        return;
+        return false;
       }
+      pinInput = String(pinInput).padStart(2, '0');
+      console.log('Input PIN:', pinInput);
 
-      let targetStudentKey = null;
+      let targetUser = null;
+      let targetStudentKey = '';
       let isParent = false;
       for (const [key, data] of Object.entries(seatingAssignments)) {
         if (data.pin === pinInput) {
+          console.log('Found PIN:', data);
           if (data.isParent === 'Y' && data.childName) {
             isParent = true;
-            targetStudentKey = Object.keys(seatingAssignments).find(k => {
-              const d = seatingAssignments[k];
-              return d.studentName === data.childName && d.isParent === 'N' && k.split('-')[1] !== 'unassigned';
-            });
-          } else if (key.split('-')[1] !== 'unassigned') {
+            targetStudentKey = Object.keys(seatingAssignments).find(
+              k => seatingAssignments[k].studentName === data.childName && seatingAssignments[k].isParent === 'N'
+            );
+            targetUser = data;
+          } else {
             targetStudentKey = key;
+            targetUser = data;
           }
           break;
         }
       }
 
-      if (!targetStudentKey) {
-        errorMessage.textContent = 'PIN tidak ditemukan!';
+      if (!targetUser || !targetStudentKey) {
+        errorMessage.textContent = 'PIN tidak ditemukan! Cek CSV atau PIN Anda.';
         errorMessage.classList.remove('hidden');
-        return;
+        console.log('Error: PIN not found in seatingAssignments');
+        return false;
       }
       errorMessage.classList.add('hidden');
 
-      // Define all seats
       const bus1Seats = [];
       for (let row = 1; row <= 11; row++) {
         for (let seat of ['A', 'B', 'C', 'D']) {
@@ -599,60 +592,64 @@
         bus2Seats.push(`bus2-L${i}`);
       }
 
-      // Separate seats by gender
-      const femaleSeats = [...bus1Seats.filter(s => s.includes('A') || s.includes('B')), ...bus2Seats.filter(s => s.includes('A') || s.includes('B'))];
-      const maleSeats = [...bus1Seats.filter(s => s.includes('C') || s.includes('D') || s.includes('L')), ...bus2Seats.filter(s => s.includes('C') || s.includes('D') || s.includes('L'))];
+      const femaleSeats = [
+        ...bus1Seats.filter(s => s.includes('A') || s.includes('B')),
+        ...bus2Seats.filter(s => s.includes('A') || s.includes('B')))
+      ];
+      const maleSeats = [
+        ...bus1Seats.filter(s => s.includes('C') || s.includes('D') || s.includes('L')),
+        ...bus2Seats.filter(s => s.includes('C') || s.includes('D') || s.includes('L')))
+      ];
 
-      // Get student data
       const studentData = seatingAssignments[targetStudentKey];
       const gender = studentData.gender;
       const pairWith = studentData.pairWith;
-      const parentKeys = isParent ? Object.keys(seatingAssignments).filter(k => {
-        const d = seatingAssignments[k];
-        return d.childName === studentData.studentName && d.isParent === 'Y' && k.split('-')[1] !== 'unassigned';
-      }) : [];
+      const parentKeys = isParent ? Object.keys(seatingAssignments).filter(
+        k => seatingAssignments[k].childName === studentData.studentName && seatingAssignments[k].isParent === 'Y'
+      ) : [];
 
-      // Find current seats
-      const currentSeats = [targetStudentKey];
+      let currentSeats = [targetStudentKey].filter(k => !k.includes('pin-'));
       if (pairWith) {
-        const pairKey = Object.keys(seatingAssignments).find(k => {
-          const d = seatingAssignments[k];
-          return d.studentName === pairWith && d.isParent === 'N' && k.split('-')[1] !== 'unassigned';
-        });
+        const pairKey = Object.keys(seatingAssignments).find(k => 
+          seatingAssignments[k].studentName === pairWith && 
+          seatingAssignments[k].isParent === 'N' && 
+          !k.includes('pin-')
+        );
         if (pairKey) currentSeats.push(pairKey);
       }
-      if (parentKeys.length > 0) {
-        currentSeats.push(...parentKeys);
+      if (parentKeys.length) {
+        currentSeats.push(...parentKeys.filter(k => k.includes('pin-')));
       }
+      console.log('Current seats to relocate:', currentSeats);
 
-      // Check available seats
-      const availableSeats = (gender === 'P' || gender === 'F' ? femaleSeats : maleSeats).filter(s => !seatingAssignments[s]?.studentName || currentSeats.includes(s));
+      const availableSeats = (gender === 'P' || gender === 'F' ? femaleSeats : maleSeats).filter(
+        s => !seatingAssignments[s]?.studentName || currentSeats.includes(s)
+      );
       const requiredSeats = parentKeys.length > 0 ? 3 : pairWith ? 2 : 1;
       if (availableSeats.length < requiredSeats) {
-        errorMessage.textContent = `Tidak cukup kursi kosong untuk ${parentKeys.length > 0 ? 'ortu dan anak' : pairWith ? 'pasangan' : 'siswa'}!`;
+        errorMessage.textContent = `Tidak Tidak cukup kursi kosong untuk ${parentKeys.length > 0 ? 'ortu dan anak' : pairWith ? 'pasangan' : 'siswa'}`;
         errorMessage.classList.remove('hidden');
-        return;
+        console.log('Error: Not enough available seats:', availableSeats.length, 'required:', requiredSeats);
+        return false;
       }
 
-      // Shuffle available seats
       function shuffle(array) {
         for (let i = array.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          [array[i], array[j]] = [array[i], array[j]];
+          const jIndex = Math.floor(Math.random() * (i + 1));
+          [array[i], array[j]] = [array[j], array[i]];
         }
         return array;
       }
       const shuffledSeats = shuffle([...availableSeats]);
+      console.log('Shuffled available seats:', shuffledSeats);
 
-      // Assign new seats
       const newAssignments = { ...seatingAssignments };
       for (const seat of currentSeats) {
         delete newAssignments[seat];
       }
 
       let newSeatIndex = 0;
-      if (parentKeys.length > 0) {
-        // Find three adjacent seats for parent-child (A-B-C or B-C-D)
+      if (parentKeys.length) {
         let seatGroup = null;
         for (let i = 0; i < shuffledSeats.length - 2; i++) {
           const s1 = shuffledSeats[i];
@@ -665,32 +662,32 @@
             const row1 = seat1.match(/\d+/)? Number(seat1.match(/\d+/)[0]) : 'L';
             const row2 = seat2.match(/\d+/)? Number(seat2.match(/\d+/)[0]) : 'L';
             const row3 = seat3.match(/\d+/)? Number(seat3.match(/\d+/)[0]) : 'L';
-            const letter1 = seat1.replace(/\d+/, '');
-            const letter2 = seat2.replace(/\d+/, '');
-            const letter3 = seat3.replace(/\d+/, '');
+            const letter1 = seat1.replace(/\d+/g, '');
+            const letter2 = seat2.replace(/\d+/g, '');
+            const letter3 = seat3.replace(/\d+/g, '');
             if (row1 === row2 && row2 === row3 && (
-                (letter1 === 'A' && letter2 === 'B' && letter3 === 'C') ||
-                (letter1 === 'B' && letter2 === 'C' && letter3 === 'D')
+              (letter1 === 'A' && letter2 === 'B' && letter3 === 'C') ||
+              (letter1 === 'B' && letter2 === 'C' && letter3 === 'D')
             )) {
               seatGroup = [s1, s2, s3];
               break;
             }
           }
         }
-
         if (seatGroup && parentKeys.length <= 2) {
-          newAssignments[seatGroup[0]] = studentData; // Anak
+          newAssignments[seatGroup[0]] = { ...studentData, seat: seatGroup[0].split('-')[1] };
           for (let i = 0; i < parentKeys.length; i++) {
-            newAssignments[seatGroup[i + 1]] = seatingAssignments[parentKeys[i]]; // Ortu
+            newAssignments[seatGroup[i + 1]] = { ...seatingAssignments[parentKeys[i]], seat: seatGroup[i + 1].split('-')[1] };
           }
           newSeatIndex = 3;
+          console.log('Assigned parent-child seats:', seatGroup);
         } else {
-          errorMessage.textContent = 'Tidak ada kursi bersebelahan untuk ortu dan anak!';
+          errorMessage.textContent = 'Tidak ada ada kursi bersebelahan untuk ortu dan anak!';
           errorMessage.classList.remove('hidden');
-          return;
+          console.log('Error: No adjacent seats for parent-child');
+          return false;
         }
       } else if (pairWith) {
-        // Find two adjacent seats for pair (A-B or C-D)
         let seatPair = null;
         for (let i = 0; i < shuffledSeats.length - 1; i++) {
           const s1 = shuffledSeats[i];
@@ -700,51 +697,49 @@
           if (bus1 === bus2) {
             const row1 = seat1.match(/\d+/)? Number(seat1.match(/\d+/)[0]) : 'L';
             const row2 = seat2.match(/\d+/)? Number(seat2.match(/\d+/)[0]) : 'L';
-            const letter1 = seat1.replace(/\d+/, '');
-            const letter2 = seat2.replace(/\d+/, '');
+            const letter1 = seat1.replace(/\d+/g, '');
+            const letter2 = seat2.replace(/\d+/g, '');
             if (row1 === row2 && (
-                (letter1 === 'A' && letter2 === 'B') ||
-                (letter1 === 'C' && letter2 === 'D')
+              (letter1 === 'A' && letter2 === 'B') ||
+              (letter1 === 'C' && letter2 === 'D')
             )) {
               seatPair = [s1, s2];
               break;
             }
           }
         }
-
         if (seatPair) {
-          newAssignments[seatPair[0]] = studentData;
-          const pairKey = Object.keys(seatingAssignments).find(k => {
-            const d = seatingAssignments[k];
-            return d.studentName === pairWith && d.isParent === 'N' && k.split('-')[1] !== 'unassigned';
-          });
-          if (pairKey) newAssignments[seatPair[1]] = seatingAssignments[pairKey];
+          newAssignments[seatPair[0]] = { ...studentData, seat: seatPair[0].split('-')[1] };
+          const pairKey = Object.keys(seatingAssignments).find(k => 
+            seatingAssignments[k].studentName === pairWith && 
+            seatingAssignments[k].isParent === 'N' && 
+            !k.includes('pin-')
+          );
+          if (pairKey) newAssignments[seatPair[1]] = { ...seatingAssignments[pairKey], seat: seatPair[1].split('-')[1] };
           newSeatIndex = 2;
+          console.log('Assigned pair seats:', seatPair);
         } else {
           errorMessage.textContent = 'Tidak ada kursi bersebelahan untuk pasangan!';
           errorMessage.classList.remove('hidden');
-          return;
+          console.log('Error: No adjacent seats for pair');
+          return false;
         }
-      }
-
-      if (newSeatIndex === 0 && shuffledSeats.length > 0) {
-        // Single student
-        newAssignments[shuffledSeats[0]] = studentData;
+      } else if (shuffledSeats.length > 0) {
+        newAssignments[shuffledSeats[0]] = { ...studentData, seat: shuffledSeats[0].split('-')[1] };
         newSeatIndex = 1;
+        console.log('Assigned single seat:', shuffledSeats[0]);
       }
 
-      // Clear unused seats
       for (const seat of [...bus1Seats, ...bus2Seats]) {
         if (!newAssignments[seat]) {
-          newAssignments[seat] = { studentName: '', gender: '', pairWith: '', isParent: 'N', childName: '', pin: '' };
+          newAssignments[seat] = { studentName: '', gender: '', pairWith: '', isParent: 'N', pin: '', seat: seat.split('-')[1] };
         }
       }
 
-      // Update global seatingAssignments
       seatingAssignments = newAssignments;
       localStorage.setItem('seatingAssignments', JSON.stringify(seatingAssignments));
+      console.log('Updated seatingAssignments:', seatingAssignments);
 
-      // Clear and regenerate seat charts and tables
       document.getElementById('bus1-seats').innerHTML = '';
       document.getElementById('bus2-seats').innerHTML = '';
       document.getElementById('bus1-students').innerHTML = '';
@@ -783,66 +778,53 @@
       console.log('Seat clicked:', { bus, seat, studentKey, studentData: seatingAssignments[studentKey] });
       
       modalSeatInfo.textContent = `Kursi ${seat.toUpperCase()}`;
-      modalBusInfo.textContent = `Bus ${bus}`;
+      modalBusInfo.textContent = `Bus ${bus === 'bus1' ? '1' : '2'}`;
       
       const studentData = seatingAssignments[studentKey];
       if (studentData && studentData.studentName) {
         modalStudentName.textContent = `${studentData.studentName}${studentData.isParent === 'Y' ? ' (Ortu)' : ''}`;
-        modalStudentName.className = "text-base text-gray-700";
+        modalStudentName.className = 'text-base text-gray-700';
       } else {
-        modalStudentName.textContent = "Kursi kosong / Belum ada data";
-        modalStudentName.className = "text-base text-gray-500 italic";
+        modalStudentName.textContent = 'Kursi kosong / Belum ada data';
+        modalStudentName.className = 'text-base text-gray-500 italic';
       }
       
       seatModal.classList.remove('hidden');
     }
 
-    // Initialize everything when DOM is loaded
+    // Initialize everything
     document.addEventListener('DOMContentLoaded', async () => {
       initCarousel();
       
       try {
-        // Fetch seating data from CSV
         seatingAssignments = await fetchSeatingData();
         
         if (!seatingAssignments) {
           throw new Error('Failed to load seating assignments');
         }
 
-        // Generate seat charts
         generateSeats('bus1', 11, 6);
         generateSeats('bus2', 7, 5, ['C', 'D']);
-        
-        // Populate student tables
         populateStudentTables();
 
-        // Add event listeners to seat buttons
         document.querySelectorAll('.seat-button').forEach(button => {
           button.addEventListener('click', handleSeatClick);
         });
 
-        // Add event listener for randomizer button
         document.getElementById('randomize-btn').addEventListener('click', randomizeSeats);
         
-        // Modal close button
-        if (closeSeatModalBtn) {
-          closeSeatModalBtn.addEventListener('click', () => seatModal.classList.add('hidden'));
-        }
-        
-        // Close modal when clicking outside
-        if (seatModal) {
-          seatModal.addEventListener('click', (event) => { 
-            if (event.target === seatModal) seatModal.classList.add('hidden'); 
-          });
-        }
+        closeSeatModalBtn.addEventListener('click', () => seatModal.classList.add('hidden'));
+        seatModal.addEventListener('click', (event) => {
+          if (event.target === seatModal) seatModal.classList.add('hidden');
+        });
       } catch (error) {
-        console.error('Error initializing seating chart:', error);
-        modalStudentName.textContent = "Gagal memuat data. Silakan coba lagi nanti.";
-        modalStudentName.className = "text-base text-red-500";
+        console.error('Error initializing seats:', error);
+        modalStudentName.textContent = 'Gagal memuat data. Silakan coba lagi.';
+        modalStudentName.className = 'text-base text-red-600';
         document.querySelectorAll('.spinner').forEach(spinner => spinner.classList.add('hidden'));
         document.querySelectorAll('#bus1-seats, #bus2-seats').forEach(container => {
           container.classList.remove('hidden');
-          container.innerHTML = '<p class="text-center text-red-500">Gagal memuat denah duduk.</p>';
+          container.innerHTML = '<p class="text-center text-red-600">Gagal memuat denah duduk.</p>';
         });
       }
     });
