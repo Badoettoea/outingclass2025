@@ -1,5 +1,5 @@
 bus,seat,studentName,gender,pairWith,isParent,childName,pin
-bus1,,Ani,P,Budi,N,,12
+bus1,1B,Ani,P,Budi,N,,12
 bus1,,Budi,L,Ani,N,,34
 bus1,,Ibu Ani,F,,Y,Ani,56
 bus1,,Ayah Ani,M,,Y,Ani,78
